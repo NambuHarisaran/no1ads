@@ -1,0 +1,37 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "no1ads.in"
+        }
+      ],
+      "destination": "https://numberoneads.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.no1ads.in"
+        }
+      ],
+      "destination": "https://numberoneads.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.numberoneads.com"
+        }
+      ],
+      "destination": "https://numberoneads.com/:path*",
+      "permanent": true
+    }
+  ]
+}

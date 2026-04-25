@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# AI search crawlers (allowed for GEO visibility)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Optional training crawlers (restricted)
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+Sitemap: https://numberoneads.com/sitemap.xml
