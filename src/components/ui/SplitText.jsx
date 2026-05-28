@@ -46,7 +46,7 @@ function SplitText({ text, className = "", highlightWord = "" }) {
           <motion.span
             key={`${word}-${index}`}
             variants={child}
-            className={`inline-block ${highlight ? "text-brand-red" : ""}`}
+            className={`inline-block ${highlight ? "text-brand-orange" : ""}`}
           >
             {word}
             {index < words.length - 1 ? "\u00A0" : ""}

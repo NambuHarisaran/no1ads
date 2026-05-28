@@ -62,14 +62,14 @@ function CustomCursor() {
     <>
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[90] h-2.5 w-2.5 rounded-full bg-brand-red mix-blend-screen"
+        className="pointer-events-none fixed left-0 top-0 z-[90] h-2.5 w-2.5 rounded-full bg-brand-orange mix-blend-multiply"
         style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: isPressed ? 0.75 : 1 }}
         transition={{ duration: 0.15 }}
       />
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[89] h-8 w-8 rounded-full border border-brand-red/70"
+        className="pointer-events-none fixed left-0 top-0 z-[89] h-8 w-8 rounded-full border border-brand-orange/70"
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: isPressed ? 1.8 : 1, opacity: isPressed ? 0.35 : 1 }}
         transition={{ duration: 0.2 }}

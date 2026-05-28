@@ -14,7 +14,14 @@ import CustomCursor from "./components/CustomCursor";
 
 function App() {
   return (
-    <div className="relative bg-brand-bg text-brand-text">
+    <div 
+      className="relative"
+      style={{
+        backgroundColor: "#0c0c0c",
+        color: "#F5F0E8",
+        minHeight: "100vh"
+      }}
+    >
       <CustomCursor />
       <Navbar />
       <main className="relative z-10">

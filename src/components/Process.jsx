@@ -1,105 +1,170 @@
-import { useRef, useState } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const steps = [
   {
     id: "01",
-    title: "Discover",
-    description: "We learn your brand inside-out, from category context to customer behavior."
+    title: "DISCOVER",
+    description: "Learn your brand's context, category, competition, and customer truth."
   },
   {
     id: "02",
-    title: "Strategize",
-    description: "We map a focused growth plan where data and creative thinking move together."
+    title: "STRATEGIZE",
+    description: "Map data-led creative strategy against your specific growth priorities."
   },
   {
     id: "03",
-    title: "Execute",
-    description: "We launch with pixel-perfect production, strict quality control, and speed."
+    title: "EXECUTE",
+    description: "Pixel-perfect production with strict quality control and speed."
   },
   {
     id: "04",
-    title: "Grow",
-    description: "We track outcomes, optimize relentlessly, and scale what works best."
+    title: "GROW",
+    description: "Track outcomes, optimize, and scale only what works."
   }
 ];
 
 function Process() {
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, amount: 0.3 });
-  const [activeStep, setActiveStep] = useState("01");
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }
+    }
+  };
 
   return (
-    <section id="process" className="py-24 md:py-32">
+    <section id="process" className="py-24 md:py-32" style={{ backgroundColor: "var(--bg-elevated)" }}>
       <div className="section-shell">
-        <p className="font-accent text-xs uppercase tracking-[0.2em] text-brand-yellow">Methodology</p>
-        <h2 className="mt-3 font-display text-[clamp(2.4rem,6vw,5.6rem)] uppercase leading-[0.9]">Our Process</h2>
-
-        <div ref={sectionRef} className="relative mt-14 hidden lg:block">
-          <svg
-            className="pointer-events-none absolute left-0 top-10 h-8 w-full"
-            viewBox="0 0 1000 60"
-            preserveAspectRatio="none"
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <p 
+            className="font-body text-xs uppercase tracking-[0.12em]"
+            style={{ color: "var(--accent-fire)" }}
           >
-            <path d="M30 30 L970 30" stroke="rgba(245,245,245,0.12)" strokeWidth="2" fill="none" />
-            <motion.path
-              d="M30 30 L970 30"
-              stroke="#FF3D00"
-              strokeWidth="2"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={inView ? { pathLength: 1 } : { pathLength: 0 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-            />
-          </svg>
+            METHODOLOGY
+          </p>
+          <h2 
+            className="mt-4 font-display text-[clamp(2.4rem,6vw,4rem)] uppercase leading-[0.9] tracking-wider"
+            style={{ color: "var(--text-primary)" }}
+          >
+            OUR PROCESS
+          </h2>
+        </motion.div>
 
-          <div className="grid grid-cols-4 gap-6">
+        {/* Desktop: Horizontal timeline */}
+        <div ref={sectionRef} className="relative mt-16 hidden lg:block">
+          {/* Connecting line */}
+          <div className="absolute left-[60px] top-[120px] h-[1px] w-[calc(100%-120px)] border-t border-dashed" style={{ borderColor: "var(--border-subtle)" }} />
+
+          {/* Steps grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            className="grid grid-cols-4 gap-12"
+          >
             {steps.map((step) => (
-              <motion.article
-                key={step.id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-                transition={{ duration: 0.55, delay: Number(step.id) * 0.12 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.02] p-6"
-              >
-                <div className="font-display text-5xl leading-none text-brand-red">{step.id}</div>
-                <h3 className="mt-6 font-display text-4xl uppercase leading-[0.9]">{step.title}</h3>
-                <p className="mt-3 text-sm text-white/70">{step.description}</p>
-              </motion.article>
+              <motion.div key={step.id} variants={itemVariants}>
+                {/* Step number background */}
+                <div 
+                  className="font-display text-[120px] font-bold leading-none tracking-wider transition-all duration-300"
+                  style={{ 
+                    color: "var(--text-primary)",
+                    opacity: 0.04
+                  }}
+                >
+                  {step.id}
+                </div>
+
+                {/* Content */}
+                <div className="relative -mt-20">
+                  {/* Accent dot on timeline */}
+                  <div 
+                    className="absolute -left-[66px] top-[36px] h-4 w-4 rounded-full border-2"
+                    style={{ 
+                      borderColor: "var(--accent-fire)",
+                      backgroundColor: "var(--bg-elevated)"
+                    }}
+                  />
+
+                  {/* Title */}
+                  <h3 
+                    className="font-headline text-2xl font-bold uppercase tracking-wide"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    {step.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p 
+                    className="mt-3 font-body text-sm leading-relaxed"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-10 space-y-3 lg:hidden">
-          {steps.map((step) => {
-            const isActive = activeStep === step.id;
-            return (
-              <div key={step.id} className="rounded-2xl border border-white/10 bg-white/[0.02]">
-                <button
-                  type="button"
-                  onClick={() => setActiveStep(isActive ? "" : step.id)}
-                  className="flex w-full items-center justify-between px-5 py-4 text-left"
-                >
-                  <span className="font-display text-4xl leading-none text-brand-red">{step.id}</span>
-                  <span className="font-display text-3xl uppercase">{step.title}</span>
-                </button>
-                <AnimatePresence>
-                  {isActive ? (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <p className="px-5 pb-5 text-sm text-white/70">{step.description}</p>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
+        {/* Mobile: Vertical stack */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 space-y-6 lg:hidden"
+        >
+          {steps.map((step) => (
+            <motion.div 
+              key={step.id}
+              variants={itemVariants}
+              className="border-l-2 pl-6"
+              style={{ borderColor: "var(--accent-fire)" }}
+            >
+              <div 
+                className="font-display text-4xl font-bold tracking-wider"
+                style={{ color: "var(--accent-fire)" }}
+              >
+                {step.id}
               </div>
-            );
-          })}
-        </div>
+              <h3 
+                className="mt-2 font-headline text-2xl font-bold uppercase tracking-wide"
+                style={{ color: "var(--text-primary)" }}
+              >
+                {step.title}
+              </h3>
+              <p 
+                className="mt-3 font-body text-sm leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

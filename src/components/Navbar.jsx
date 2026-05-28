@@ -4,11 +4,11 @@ import { Menu, X } from "lucide-react";
 import MagneticButton from "./ui/MagneticButton";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" }
+  { label: "HOME", href: "#home" },
+  { label: "SERVICES", href: "#services" },
+  { label: "WORK", href: "#work" },
+  { label: "ABOUT", href: "#about" },
+  { label: "CONTACT", href: "#contact" }
 ];
 
 function Navbar() {
@@ -25,15 +25,33 @@ function Navbar() {
       <motion.nav
         initial={false}
         animate={{
-          backgroundColor: isScrolled ? "rgba(10, 10, 10, 0.85)" : "rgba(10, 10, 10, 0)",
-          borderColor: isScrolled ? "rgba(255, 255, 255, 0.1)" : "rgba(255, 255, 255, 0)",
-          backdropFilter: isScrolled ? "blur(18px)" : "blur(0px)"
+          backgroundColor: isScrolled 
+            ? "rgba(12, 12, 12, 0.95)" 
+            : "rgba(12, 12, 12, 0)",
+          borderColor: isScrolled 
+            ? "rgba(255, 255, 255, 0.06)" 
+            : "rgba(255, 255, 255, 0)",
+          backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)"
         }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         className="border-b"
       >
         <div className="section-shell flex h-20 items-center justify-between">
-          <a href="#home" className="flex items-center">
+          {/* Logo */}
+          <a 
+            href="#home" 
+            className="flex items-center transition-all hover:opacity-80"
+            style={{
+              filter: "drop-shadow(0 0 12px rgba(232, 80, 10, 0))",
+              transition: "all 0.3s ease"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = "drop-shadow(0 0 12px rgba(232, 80, 10, 0.4))";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = "drop-shadow(0 0 12px rgba(232, 80, 10, 0))";
+            }}
+          >
             <img 
               src="/logo.png" 
               alt="Number One Ads" 
@@ -41,67 +59,84 @@ function Navbar() {
             />
           </a>
 
-          <div className="hidden items-center gap-8 lg:flex">
+          {/* Desktop Navigation */}
+          <div className="hidden items-center gap-12 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-accent text-sm uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-brand-red"
+                className="font-body text-xs font-normal tracking-[0.08em] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
+          {/* Desktop CTA Button */}
           <div className="hidden lg:block">
-            <MagneticButton
-              as="a"
+            <a
               href="#contact"
-              className="rounded-full border border-brand-red bg-brand-red px-6 py-3 font-accent text-xs uppercase tracking-[0.18em] text-black transition-colors hover:bg-brand-yellow hover:border-brand-yellow"
+              className="inline-flex items-center justify-center rounded-sm bg-[var(--accent-fire)] px-8 py-3 font-body text-xs font-medium uppercase tracking-[0.12em] text-white transition-all duration-200 hover:scale-105 hover:shadow-fire"
+              style={{
+                boxShadow: "0 8px 24px rgba(232, 80, 10, 0)"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 10, 0.35)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 10, 0)";
+              }}
             >
-              Start a Project
-            </MagneticButton>
+              START A PROJECT
+            </a>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             type="button"
             aria-label="Toggle menu"
             onClick={() => setIsOpen((open) => !open)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-[var(--border-subtle)] text-[var(--text-primary)] transition-colors hover:border-[var(--accent-fire)] hover:text-[var(--accent-fire)] lg:hidden"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </motion.nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen ? (
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.22, ease: "easeOut" }}
-            className="border-b border-white/10 bg-[#0f0f0f] px-4 pb-6 pt-2 lg:hidden"
+            className="border-b border-[var(--border-subtle)] bg-[var(--bg-elevated)] backdrop-blur-md lg:hidden"
           >
-            <div className="mx-auto flex max-w-[1400px] flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
+            <div className="section-shell flex flex-col gap-1 py-6">
+              {navLinks.map((link, index) => (
+                <motion.a
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="rounded-xl border border-white/10 px-4 py-3 font-accent text-sm uppercase tracking-[0.15em] text-white/85"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="px-4 py-3 font-body text-xs font-normal tracking-[0.08em] text-[var(--text-secondary)] transition-colors hover:text-[var(--accent-fire)]"
                 >
                   {link.label}
-                </a>
+                </motion.a>
               ))}
-              <MagneticButton
-                as="a"
+              <motion.a
                 href="#contact"
                 onClick={() => setIsOpen(false)}
-                className="mt-2 rounded-full border border-brand-red bg-brand-red px-6 py-3 text-center font-accent text-xs uppercase tracking-[0.18em] text-black"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05 }}
+                className="mt-4 inline-flex items-center justify-center rounded-sm bg-[var(--accent-fire)] px-6 py-3 font-body text-xs font-medium uppercase tracking-[0.12em] text-white transition-all hover:scale-105 hover:shadow-fire"
               >
-                Start a Project
-              </MagneticButton>
+                START A PROJECT
+              </motion.a>
             </div>
           </motion.div>
         ) : null}
