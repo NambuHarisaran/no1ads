@@ -33,8 +33,12 @@ function Navbar() {
         className="border-b"
       >
         <div className="section-shell flex h-20 items-center justify-between">
-          <a href="#home" className="font-display text-4xl leading-none tracking-wide">
-            NO1ADS<span className="text-brand-red">.</span>
+          <a href="#home" className="flex items-center">
+            <img 
+              src="/logo.png" 
+              alt="Number One Ads" 
+              className="h-16 w-auto"
+            />
           </a>
 
           <div className="hidden items-center gap-8 lg:flex">

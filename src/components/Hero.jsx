@@ -15,9 +15,9 @@ const highlights = [
 ];
 
 const stats = [
-  { value: 500, suffix: "+", label: "Projects" },
-  { value: 200, suffix: "+", label: "Clients" },
-  { value: 15, suffix: "+", label: "Years" },
+  { value: 3000, suffix: "+", label: "Projects" },
+  { value: 2000, suffix: "+", label: "Clients" },
+  { value: 25, suffix: "+", label: "Years" },
   { value: 98, suffix: "%", label: "Retention" }
 ];
 

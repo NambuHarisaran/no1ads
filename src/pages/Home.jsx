@@ -15,8 +15,8 @@ export default function Home() {
     getOrganizationSchema(),
     getLocalBusinessSchema(),
     getAggregateStatisticSchema([
-      { name: "Brands Served", value: "200+" },
-      { name: "Years Experience", value: "15+" },
+      { name: "Brands Served", value: "3000+" },
+      { name: "Years Experience", value: "25+" },
       { name: "Core Services", value: "8" },
       { name: "Geographic Coverage", value: "Pan-India" },
     ]),
@@ -48,7 +48,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            We're a full-service advertising and branding agency in Chennai. 15+ years of strategic creativity.
+            We're a full-service advertising and branding agency in Chennai. 25+ years of strategic creativity.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

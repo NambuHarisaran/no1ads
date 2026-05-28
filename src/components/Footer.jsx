@@ -24,10 +24,13 @@ function Footer() {
     <footer className="border-t border-white/10 bg-black py-12">
       <div className="section-shell grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <a href="#home" className="font-display text-5xl leading-none tracking-wide">
-            NO1ADS<span className="text-brand-red">.</span>
+          <a href="#home" className="inline-block">
+            <img 
+              src="/25.png" 
+              alt="Number One Ads" 
+              className="h-40 w-auto"
+            />
           </a>
-          <p className="mt-3 max-w-xs text-sm text-white/60">We Make Brands Unstoppable.</p>
         </div>
 
         <div>
