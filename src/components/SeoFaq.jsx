@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -32,45 +31,133 @@ function SeoFaq() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="bg-[var(--bg-primary)] section-pad">
-      <div className="mx-auto max-w-[760px]">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--brand-orange)]">
-            FAQ
-          </p>
-          <h2 className="mt-5 font-display text-[clamp(2.25rem,5vw,4rem)] font-bold">
-            Questions brands ask us
+    <section
+      id="faq"
+      style={{
+        background: "var(--bg-page)",
+        padding: "var(--section-v) var(--section-h)"
+      }}
+    >
+      <div style={{ maxWidth: 760, margin: "0 auto" }}>
+        <div data-reveal>
+          <span className="section-label">FAQ</span>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 5vw, 64px)",
+              fontWeight: 700,
+              lineHeight: 1.08
+            }}
+          >
+            Questions brands ask us.
           </h2>
-        </motion.div>
+        </div>
 
-        <div className="mt-10 border-t border-[var(--border-light)]">
+        <div
+          style={{
+            marginTop: 48,
+            borderTop: "1px solid var(--border-subtle)"
+          }}
+        >
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div key={faq.q} className="border-b border-[var(--border-light)]">
+              <div
+                key={faq.q}
+                style={{ borderBottom: "1px solid var(--border-subtle)" }}
+              >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                  className="flex min-h-16 w-full items-center justify-between gap-6 py-5 text-left font-body text-base font-semibold text-[var(--text-primary)] transition-colors hover:text-[var(--brand-orange)]"
                   aria-expanded={isOpen}
+                  className="faq-question"
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                    padding: "24px 0",
+                    cursor: "pointer",
+                    background: "none",
+                    border: "none",
+                    textAlign: "left",
+                    gap: 24
+                  }}
+                  onMouseEnter={(e) => {
+                    const text = e.currentTarget.querySelector(".faq-q-text");
+                    if (text) text.style.color = "var(--orange)";
+                  }}
+                  onMouseLeave={(e) => {
+                    const text = e.currentTarget.querySelector(".faq-q-text");
+                    if (text) text.style.color = "var(--text-primary)";
+                  }}
                 >
-                  <span>{faq.q}</span>
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center text-2xl font-light transition-transform ${
-                      isOpen ? "rotate-45 text-[var(--brand-orange)]" : ""
-                    }`}
+                    className="faq-q-text"
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "var(--text-primary)",
+                      transition: "color 0.2s ease"
+                    }}
                   >
-                    +
+                    {faq.q}
+                  </span>
+
+                  {/* + / × icon */}
+                  <span
+                    style={{
+                      width: 20,
+                      height: 20,
+                      flexShrink: 0,
+                      position: "relative",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        width: 14,
+                        height: 1.5,
+                        background: isOpen ? "var(--orange)" : "var(--text-muted)",
+                        borderRadius: 1,
+                        transition: "transform 0.25s ease, background 0.2s ease",
+                        transform: isOpen ? "rotate(45deg)" : "rotate(0deg)"
+                      }}
+                    />
+                    <span
+                      style={{
+                        position: "absolute",
+                        width: 14,
+                        height: 1.5,
+                        background: isOpen ? "var(--orange)" : "var(--text-muted)",
+                        borderRadius: 1,
+                        transition: "transform 0.25s ease, background 0.2s ease",
+                        transform: isOpen ? "rotate(-45deg)" : "rotate(90deg)"
+                      }}
+                    />
                   </span>
                 </button>
-                <div className={`faq-answer ${isOpen ? "is-open pb-6" : ""}`}>
-                  <p className="font-body text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+
+                <div
+                  className={`faq-answer ${isOpen ? "is-open" : ""}`}
+                  style={{
+                    paddingBottom: isOpen ? 24 : 0
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.8,
+                      maxWidth: 640
+                    }}
+                  >
                     {faq.a}
                   </p>
                 </div>

@@ -5,32 +5,25 @@ export default {
     extend: {
       colors: {
         brand: {
-          "bg-base": "#0c0c0c",
-          "bg-elevated": "#141414",
-          "bg-surface": "#1c1c1c",
-          "accent-fire": "#E8500A",
-          "accent-gold": "#C9A84C",
-          "text-primary": "#F5F0E8",
-          "text-secondary": "#9A9589",
-          "text-muted": "#5A5550",
-          "border-subtle": "rgba(255,255,255,0.06)",
-          "border-strong": "rgba(232,80,10,0.3)",
-          "shadow-fire": "rgba(232,80,10,0.15)"
+          gold: "#F29F05",
+          "gold-dark": "#D68C00",
+          orange: "#F26E22",
+          "orange-dark": "#D9560F",
+          ink: "#0D0D0D",
         }
       },
       fontFamily: {
-        display: ["Bebas Neue", "sans-serif"],
-        headline: ["Barlow Condensed", "sans-serif"],
-        body: ["DM Sans", "sans-serif"],
-        accent: ["Barlow Condensed", "sans-serif"]
+        display: ["Playfair Display", "Georgia", "serif"],
+        body: ["DM Sans", "system-ui", "sans-serif"],
+        label: ["JetBrains Mono", "Courier New", "monospace"]
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(232, 80, 10, 0.5), 0 0 30px rgba(232, 80, 10, 0.25)",
-        fire: "0 8px 24px rgba(232, 80, 10, 0.35)",
-        panel: "0 20px 45px -25px rgba(0, 0, 0, 0.15)"
-      },
-      backgroundImage: {
-        "orange-radial": "radial-gradient(circle at center, rgba(232, 80, 10, 0.12), transparent 65%)"
+        xs: "0 1px 4px rgba(13, 13, 13, 0.06)",
+        sm: "0 2px 10px rgba(13, 13, 13, 0.08)",
+        md: "0 8px 28px rgba(13, 13, 13, 0.10)",
+        lg: "0 20px 56px rgba(13, 13, 13, 0.13)",
+        gold: "0 8px 32px rgba(242, 159, 5, 0.25)",
+        orange: "0 8px 32px rgba(242, 110, 34, 0.28)"
       }
     }
   },

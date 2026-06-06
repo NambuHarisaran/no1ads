@@ -1,36 +1,132 @@
-const clients = [
+const row1Clients = [
   "South Star",
   "Tata",
   "IBrizz",
   "Sastha Oil",
-  "SunPeak",
+  "SunPeak Consumer",
   "Metro Build Expo",
   "South Blaze",
-  "Retail Rush",
-  "City Line",
-  "Tamil Fresh"
+  "Naveen Brands"
 ];
 
-function Badge({ client }) {
+const row2Clients = [
+  "FMCG Sector",
+  "Automotive",
+  "Real Estate",
+  "Healthcare",
+  "Education",
+  "Retail",
+  "Technology",
+  "Food & Bev"
+];
+
+function ClientBadge({ name }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded border border-[var(--border-light)] bg-[var(--bg-card)] px-5 py-2.5 font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-[var(--text-secondary)] shadow-[var(--shadow-sm)] transition-colors hover:border-[var(--brand-orange)] hover:text-[var(--text-primary)]">
-      {client}
-      <span className="font-mono text-[10px] font-normal text-[var(--text-muted)]">BRAND</span>
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-subtle)",
+        borderRadius: "var(--radius-sm)",
+        padding: "10px 18px",
+        marginRight: 16,
+        boxShadow: "var(--shadow-xs)",
+        cursor: "default",
+        transition: "all 0.25s ease",
+        flexShrink: 0,
+        whiteSpace: "nowrap"
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = "var(--orange)";
+        e.currentTarget.style.color = "var(--text-primary)";
+        e.currentTarget.style.transform = "translateY(-2px)";
+        e.currentTarget.style.boxShadow = "var(--shadow-sm)";
+        const dot = e.currentTarget.querySelector(".client-dot");
+        if (dot) {
+          dot.style.background = "var(--orange)";
+          dot.style.opacity = "1";
+        }
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "var(--border-subtle)";
+        e.currentTarget.style.color = "var(--text-secondary)";
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = "var(--shadow-xs)";
+        const dot = e.currentTarget.querySelector(".client-dot");
+        if (dot) {
+          dot.style.background = "var(--gold)";
+          dot.style.opacity = "0.6";
+        }
+      }}
+    >
+      <span
+        className="client-dot"
+        style={{
+          width: 6,
+          height: 6,
+          borderRadius: "50%",
+          background: "var(--gold)",
+          opacity: 0.6,
+          flexShrink: 0,
+          transition: "all 0.25s ease"
+        }}
+      />
+      <span
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: 13,
+          fontWeight: 600,
+          color: "var(--text-secondary)",
+          letterSpacing: "0.03em",
+          textTransform: "uppercase"
+        }}
+      >
+        {name}
+      </span>
     </span>
   );
 }
 
 function MarqueeStrip() {
+  const duplicatedRow1 = [...row1Clients, ...row1Clients];
+  const duplicatedRow2 = [...row2Clients, ...row2Clients];
+
   return (
-    <section className="overflow-hidden bg-[var(--bg-primary)] py-8">
-      <div className="ticker-track flex min-w-max items-center gap-6">
-        {[...clients, ...clients].map((client, index) => (
-          <Badge key={`${client}-a-${index}`} client={client} />
+    <section
+      style={{
+        background: "var(--bg-page)",
+        padding: "40px 0",
+        overflow: "hidden"
+      }}
+    >
+      {/* Row 1 — scrolls LEFT */}
+      <div
+        className="ticker-track"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          minWidth: "max-content"
+        }}
+      >
+        {duplicatedRow1.map((client, index) => (
+          <ClientBadge key={`r1-${client}-${index}`} name={client} />
         ))}
       </div>
-      <div className="ticker-track-reverse mt-5 flex min-w-max items-center gap-6">
-        {[...clients.slice().reverse(), ...clients.slice().reverse()].map((client, index) => (
-          <Badge key={`${client}-b-${index}`} client={client} />
+
+      {/* Row 2 — scrolls RIGHT */}
+      <div
+        className="ticker-track-reverse"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          minWidth: "max-content",
+          marginTop: 16
+        }}
+      >
+        {duplicatedRow2.map((client, index) => (
+          <ClientBadge key={`r2-${client}-${index}`} name={client} />
         ))}
       </div>
     </section>

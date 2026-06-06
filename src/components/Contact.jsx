@@ -1,46 +1,145 @@
-import { motion } from "framer-motion";
-
 function Contact() {
   return (
-    <section id="contact" className="bg-[var(--bg-secondary)] section-pad">
-      <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[0.58fr_0.42fr] lg:items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--brand-orange)]">
-            LET'S BUILD SOMETHING UNSTOPPABLE
-          </p>
-          <h2 className="mt-5 max-w-xl font-display text-[clamp(2.25rem,5vw,4rem)] font-black leading-tight">
-            Ready to be
-            <span className="block italic text-[var(--brand-orange)]">Number One?</span>
-          </h2>
-          <p className="mt-6 max-w-lg font-body text-base leading-relaxed text-[var(--text-secondary)]">
-            Tell us what you're building. We'll craft the strategy and execution to make your
-            brand impossible to ignore.
-          </p>
-        </motion.div>
+    <section
+      id="contact"
+      style={{
+        background: "var(--bg-alt)",
+        padding: "var(--section-v) var(--section-h)",
+        position: "relative",
+        overflow: "hidden"
+      }}
+    >
+      {/* Decorative "NO1" watermark */}
+      <span
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          bottom: -40,
+          right: -40,
+          fontFamily: "var(--font-display)",
+          fontSize: 300,
+          fontWeight: 900,
+          color: "transparent",
+          WebkitTextStroke: "1px var(--border-subtle)",
+          pointerEvents: "none",
+          userSelect: "none",
+          opacity: 0.5,
+          lineHeight: 1
+        }}
+      >
+        NO1
+      </span>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-          className="lg:justify-self-end"
+      <div className="contact-layout" style={{ maxWidth: "var(--max-w)", margin: "0 auto", position: "relative", zIndex: 2 }}>
+        {/* LEFT — Headline */}
+        <div data-reveal>
+          <span className="section-label">LET'S BUILD SOMETHING UNSTOPPABLE</span>
+
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(36px, 4.5vw, 72px)",
+              fontWeight: 900,
+              lineHeight: 1.08
+            }}
+          >
+            Ready to be
+            <br />
+            <em className="gradient-text">Number One?</em>
+          </h2>
+
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: 17,
+              color: "var(--text-secondary)",
+              lineHeight: 1.75,
+              maxWidth: 460,
+              marginTop: 20
+            }}
+          >
+            Tell us what you're building. We'll craft the strategy and execution
+            to make your brand impossible to ignore.
+          </p>
+        </div>
+
+        {/* RIGHT — CTA + contact */}
+        <div
+          data-reveal
+          data-reveal-delay="2"
+          className="contact-right"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
+          }}
         >
           <a
             href="mailto:hello@numberoneads.com"
-            className="inline-flex min-h-14 w-full items-center justify-center rounded bg-[var(--brand-orange)] px-10 font-body text-base font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-[var(--brand-orange-light)] hover:shadow-[0_8px_24px_rgba(217,79,0,0.3)] sm:w-auto"
+            className="btn-primary contact-cta-btn"
+            style={{ fontSize: 16, padding: "18px 40px" }}
           >
             Start a Project →
           </a>
-          <p className="mt-5 max-w-sm font-mono text-xs leading-relaxed text-[var(--text-muted)]">
-            hello@numberoneads.com · +91 98765 43210 · Chennai, Tamil Nadu
-          </p>
-        </motion.div>
+
+          <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 12 }}>
+            {[
+              { icon: "✉", text: "hello@numberoneads.com" },
+              { icon: "☎", text: "+91 98765 43210" },
+              { icon: "📍", text: "Chennai, Tamil Nadu" }
+            ].map((item) => (
+              <div
+                key={item.text}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: 14,
+                    color: "var(--text-muted)",
+                    width: 16,
+                    textAlign: "center",
+                    flexShrink: 0
+                  }}
+                >
+                  {item.icon}
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-label)",
+                    fontSize: 12,
+                    color: "var(--text-muted)"
+                  }}
+                >
+                  {item.text}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      <style>{`
+        .contact-layout {
+          display: grid;
+          grid-template-columns: 0.55fr 0.45fr;
+          gap: 48px;
+          align-items: center;
+        }
+        @media (max-width: 767px) {
+          .contact-layout {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .contact-cta-btn {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

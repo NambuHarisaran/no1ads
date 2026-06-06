@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -13,112 +11,239 @@ const navLinks = [
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollY } = useScroll();
+  const [activeLink, setActiveLink] = useState("#home");
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 20);
-  });
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
+
+  const handleNavClick = (href) => {
+    setActiveLink(href);
+    setIsOpen(false);
+  };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[1000]">
-      <motion.nav
-        initial={false}
-        animate={{
-          backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.94)" : "#FFFFFF",
-          boxShadow: isScrolled ? "0 8px 32px rgba(100, 60, 20, 0.08)" : "none"
+    <header
+      className="fixed inset-x-0 top-0"
+      style={{ zIndex: "var(--z-nav)" }}
+    >
+      <nav
+        style={{
+          backgroundColor: isScrolled
+            ? "rgba(250, 250, 247, 0.92)"
+            : "rgba(250, 250, 247, 0.98)",
+          backdropFilter: "blur(20px) saturate(180%)",
+          WebkitBackdropFilter: "blur(20px) saturate(180%)",
+          borderBottom: "1px solid var(--border-subtle)",
+          boxShadow: isScrolled ? "var(--shadow-sm)" : "none",
+          transition: "box-shadow 0.3s ease"
         }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="border-b border-[var(--border-light)] backdrop-blur"
       >
-        <div className="section-shell flex h-[72px] items-center justify-between">
-          <a href="#home" className="flex items-center transition-opacity hover:opacity-80">
-            <img src="/logo.png" alt="Number One Ads" className="h-14 w-auto" />
+        <div
+          className="section-shell flex items-center justify-between"
+          style={{ height: 72 }}
+        >
+          {/* Logo */}
+          <a
+            href="#home"
+            className="flex items-center transition-opacity hover:opacity-80"
+            onClick={() => handleNavClick("#home")}
+          >
+            <img src="/logo.png" alt="Number One Ads" style={{ height: 40, width: "auto" }} />
           </a>
 
-          <div className="hidden items-center gap-9 md:flex">
-            {navLinks.map((link, index) => (
+          {/* Desktop nav links */}
+          <div className="hidden items-center md:flex" style={{ gap: 36 }}>
+            {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`border-b-2 py-2 font-body text-sm font-medium tracking-[0.02em] transition-colors ${
-                  index === 0
-                    ? "border-[var(--brand-orange)] text-[var(--brand-orange)]"
-                    : "border-transparent text-[var(--text-secondary)] hover:border-[var(--brand-orange)] hover:text-[var(--text-primary)]"
-                }`}
+                onClick={() => handleNavClick(link.href)}
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 14,
+                  fontWeight: activeLink === link.href ? 600 : 500,
+                  color: activeLink === link.href
+                    ? "var(--orange)"
+                    : "var(--text-secondary)",
+                  transition: "color 0.2s ease",
+                  textDecoration: "none"
+                }}
+                onMouseEnter={(e) => {
+                  if (activeLink !== link.href) e.target.style.color = "var(--text-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  if (activeLink !== link.href) e.target.style.color = "var(--text-secondary)";
+                }}
               >
                 {link.label}
               </a>
             ))}
           </div>
 
+          {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden min-h-11 items-center justify-center rounded-full bg-[var(--brand-orange)] px-6 font-body text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-[var(--brand-orange-light)] md:inline-flex"
+            className="btn-primary hidden md:inline-flex"
+            style={{ padding: "10px 22px", marginLeft: 24, fontSize: 13 }}
+            onClick={() => handleNavClick("#contact")}
           >
             Start a Project
           </a>
 
+          {/* Mobile hamburger */}
           <button
             type="button"
-            aria-label={isOpen ? undefined : "Open menu"}
-            tabIndex={isOpen ? -1 : 0}
-            onClick={() => setIsOpen((open) => !open)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-light)] text-[var(--text-primary)] transition-colors hover:border-[var(--brand-orange)] md:hidden"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            onClick={() => setIsOpen((o) => !o)}
+            className="flex md:hidden"
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 44,
+              height: 44,
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              gap: isOpen ? 0 : 5,
+              position: "relative"
+            }}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <span
+              style={{
+                display: "block",
+                width: 22,
+                height: 1.5,
+                background: "var(--text-primary)",
+                borderRadius: 2,
+                transition: "all 0.3s ease",
+                transform: isOpen ? "translateY(0.75px) rotate(45deg)" : "none",
+                position: isOpen ? "absolute" : "relative"
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 22,
+                height: 1.5,
+                background: "var(--text-primary)",
+                borderRadius: 2,
+                transition: "all 0.3s ease",
+                opacity: isOpen ? 0 : 1,
+                position: isOpen ? "absolute" : "relative"
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 22,
+                height: 1.5,
+                background: "var(--text-primary)",
+                borderRadius: 2,
+                transition: "all 0.3s ease",
+                transform: isOpen ? "translateY(-0.75px) rotate(-45deg)" : "none",
+                position: isOpen ? "absolute" : "relative"
+              }}
+            />
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
-      <AnimatePresence>
-        {isOpen ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[1001] bg-[var(--bg-primary)] md:hidden"
-          >
-            <div className="flex min-h-[100dvh] flex-col px-6 pb-8 pt-5">
-              <div className="flex items-center justify-between">
-                <img src="/logo.png" alt="Number One Ads" className="h-14 w-auto" />
-                <button
-                  type="button"
-                  aria-label="Close menu"
-                  onClick={() => setIsOpen(false)}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-light)] text-[var(--text-primary)]"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+      {/* Mobile menu overlay */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: "var(--z-overlay)",
+          background: "var(--bg-ink)",
+          transition: "opacity 0.35s ease, visibility 0.35s ease",
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? "visible" : "hidden",
+          pointerEvents: isOpen ? "auto" : "none"
+        }}
+        className="flex md:hidden flex-col items-center justify-center"
+      >
+        {/* Close button */}
+        <button
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setIsOpen(false)}
+          style={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            width: 44,
+            height: 44,
+            background: "none",
+            border: "none",
+            color: "var(--text-on-dark)",
+            fontSize: 24,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          ✕
+        </button>
 
-              <div className="mt-16 flex flex-1 flex-col gap-5">
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="font-display text-[clamp(2rem,12vw,3.4rem)] italic leading-none text-[var(--text-primary)] transition-colors hover:text-[var(--brand-orange)]"
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-              </div>
+        {/* Nav links */}
+        <nav style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+          {navLinks.map((link, index) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => handleNavClick(link.href)}
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(36px, 12vw, 54px)",
+                fontStyle: "italic",
+                fontWeight: 700,
+                color: "var(--text-on-dark)",
+                transition: "color 0.2s ease, transform 0.4s ease",
+                textDecoration: "none",
+                opacity: isOpen ? 1 : 0,
+                transform: isOpen ? "translateX(0)" : "translateX(-40px)",
+                transitionDelay: isOpen ? `${index * 0.06}s` : "0s"
+              }}
+              onMouseEnter={(e) => { e.target.style.color = "var(--gold)"; }}
+              onMouseLeave={(e) => { e.target.style.color = "var(--text-on-dark)"; }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--brand-orange)] px-6 font-body text-sm font-medium text-white"
-              >
-                Start a Project
-              </a>
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+        {/* Footer info */}
+        <p
+          style={{
+            position: "absolute",
+            bottom: 32,
+            fontFamily: "var(--font-label)",
+            fontSize: 11,
+            color: "rgba(250, 250, 247, 0.35)",
+            textAlign: "center",
+            letterSpacing: "0.05em"
+          }}
+        >
+          hello@numberoneads.com · +91 98765 43210
+        </p>
+      </div>
     </header>
   );
 }

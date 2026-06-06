@@ -1,119 +1,275 @@
-import { motion } from "framer-motion";
-
 const info = [
-  ["Founded", "2010 · 15 Years in Market"],
-  ["Headquarters", "Chennai, Tamil Nadu"],
-  ["Team", "48 Creative Specialists"]
+  ["FOUNDED", "2010 · 15 Years in Market"],
+  ["HQ", "Chennai, Tamil Nadu"],
+  ["TEAM", "48 Creative Specialists"]
 ];
 
 const sectors = [
-  "FMCG",
-  "Automotive",
-  "Real Estate",
-  "Food & Beverage",
-  "Healthcare",
-  "Retail",
-  "Technology",
-  "Education"
+  { name: "FMCG", size: "large" },
+  { name: "Automotive", size: "large" },
+  { name: "Real Estate", size: "large" },
+  { name: "Food & Beverage", size: "medium" },
+  { name: "Healthcare", size: "medium" },
+  { name: "Retail", size: "medium" },
+  { name: "Technology", size: "small" },
+  { name: "Education", size: "small" }
 ];
+
+const sizeMap = { large: 18, medium: 15, small: 13 };
 
 function About() {
   return (
     <>
-      <section id="about" className="bg-[var(--bg-primary)] section-pad">
-        <div className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[0.55fr_0.45fr] lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--brand-orange)]">
-              ABOUT US
-            </p>
-            <h2 className="mt-5 font-display text-[clamp(2.35rem,5vw,4.75rem)] font-bold leading-tight">
-              We are NO1ADS
-              <span className="block italic text-[var(--brand-orange)]">A creative powerhouse.</span>
+      {/* ─── ABOUT SECTION ─── */}
+      <section
+        id="about"
+        style={{
+          background: "var(--bg-alt)",
+          padding: "var(--section-v) var(--section-h)"
+        }}
+      >
+        <div className="about-layout" style={{ maxWidth: "var(--max-w)", margin: "0 auto" }}>
+          {/* LEFT COLUMN */}
+          <div data-reveal>
+            <span className="section-label">ABOUT US</span>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 5vw, 64px)",
+                fontWeight: 700,
+                lineHeight: 1.08
+              }}
+            >
+              We are NO1ADS.
+              <br />
+              <em className="gradient-text">A creative powerhouse.</em>
             </h2>
-            <p className="mt-7 max-w-xl font-body text-base leading-[1.8] text-[var(--text-secondary)]">
+
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: 16,
+                color: "var(--text-secondary)",
+                lineHeight: 1.85,
+                marginTop: 24,
+                maxWidth: 520
+              }}
+            >
               From local legends to national campaigns, we build brand systems that look powerful,
               feel premium, and perform in market. Our South-Indian creative DNA gives us speed,
               craft, and cultural precision. Our global ambition keeps our standards uncompromising.
             </p>
 
-            <div className="mt-9 max-w-xl">
+            {/* Info table */}
+            <div style={{ marginTop: 36, maxWidth: 520 }}>
               {info.map(([label, value]) => (
                 <div
                   key={label}
-                  className="flex flex-col gap-1 border-b border-[var(--border-light)] py-4 sm:flex-row sm:items-center sm:gap-6"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 24,
+                    padding: "18px 0",
+                    borderBottom: "1px solid var(--border-subtle)"
+                  }}
                 >
-                  <span className="w-[120px] font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-label)",
+                      fontSize: 10,
+                      letterSpacing: "0.12em",
+                      color: "var(--text-muted)",
+                      width: 130,
+                      flexShrink: 0,
+                      textTransform: "uppercase"
+                    }}
+                  >
                     {label}
                   </span>
-                  <span className="font-body text-[15px] font-semibold text-[var(--text-primary)]">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      fontWeight: 600,
+                      color: "var(--text-primary)"
+                    }}
+                  >
                     {value}
                   </span>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="grid grid-cols-2 overflow-hidden rounded-lg border border-[var(--border-light)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)]"
-          >
-            <div className="p-6 sm:p-8">
-              <div className="font-display text-[60px] font-black leading-none text-[var(--text-primary)] md:text-[96px]">
-                25+
-              </div>
-              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
-                Years in market
-              </p>
+          {/* RIGHT COLUMN */}
+          <div data-reveal data-reveal-delay="2" className="about-right">
+            {/* Decorative vertical line */}
+            <div
+              aria-hidden="true"
+              style={{
+                width: 1,
+                height: 80,
+                background: "linear-gradient(to bottom, var(--gold), var(--orange))",
+                marginBottom: 20
+              }}
+            />
+
+            {/* Big stat number */}
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "4px" }}>
+              <img
+                src="/25.png"
+                alt="25"
+                className="about-big-img"
+                style={{
+                  height: "160px",
+                  width: "auto",
+                  objectFit: "contain",
+                  display: "block"
+                }}
+              />
+              <span
+                className="gradient-text"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 80,
+                  fontWeight: 900,
+                  lineHeight: 1
+                }}
+              >
+                +
+              </span>
             </div>
-            <div className="relative min-h-[160px] overflow-hidden bg-[var(--brand-orange-pale)]">
-              <div className="absolute -right-10 top-0 h-[140%] w-20 rotate-12 bg-[var(--brand-orange)]" />
-              <div className="absolute bottom-6 left-6 h-16 w-16 border border-[var(--brand-orange)]" />
+
+            <p
+              style={{
+                fontFamily: "var(--font-label)",
+                fontSize: 12,
+                letterSpacing: "0.1em",
+                color: "var(--text-muted)",
+                marginTop: 8,
+                textTransform: "uppercase"
+              }}
+            >
+              Years building brands.
+            </p>
+
+            {/* Secondary stat badges */}
+            <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
+              {["48 specialists", "12+ cities"].map((badge) => (
+                <span
+                  key={badge}
+                  style={{
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border-subtle)",
+                    borderRadius: "var(--radius-pill)",
+                    padding: "10px 18px",
+                    fontFamily: "var(--font-body)",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--text-secondary)"
+                  }}
+                >
+                  {badge}
+                </span>
+              ))}
             </div>
-            <div className="bg-[var(--bg-card-tinted)] p-6 sm:p-8">
-              <p className="font-display text-xl italic leading-relaxed text-[var(--text-primary)]">
-                "Cultural precision, production speed, and standards that travel."
-              </p>
-            </div>
-            <div className="p-6 sm:p-8">
-              <div className="font-display text-5xl font-black leading-none text-[var(--text-primary)]">
-                48
-              </div>
-              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
-                Specialists
-              </p>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <section className="bg-[var(--bg-primary)] px-[clamp(16px,5vw,80px)] pb-[var(--section-pad)]">
-        <div className="mx-auto max-w-[1320px]">
-          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--brand-orange)]">
-            INDUSTRIES
-          </p>
-          <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] font-bold">
-            Industries we've shaped
-          </h2>
-          <div className="mt-8 flex flex-wrap gap-2.5">
+      {/* ─── INDUSTRIES SECTION ─── */}
+      <section
+        style={{
+          background: "var(--bg-page)",
+          padding: "var(--section-v) var(--section-h)"
+        }}
+      >
+        <div style={{ maxWidth: "var(--max-w)", margin: "0 auto" }}>
+          <div data-reveal>
+            <span className="section-label">SECTORS</span>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 4vw, 64px)",
+                fontWeight: 700
+              }}
+            >
+              Industries we've shaped.
+            </h2>
+          </div>
+
+          <div
+            data-reveal
+            data-reveal-delay="2"
+            className="industry-tags"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 12,
+              marginTop: 48
+            }}
+          >
             {sectors.map((sector) => (
               <span
-                key={sector}
-                className="rounded-full border border-[var(--border-medium)] px-4 py-2 font-body text-sm font-medium text-[var(--text-secondary)] transition-colors hover:border-[var(--bg-ink)] hover:bg-[var(--bg-ink)] hover:text-white"
+                key={sector.name}
+                className="industry-tag"
+                style={{
+                  border: "1.5px solid var(--border-medium)",
+                  borderRadius: "var(--radius-pill)",
+                  padding: "12px 22px",
+                  fontFamily: "var(--font-body)",
+                  fontSize: sizeMap[sector.size],
+                  fontWeight: 500,
+                  color: "var(--text-secondary)",
+                  cursor: "default",
+                  transition: "all 0.25s ease",
+                  position: "relative",
+                  overflow: "hidden"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "white";
+                  e.currentTarget.style.borderColor = "var(--bg-ink)";
+                  e.currentTarget.style.background = "var(--bg-ink)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "var(--text-secondary)";
+                  e.currentTarget.style.borderColor = "var(--border-medium)";
+                  e.currentTarget.style.background = "transparent";
+                }}
               >
-                {sector}
+                {sector.name}
               </span>
             ))}
           </div>
         </div>
       </section>
+
+      <style>{`
+        .about-layout {
+          display: grid;
+          grid-template-columns: 0.55fr 0.45fr;
+          gap: 64px;
+          align-items: start;
+        }
+        .about-big-img {
+          height: 160px;
+        }
+        @media (max-width: 767px) {
+          .about-layout {
+            grid-template-columns: 1fr !important;
+            gap: 0 !important;
+          }
+          .about-right {
+            margin-top: 40px;
+          }
+          .about-big-img {
+            height: 110px !important;
+          }
+          .industry-tags .industry-tag {
+            padding: 10px 16px !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

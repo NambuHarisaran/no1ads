@@ -1,0 +1,45 @@
+/* MarqueeLogos styles — legacy component */
+.marquee-section {
+  padding: 40px 0;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+.marquee-wrapper {
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.marquee-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  padding: 8px 16px;
+}
+.marquee-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.marquee-initials {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+}
+.marquee-name {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.marquee-wrapper-reverse .marquee-track {
+  /* reverse direction handled by framer-motion */
+}
