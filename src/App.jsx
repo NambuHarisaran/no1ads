@@ -14,14 +14,7 @@ import CustomCursor from "./components/CustomCursor";
 
 function App() {
   return (
-    <div 
-      className="relative"
-      style={{
-        backgroundColor: "#0c0c0c",
-        color: "#F5F0E8",
-        minHeight: "100vh"
-      }}
-    >
+    <div className="relative min-h-[100dvh] bg-[var(--bg-primary)] text-[var(--text-primary)]">
       <CustomCursor />
       <Navbar />
       <main className="relative z-10">

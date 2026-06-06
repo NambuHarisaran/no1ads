@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import AnimatedCounter from "./ui/AnimatedCounter";
 
 const services = [
@@ -14,202 +13,117 @@ const services = [
 ];
 
 const stats = [
-  { value: 3000, suffix: "+", label: "PROJECTS" },
-  { value: 2000, suffix: "+", label: "CLIENTS" },
-  { value: 25, suffix: "+", label: "YEARS" },
-  { value: 98, suffix: "%", label: "RETENTION" }
+  { value: 3000, suffix: "+", label: "Projects" },
+  { value: 2000, suffix: "+", label: "Clients" },
+  { value: 25, suffix: "+", label: "Years" },
+  { value: 98, suffix: "%", label: "Retention" }
 ];
 
 function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
-
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 18 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }
+      transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }
     }
   };
 
   return (
-    <section 
-      id="home" 
-      className="relative min-h-[100dvh] flex items-center overflow-hidden pt-20"
-      style={{ backgroundColor: "var(--bg-base)" }}
-    >
-      {/* Ambient gradient */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 80% 60% at 20% 50%, rgba(232, 80, 10, 0.12), transparent)"
-          }}
-        />
-      </div>
-
-      {/* Watermark NO1 */}
-      <div 
-        className="pointer-events-none absolute -bottom-10 -right-20 opacity-[0.05] text-[30vw] font-display font-bold tracking-wider"
-        style={{ color: "var(--text-primary)" }}
+    <>
+      <section
+        id="home"
+        className="relative overflow-hidden bg-[var(--bg-primary)] pb-0 pt-[96px] md:pt-[120px]"
       >
-        NO1
-      </div>
-
-      {/* Main content */}
-      <div className="section-shell relative z-10 grid gap-12 md:grid-cols-3 md:gap-16">
-        {/* Left column - 2/3 width */}
-        <motion.div 
-          className="md:col-span-2"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {/* Label pill */}
-          <motion.div 
-            variants={itemVariants}
-            className="mb-8 inline-flex items-center rounded-sm border border-[var(--border-strong)] bg-[rgba(232,80,10,0.08)] px-4 py-2"
+        <div className="section-shell relative grid gap-10 pb-12 pt-8 md:min-h-[calc(100dvh-72px)] md:grid-cols-[minmax(0,0.62fr)_minmax(260px,0.38fr)] md:items-center md:pb-20 md:pt-0">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            transition={{ staggerChildren: 0.1 }}
+            className="relative z-10"
           >
-            <span 
-              className="font-body text-xs uppercase tracking-[0.12em]"
-              style={{ color: "var(--accent-fire)" }}
+            <motion.p
+              variants={itemVariants}
+              className="mb-6 font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--brand-orange)]"
             >
-              NUMBER ONE ADS · INDIA · EST. 2010
-            </span>
+              NO1ADS · CHENNAI · EST. 2010
+            </motion.p>
+
+            <motion.h1
+              variants={itemVariants}
+              className="max-w-5xl font-display text-[clamp(2.5rem,11vw,6rem)] font-black leading-none text-[var(--text-primary)] md:text-[clamp(3.25rem,7vw,6rem)]"
+            >
+              We make brands
+              <span className="block italic text-[var(--brand-orange)]">Unstoppable.</span>
+            </motion.h1>
+
+            <motion.p
+              variants={itemVariants}
+              className="mt-7 max-w-xl font-body text-[15px] leading-relaxed text-[var(--text-secondary)] md:text-lg"
+            >
+              360° full-service advertising — Creative, Digital, Outdoor, Events, Print.
+            </motion.p>
+
+            <motion.div variants={itemVariants} className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#contact"
+                className="inline-flex min-h-12 items-center justify-center rounded bg-[var(--brand-orange)] px-8 font-body text-[15px] font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-[var(--brand-orange-light)] hover:shadow-[0_8px_24px_rgba(217,79,0,0.3)]"
+              >
+                Start a Project →
+              </a>
+              <a
+                href="#work"
+                className="inline-flex min-h-12 items-center justify-center px-5 font-body text-[15px] font-medium text-[var(--text-primary)] underline-offset-4 transition-colors hover:text-[var(--brand-orange)] hover:underline"
+              >
+                View Our Work
+              </a>
+            </motion.div>
           </motion.div>
 
-          {/* Headline - split color */}
-          <motion.div variants={itemVariants}>
-            <h1 
-              className="font-display text-[clamp(2.8rem,10vw,9rem)] uppercase leading-[0.88] tracking-wider"
-              style={{ color: "var(--text-primary)" }}
-            >
-              WE MAKE BRANDS
-            </h1>
-            <h1 
-              className="font-display text-[clamp(2.8rem,10vw,9rem)] uppercase leading-[0.88] tracking-wider"
-              style={{ color: "var(--accent-fire)" }}
-            >
-              UNSTOPPABLE.
-            </h1>
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.25, duration: 0.8 }}
+            className="pointer-events-none absolute right-[-20px] top-1/2 hidden -translate-y-1/2 font-display text-[240px] font-black leading-none text-[var(--border-light)] md:block"
+          >
+            01
           </motion.div>
+        </div>
 
-          {/* Subheadline */}
-          <motion.p 
-            variants={itemVariants}
-            className="mt-8 max-w-xl font-body text-base leading-relaxed"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            360° full-service advertising — Creative, Digital, Outdoor, Events, Print.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div 
-            variants={itemVariants}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <a
-              href="#work"
-              className="inline-flex items-center gap-3 rounded-sm bg-[var(--accent-fire)] px-8 py-3 font-body text-xs font-medium uppercase tracking-[0.1em] text-white transition-all hover:scale-105"
-              style={{
-                boxShadow: "0 8px 24px rgba(232, 80, 10, 0)"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 10, 0.35)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = "0 8px 24px rgba(232, 80, 10, 0)";
-              }}
-            >
-              START A PROJECT
-              <ArrowRight size={16} />
-            </a>
-            <a
-              href="#work"
-              className="inline-flex items-center gap-2 border-b-2 border-transparent font-body text-xs uppercase tracking-[0.1em] transition-colors hover:border-[var(--accent-fire)] hover:text-[var(--accent-fire)]"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              VIEW OUR WORK
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* Right column - 1/3 width */}
-        <motion.div
-          className="relative flex items-center justify-center"
-          variants={itemVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {/* Vertical ticker */}
-          <div 
-            className="flex flex-col gap-6 border-l border-[var(--border-strong)] pl-8"
-            style={{
-              animation: "scroll-up 20s linear infinite"
-            }}
-          >
-            {[...services, ...services].map((service, index) => (
-              <div
+        <div className="static z-[1] mt-10 w-full overflow-hidden bg-[var(--bg-ink)] py-3 md:relative md:mt-0">
+          <div className="ticker-track flex min-w-max items-center gap-8">
+            {[...services, ...services, ...services].map((service, index) => (
+              <span
                 key={`${service}-${index}`}
-                className="font-headline text-2xl font-bold uppercase tracking-wider"
-                style={{
-                  color: index % 2 === 0 ? "var(--text-primary)" : "var(--accent-fire)"
-                }}
+                className="font-mono text-xs uppercase tracking-[0.12em] text-white"
               >
                 {service}
-              </div>
+                <span className="mx-8 text-[var(--brand-orange)]">·</span>
+              </span>
             ))}
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </section>
 
-      {/* Stats bar - bottom */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 border-t border-[var(--border-subtle)] px-4 py-8 md:px-0"
-        style={{ background: "rgba(232, 80, 10, 0.04)" }}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ delay: 0.6 }}
-      >
-        <div className="section-shell grid grid-cols-2 gap-4 md:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div 
-                className="font-display text-4xl md:text-5xl leading-none"
-                style={{ color: "var(--accent-fire)" }}
-              >
+      <section className="border-y border-[var(--border-light)] bg-[var(--bg-secondary)] px-0 py-10 md:py-12">
+        <div className="section-shell grid grid-cols-2 gap-8 text-center md:grid-cols-4 md:gap-0">
+          {stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              className="md:border-r md:border-[var(--border-light)] md:last:border-r-0"
+            >
+              <div className="font-display text-[clamp(2.5rem,5vw,4rem)] font-black leading-none text-[var(--text-primary)]">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </div>
-              <p 
-                className="mt-3 font-body text-xs uppercase tracking-[0.08em]"
-                style={{ color: "var(--text-muted)" }}
-              >
+              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
                 {stat.label}
               </p>
             </div>
           ))}
         </div>
-      </motion.div>
-
-      <style>{`
-        @keyframes scroll-up {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
-        }
-      `}</style>
-    </section>
+      </section>
+    </>
   );
 }
 

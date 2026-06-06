@@ -1,211 +1,42 @@
 import { Facebook, Instagram } from "lucide-react";
 
 const quickLinks = [
-  { label: "HOME", href: "#home" },
-  { label: "SERVICES", href: "#services" },
-  { label: "WORK", href: "#work" },
-  { label: "ABOUT", href: "#about" },
-  { label: "CONTACT", href: "#contact" }
+  { label: "Home", href: "#home" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" }
 ];
 
 const serviceLinks = [
-  "CREATIVE",
-  "DIGITAL",
-  "EXHIBITIONS",
-  "EVENTS",
-  "ROADSHOWS",
-  "RETAIL",
-  "SIGNAGE",
-  "PRINTING"
+  "Creative",
+  "Digital",
+  "Exhibitions",
+  "Events",
+  "Roadshows",
+  "Retail",
+  "Signage",
+  "Printing"
 ];
 
 function Footer() {
   return (
-    <footer 
-      style={{ backgroundColor: "var(--bg-elevated)", borderTopColor: "var(--border-subtle)" }}
-      className="border-t"
-    >
-      {/* Marquee ticker */}
-      <div 
-        className="border-b border-t ticker-track flex min-w-max overflow-hidden py-4"
-        style={{ borderColor: "var(--border-subtle)" }}
-      >
-        {["360° ADVERTISING", "CREATIVE", "DIGITAL", "OUTDOOR", "EVENTS", "PRINT", "BRANDING"].map((item, index) => (
-          <span
-            key={`${item}-${index}`}
-            className="px-6 font-headline text-xs font-bold uppercase tracking-[0.15em]"
-            style={{ color: "var(--text-muted)" }}
-          >
-            {item} ·
-          </span>
-        ))}
-        {["360° ADVERTISING", "CREATIVE", "DIGITAL", "OUTDOOR", "EVENTS", "PRINT", "BRANDING"].map((item, index) => (
-          <span
-            key={`${item}-${index}-2`}
-            className="px-6 font-headline text-xs font-bold uppercase tracking-[0.15em]"
-            style={{ color: "var(--text-muted)" }}
-          >
-            {item} ·
-          </span>
-        ))}
-      </div>
-
-      {/* Main footer content */}
-      <div className="section-shell py-12">
-        {/* Top row: Logo + Tagline */}
-        <div className="grid gap-12 items-start lg:grid-cols-[1fr_auto_1fr] mb-12">
-          <a href="#home" className="inline-block">
-            <img 
-              src="/logo.png" 
-              alt="Number One Ads" 
-              className="h-20 w-auto"
-            />
-          </a>
-
-          <div className="hidden lg:block text-center">
-            <p 
-              className="font-body text-xs font-medium uppercase tracking-[0.1em] italic"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Built to be Unstoppable
-            </p>
-          </div>
-
-          <div className="text-right">
-            <img 
-              src="/25.png" 
-              alt="25 Years Legacy" 
-              className="h-20 w-auto ml-auto"
-            />
-          </div>
-        </div>
-
-        {/* Grid: 4 columns */}
-        <div className="grid gap-12 md:grid-cols-4 mb-12">
-          {/* Navigate */}
+    <footer className="bg-[var(--bg-ink)] px-[clamp(24px,5vw,80px)] pb-8 pt-16 text-[var(--text-inverse)]">
+      <div className="mx-auto max-w-[1320px]">
+        <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <p 
-              className="font-body text-xs font-semibold uppercase tracking-[0.1em]"
-              style={{ color: "var(--accent-fire)" }}
-            >
-              Navigate
+            <a href="#home" className="inline-block">
+              <img src="/logo.png" alt="Number One Ads" className="h-16 w-auto brightness-0 invert" />
+            </a>
+            <p className="mt-3 max-w-xs font-body text-sm text-[rgba(250,248,244,0.5)]">
+              Making brands unstoppable since 2010.
             </p>
-            <ul className="mt-4 space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a 
-                    href={link.href}
-                    className="font-body text-sm transition-colors"
-                    style={{ color: "var(--text-secondary)" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "var(--accent-fire)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <p 
-              className="font-body text-xs font-semibold uppercase tracking-[0.1em]"
-              style={{ color: "var(--accent-fire)" }}
-            >
-              Services
-            </p>
-            <ul className="mt-4 space-y-2">
-              {serviceLinks.map((service) => (
-                <li 
-                  key={service}
-                  className="font-body text-sm"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {service}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <p 
-              className="font-body text-xs font-semibold uppercase tracking-[0.1em]"
-              style={{ color: "var(--accent-fire)" }}
-            >
-              Contact
-            </p>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <a 
-                  href="mailto:hello@numberoneads.com"
-                  className="font-body text-sm transition-colors"
-                  style={{ color: "var(--text-secondary)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "var(--accent-fire)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                  }}
-                >
-                  hello@numberoneads.com
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="tel:+919876543210"
-                  className="font-body text-sm transition-colors"
-                  style={{ color: "var(--text-secondary)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "var(--accent-fire)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                  }}
-                >
-                  +91 98765 43210
-                </a>
-              </li>
-              <li 
-                className="font-body text-sm"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Chennai, Tamil Nadu
-              </li>
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <p 
-              className="font-body text-xs font-semibold uppercase tracking-[0.1em]"
-              style={{ color: "var(--accent-fire)" }}
-            >
-              Follow
-            </p>
-            <div className="mt-4 flex gap-3">
+            <div className="mt-6 flex gap-3">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-sm border transition-all"
-                style={{
-                  borderColor: "var(--border-subtle)",
-                  color: "var(--text-secondary)"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--accent-fire)";
-                  e.currentTarget.style.color = "var(--accent-fire)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
+                className="inline-flex h-9 w-9 items-center justify-center rounded border border-white/15 text-white/60 transition-colors hover:border-white hover:text-white"
                 aria-label="Facebook"
               >
                 <Facebook size={16} />
@@ -214,37 +45,56 @@ function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-sm border transition-all"
-                style={{
-                  borderColor: "var(--border-subtle)",
-                  color: "var(--text-secondary)"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--accent-fire)";
-                  e.currentTarget.style.color = "var(--accent-fire)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                }}
+                className="inline-flex h-9 w-9 items-center justify-center rounded border border-white/15 text-white/60 transition-colors hover:border-white hover:text-white"
                 aria-label="Instagram"
               >
                 <Instagram size={16} />
               </a>
             </div>
           </div>
+
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--brand-orange)]">
+              Navigate
+            </p>
+            <ul className="mt-4 space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="font-body text-sm text-[rgba(250,248,244,0.65)] transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--brand-orange)]">
+              Services
+            </p>
+            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3">
+              {serviceLinks.map((service) => (
+                <li key={service} className="font-body text-sm text-[rgba(250,248,244,0.65)]">
+                  {service}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div 
-          className="border-t pt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs font-medium"
-          style={{ borderColor: "var(--border-subtle)", color: "var(--text-muted)" }}
-        >
-          <p>© 2025 NUMBER ONE ADS. ALL RIGHTS RESERVED.</p>
-          <div className="flex gap-6">
-            <a href="#" className="transition-colors hover:text-[var(--accent-fire)]">PRIVACY POLICY</a>
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.08] pt-6 font-mono text-[11px] text-[rgba(250,248,244,0.35)] md:flex-row md:items-center md:justify-between">
+          <p>© 2025 Number One Ads. All Rights Reserved.</p>
+          <div className="flex gap-3">
+            <a href="#" className="transition-colors hover:text-white">
+              Privacy Policy
+            </a>
             <span>·</span>
-            <a href="#" className="transition-colors hover:text-[var(--accent-fire)]">TERMS OF SERVICE</a>
+            <a href="#" className="transition-colors hover:text-white">
+              Terms of Service
+            </a>
           </div>
         </div>
       </div>

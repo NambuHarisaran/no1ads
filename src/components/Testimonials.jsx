@@ -1,237 +1,88 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Quote, Star, ChevronRight, ChevronLeft } from "lucide-react";
+import { motion } from "framer-motion";
+
+const featured = {
+  quote: "Roadshow execution was flawless across cities. They think like owners, not vendors.",
+  name: "Naveen Raj",
+  role: "Director, SunPeak Consumer"
+};
 
 const testimonials = [
   {
-    id: 1,
-    quote: "NO1ADS brought energy, speed, and strategic clarity. Our campaign performance jumped within weeks.",
+    quote:
+      "NO1ADS brought energy, speed, and strategic clarity. Our campaign performance jumped within weeks.",
     name: "Arvind Krishnan",
-    company: "Brand Lead, South Blaze",
-    rating: 5
+    role: "Brand Lead, South Blaze"
   },
   {
-    id: 2,
-    quote: "From our exhibition pavilion to digital follow-up, every touchpoint felt premium and synchronized.",
+    quote:
+      "From our exhibition pavilion to digital follow-up, every touchpoint felt premium and synchronized.",
     name: "Dharani Menon",
-    company: "Marketing Head, Metro Build Expo",
-    rating: 5
-  },
-  {
-    id: 3,
-    quote: "Roadshow execution was flawless across cities. They think like owners, not vendors.",
-    name: "Naveen Raj",
-    company: "Director, SunPeak Consumer",
-    rating: 5
-  },
-  {
-    id: 4,
-    quote: "The creative team understood our brand DNA from day one. Results speak for themselves.",
-    name: "Priya Desai",
-    company: "CEO, Retail Rush",
-    rating: 5
+    role: "Marketing Head, Metro Build Expo"
   }
 ];
 
 function Testimonials() {
-  const [currentQuote, setCurrentQuote] = useState(0);
-  const carouselRef = useRef(null);
-  const [dragLimit, setDragLimit] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentQuote((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const updateLimit = () => {
-      const element = carouselRef.current;
-      if (!element) return;
-      setDragLimit(Math.max(0, element.scrollWidth - element.offsetWidth));
-    };
-
-    updateLimit();
-    window.addEventListener("resize", updateLimit);
-    return () => window.removeEventListener("resize", updateLimit);
-  }, []);
-
   return (
-    <section id="testimonials" className="py-24 md:py-32" style={{ backgroundColor: "var(--bg-base)" }}>
-      <div className="section-shell">
-        {/* Header */}
+    <section id="testimonials" className="bg-[var(--bg-secondary)] section-pad">
+      <div className="mx-auto max-w-[1320px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <p 
-            className="font-body text-xs uppercase tracking-[0.12em]"
-            style={{ color: "var(--accent-fire)" }}
-          >
+          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--brand-orange)]">
             SOCIAL PROOF
           </p>
-          <h2 
-            className="mt-4 font-display text-[clamp(2.4rem,6vw,4rem)] uppercase leading-[0.9] tracking-wider"
-            style={{ color: "var(--text-primary)" }}
-          >
-            WHAT CLIENTS SAY
+          <h2 className="mt-5 font-display text-[clamp(2.25rem,5vw,4.5rem)] font-bold">
+            What clients say
           </h2>
+          <p className="mt-3 font-display text-xl italic text-[var(--text-secondary)]">
+            From small businesses to national brands — what they told us.
+          </p>
         </motion.div>
 
-        {/* Featured quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-          className="mt-12 rounded-lg p-10"
-          style={{
-            backgroundColor: "var(--bg-elevated)",
-            borderLeft: "3px solid var(--accent-fire)"
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={testimonials[currentQuote].id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="flex items-start gap-4">
-                <Quote 
-                  size={32} 
-                  style={{ color: "var(--accent-fire)", opacity: 0.4 }}
-                  className="flex-shrink-0"
-                />
-                <div>
-                  <p 
-                    className="font-body text-lg leading-relaxed"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    "{testimonials[currentQuote].quote}"
-                  </p>
+        <div className="mt-12 grid gap-5 lg:grid-cols-[0.4fr_0.6fr]">
+          <motion.article
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.55 }}
+            className="rounded-lg bg-[var(--bg-ink)] p-8 text-white md:p-10 lg:p-12"
+          >
+            <div className="font-display text-[96px] leading-[0.7] text-[var(--brand-orange)]">“</div>
+            <p className="mt-3 font-display text-xl italic leading-relaxed text-white">
+              {featured.quote}
+            </p>
+            <p className="mt-7 font-body text-sm font-semibold text-white">{featured.name}</p>
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.08em] text-white/50">
+              {featured.role}
+            </p>
+          </motion.article>
 
-                  <div className="mt-6">
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <p 
-                          className="font-headline text-base font-bold"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {testimonials[currentQuote].name}
-                        </p>
-                        <p 
-                          className="font-body text-xs"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          {testimonials[currentQuote].company}
-                        </p>
-                      </div>
-                      <div className="flex gap-1 ml-auto">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star 
-                            key={i} 
-                            size={14} 
-                            className="fill-[var(--accent-fire)]"
-                            style={{ color: "var(--accent-fire)" }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Progress indicator */}
-          <div className="mt-6 flex gap-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => setCurrentQuote(index)}
-                className="h-1 transition-all"
-                style={{
-                  width: index === currentQuote ? "24px" : "8px",
-                  backgroundColor: index === currentQuote ? "var(--accent-fire)" : "var(--border-subtle)"
-                }}
-              />
+          <div className="grid gap-5">
+            {testimonials.map((item, index) => (
+              <motion.article
+                key={item.name}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.12 + index * 0.07, duration: 0.55 }}
+                className="rounded-lg border border-[var(--border-light)] bg-[var(--bg-card)] p-7 shadow-[var(--shadow-sm)]"
+              >
+                <p className="font-body text-[15px] italic leading-[1.7] text-[var(--text-primary)]">
+                  “{item.quote}”
+                </p>
+                <p className="mt-6 font-body text-sm font-semibold text-[var(--text-primary)]">
+                  {item.name}
+                </p>
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)]">
+                  {item.role}
+                </p>
+              </motion.article>
             ))}
           </div>
-        </motion.div>
-
-        {/* Carousel of testimonials */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-          className="mt-12 relative"
-        >
-          <div ref={carouselRef} className="overflow-hidden">
-            <motion.div
-              drag="x"
-              dragConstraints={{ left: -dragLimit, right: 0 }}
-              className="flex cursor-grab gap-4 active:cursor-grabbing md:gap-6"
-            >
-              {testimonials.map((item) => (
-                <motion.article
-                  key={item.id}
-                  whileHover={{ y: -4 }}
-                  className="w-[280px] md:w-[320px] flex-shrink-0 rounded-lg border p-6 transition-all"
-                  style={{
-                    backgroundColor: "var(--bg-elevated)",
-                    borderColor: "var(--border-subtle)"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border-strong)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border-subtle)";
-                  }}
-                >
-                  <div className="flex gap-1">
-                    {Array.from({ length: item.rating }).map((_, i) => (
-                      <Star 
-                        key={i} 
-                        size={12} 
-                        className="fill-[var(--accent-fire)]"
-                        style={{ color: "var(--accent-fire)" }}
-                      />
-                    ))}
-                  </div>
-
-                  <p 
-                    className="mt-3 font-body text-sm leading-relaxed"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    "{item.quote}"
-                  </p>
-
-                  <div className="mt-5 border-t border-[var(--border-subtle)] pt-4">
-                    <p 
-                      className="font-headline text-sm font-bold"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {item.name}
-                    </p>
-                    <p 
-                      className="font-body text-xs mt-1"
-                      style={{ color: "var(--text-muted)" }}
-                    >
-                      {item.company}
-                    </p>
-                  </div>
-                </motion.article>
-              ))}
-            </motion.div>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

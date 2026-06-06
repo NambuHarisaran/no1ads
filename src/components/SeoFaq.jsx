@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const faqs = [
@@ -28,69 +29,55 @@ const faqs = [
 ];
 
 function SeoFaq() {
+  const [openIndex, setOpenIndex] = useState(0);
+
   return (
-    <section id="faq" className="py-24 md:py-32" style={{ backgroundColor: "var(--bg-base)" }}>
-      <div className="section-shell">
-        {/* Header */}
+    <section id="faq" className="bg-[var(--bg-primary)] section-pad">
+      <div className="mx-auto max-w-[760px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <p 
-            className="font-body text-xs uppercase tracking-[0.12em]"
-            style={{ color: "var(--accent-fire)" }}
-          >
+          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-[var(--brand-orange)]">
             FAQ
           </p>
-          <h2 
-            className="mt-4 font-display text-[clamp(2.4rem,6vw,4rem)] uppercase leading-[0.9] tracking-wider"
-            style={{ color: "var(--text-primary)" }}
-          >
-            QUESTIONS BRANDS ASK US
+          <h2 className="mt-5 font-display text-[clamp(2.25rem,5vw,4rem)] font-bold">
+            Questions brands ask us
           </h2>
         </motion.div>
 
-        {/* FAQ Grid */}
-        <motion.div 
-          layout
-          className="mt-12 grid gap-6 md:grid-cols-2 lg:gap-8"
-        >
-          {faqs.map((faq, index) => (
-            <motion.article
-              key={faq.q}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: index * 0.05, duration: 0.6 }}
-              className="rounded-lg p-6 border transition-all"
-              style={{
-                backgroundColor: "var(--bg-elevated)",
-                borderColor: "var(--border-subtle)"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-strong)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-subtle)";
-              }}
-            >
-              <h3 
-                className="font-headline text-lg font-bold uppercase tracking-wide leading-tight"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {faq.q}
-              </h3>
-              <p 
-                className="mt-3 font-body text-sm leading-relaxed"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                {faq.a}
-              </p>
-            </motion.article>
-          ))}
-        </motion.div>
+        <div className="mt-10 border-t border-[var(--border-light)]">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div key={faq.q} className="border-b border-[var(--border-light)]">
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                  className="flex min-h-16 w-full items-center justify-between gap-6 py-5 text-left font-body text-base font-semibold text-[var(--text-primary)] transition-colors hover:text-[var(--brand-orange)]"
+                  aria-expanded={isOpen}
+                >
+                  <span>{faq.q}</span>
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center text-2xl font-light transition-transform ${
+                      isOpen ? "rotate-45 text-[var(--brand-orange)]" : ""
+                    }`}
+                  >
+                    +
+                  </span>
+                </button>
+                <div className={`faq-answer ${isOpen ? "is-open pb-6" : ""}`}>
+                  <p className="font-body text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
