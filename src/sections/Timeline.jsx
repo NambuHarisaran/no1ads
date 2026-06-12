@@ -14,8 +14,8 @@ const MILESTONES = [
 
 const STATS = [
   [25, 'Years'],
-  [500, 'Projects'],
-  [200, 'Clients'],
+  [3000 , 'Projects'],
+  [2000 , 'Clients'],
 ];
 
 function StatCounter({ target, label }) {

@@ -32,7 +32,7 @@ export default function LegacyBanner() {
             tag="span"
           />
         </h2>
-        <p className="legacy-sub">Since 1999 — Madurai's Most Trusted Advertising Partner</p>
+        <p className="legacy-sub">Since 2000 — Madurai's Most Trusted Advertising Partner</p>
       </div>
     </section>
   );
