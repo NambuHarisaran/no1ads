@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 
 const LINKS = [
-  ['Home', '#home'],
-  ['Services', '#services'],
-  ['Work', '#work'],
-  ['Legacy', '#legacy'],
-  ['Contact', '#contact'],
+  ['Home', '/'],
+  ['About', '/about'],
+  ['Services', '/services'],
+  ['Work', '/work'],
+  ['Contact', '/contact'],
 ];
 
 export default function Nav() {
@@ -27,15 +28,19 @@ export default function Nav() {
     <>
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-inner">
-          <a href="#home" className="nav-logo" aria-label="Number One Ads — home">
+          <Link to="/" className="nav-logo" aria-label="Number One Ads — home">
             <img src="/assets/logo.png" alt="number one ads" />
-          </a>
+          </Link>
           <ul className="nav-links">
             {LINKS.map(([label, href]) => (
-              <li key={label}><a href={href}>{label}</a></li>
+              <li key={label}>
+                <NavLink to={href} end={href === '/'} className={({ isActive }) => (isActive ? 'is-active' : undefined)}>
+                  {label}
+                </NavLink>
+              </li>
             ))}
           </ul>
-          <a className="nav-cta" href="#contact">Get in Touch</a>
+          <Link className="nav-cta" to="/contact">Get in Touch</Link>
           <button
             className={`nav-burger ${open ? 'open' : ''}`}
             onClick={() => setOpen(!open)}
@@ -48,9 +53,17 @@ export default function Nav() {
       </nav>
       <div className={`mobile-overlay ${open ? 'open' : ''}`}>
         {LINKS.map(([label, href]) => (
-          <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>
+          <NavLink
+            key={label}
+            to={href}
+            end={href === '/'}
+            onClick={() => setOpen(false)}
+            className={({ isActive }) => (isActive ? 'is-active' : undefined)}
+          >
+            {label}
+          </NavLink>
         ))}
-        <a href="#contact" onClick={() => setOpen(false)} style={{ color: 'var(--orange)' }}>Get in Touch</a>
+        <Link to="/contact" onClick={() => setOpen(false)} style={{ color: 'var(--orange)' }}>Get in Touch</Link>
       </div>
     </>
   );

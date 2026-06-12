@@ -48,27 +48,37 @@ function Field({ label, name, type = 'text', textarea = false }) {
   );
 }
 
-export default function Contact() {
+export default function Contact({ showHeading = true }) {
   return (
     <section className="contact-section" id="contact">
       <div className="container">
         <div className="contact-grid">
           <div>
-            <Reveal>
-              <div className="section-label">
-                <ShinyText text="READY TO BUILD SOMETHING GREAT?" speed={5} color="#E87722" shineColor="#FFFFFF" />
-              </div>
-              <h2 className="contact-headline">
-                <SplitText
-                  text="Let's Talk."
-                  splitType="chars"
-                  delay={40}
-                  duration={0.7}
-                  ease="power3.out"
-                  tag="span"
-                />
-              </h2>
-            </Reveal>
+            {showHeading && (
+              <Reveal>
+                <div className="section-label">
+                  <ShinyText text="READY TO BUILD SOMETHING GREAT?" speed={5} color="#E87722" shineColor="#FFFFFF" />
+                </div>
+                <h2 className="contact-headline">
+                  <SplitText
+                    text="Let's Talk."
+                    splitType="chars"
+                    delay={40}
+                    duration={0.7}
+                    ease="power3.out"
+                    tag="span"
+                  />
+                </h2>
+              </Reveal>
+            )}
+            {!showHeading && (
+              <Reveal>
+                <p className="contact-intro">
+                  Tell us about your brand, your site and your timeline. We reply fast and,
+                  for local projects, can visit to measure and quote in person.
+                </p>
+              </Reveal>
+            )}
             <Reveal className="contact-info" stagger={120}>
               <div className="contact-info-item">
                 <PinIcon />

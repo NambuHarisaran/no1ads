@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
 import Reveal from '../components/Reveal.jsx';
@@ -36,12 +37,12 @@ const icons = {
 };
 
 const SERVICES = [
-  ['01', icons.design, 'Creative Design', 'Expert brand craft from concept to final art. Every pixel refined with purpose and precision.'],
-  ['02', icons.print, 'Printing Solutions', 'Premium print across all formats and scales — hoarding, handbills, brochures — meeting every deadline.'],
-  ['03', icons.film, 'Film & Photography', 'From TVCs to product shoots, we translate your brand into compelling visual stories.'],
-  ['04', icons.media, 'Media & Advertising', 'Tailored media strategies spanning print, outdoor, broadcast, and digital channels.'],
-  ['05', icons.events, 'Roadshow & Events', 'End-to-end roadshow production and event design that commands attention at every venue.'],
-  ['06', icons.brand, 'Branding & Identity', "Building brand identities that carve a distinct, lasting space in consumers' minds."],
+  ['01', icons.design, 'Creative Design', 'Expert brand craft from concept to final art. Every pixel refined with purpose and precision.', 'creative-design'],
+  ['02', icons.media, 'Digital Marketing', 'Search, social, audio and streaming campaigns — strategy, creative and media buying under one roof.', 'digital-marketing'],
+  ['03', icons.print, 'Printing Solutions', 'Premium print across all formats and scales — hoarding, handbills, brochures — meeting every deadline.', 'printing'],
+  ['04', icons.film, 'Film & Photography', 'From TVCs to product shoots, we translate your brand into compelling visual stories.', 'film-photography'],
+  ['05', icons.events, 'Roadshow & Events', 'End-to-end roadshow production and event design that commands attention at every venue.', 'roadshow-outdoor'],
+  ['06', icons.brand, 'Branding & Identity', "Building brand identities that carve a distinct, lasting space in consumers' minds.", 'branding-identity'],
 ];
 
 export default function Services() {
@@ -63,18 +64,21 @@ export default function Services() {
             />
           </h2>
         </Reveal>
-        <Reveal className="services-grid" stagger={120}>
-          {SERVICES.map(([num, icon, title, body]) => (
-            <article className="service-card" key={num}>
+        <Reveal className="services-grid services-bento" stagger={120}>
+          {SERVICES.map(([num, icon, title, body, slug], i) => (
+            <Link className={`service-card ${i === 0 ? 'service-card--feature' : ''}`} key={num} to={`/services/${slug}`}>
               <div className="service-num">{num}</div>
               <div className="service-icon">{icon}</div>
               <h3 className="service-title">
                 <SplitText text={title} splitType="words" delay={80} duration={0.5} ease="power3.out" tag="span" />
               </h3>
               <p className="service-body">{body}</p>
-              <a href="#contact" className="service-more">Learn More →</a>
-            </article>
+              <span className="service-more">Learn More →</span>
+            </Link>
           ))}
+        </Reveal>
+        <Reveal className="services-cta-row">
+          <Link to="/services" className="btn-orange">Explore All Services →</Link>
         </Reveal>
       </div>
     </section>

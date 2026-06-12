@@ -8,9 +8,17 @@ export default defineConfig({
   plugins: [
     react(),
     // Generates sitemap.xml + robots.txt into the build output.
-    // Single-page site, so the only crawlable route is the homepage.
     Sitemap({
       hostname: SITE_URL,
+      dynamicRoutes: [
+        '/about', '/services', '/work', '/contact',
+        '/services/creative-design', '/services/digital-marketing',
+        '/services/branding-identity', '/services/led-signage',
+        '/services/acp-elevation', '/services/signage-boards',
+        '/services/exhibition-stalls', '/services/roadshow-outdoor',
+        '/services/in-shop-branding', '/services/printing',
+        '/services/film-photography',
+      ],
       changefreq: 'monthly',
       priority: 1.0,
       lastmod: new Date(),

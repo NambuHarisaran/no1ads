@@ -1,6 +1,16 @@
 # Number One Ads
 
-Single-page website for **Number One Ads** — a 25-year 360° advertising agency in Madurai, Tamil Nadu. Built with React + Vite, GSAP, and a custom build-time image pipeline.
+Multi-page marketing website for **Number One Ads** — a 25-year 360° advertising agency in Madurai, Tamil Nadu. Built with React + Vite + React Router, GSAP, and a custom build-time image pipeline.
+
+## Pages
+
+- `/` — Home (hero, sectors, services overview, showcase, evolution, featured work, testimonials, CTA)
+- `/about` — Our story, legacy timeline, values, evolution, testimonials
+- `/services` — Capabilities, detailed signage/production grid, process
+- `/work` — Filterable portfolio gallery + lightbox
+- `/contact` — Contact details and enquiry form
+
+Routing is client-side; `public/_redirects` and `vercel.json` provide the SPA fallback so deep links resolve on static hosts. Per-page `<title>`/meta are handled by `src/components/Seo.jsx`, and `vite.config.js` lists every route for the generated `sitemap.xml`.
 
 ## Develop
 
