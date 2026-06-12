@@ -1,37 +1,72 @@
 import { lazy, Suspense } from 'react';
-import Nav from './sections/Nav.jsx';
-import Hero from './sections/Hero.jsx';
-import Timeline from './sections/Timeline.jsx';
-import Services from './sections/Services.jsx';
-import ServicesShowcase from './sections/ServicesShowcase.jsx';
-import Evolution from './sections/Evolution.jsx';
-import LegacyBanner from './sections/LegacyBanner.jsx';
-import Contact from './sections/Contact.jsx';
-import Footer from './sections/Footer.jsx';
-import CursorDot from './components/CursorDot.jsx';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout.jsx';
+import Home from './pages/Home.jsx';
 
-// The gallery carries the heaviest payload (manifest + lightbox), so it is
-// code-split into its own chunk and rendered behind Suspense.
-const Gallery = lazy(() => import('./sections/Gallery.jsx'));
+// Heavier inner pages are code-split so the landing page stays lean.
+const About = lazy(() => import('./pages/About.jsx'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage.jsx'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail.jsx'));
+const Work = lazy(() => import('./pages/Work.jsx'));
+const ContactPage = lazy(() => import('./pages/ContactPage.jsx'));
+const NotFound = lazy(() => import('./pages/NotFound.jsx'));
+
+const PageFallback = () => <div className="route-fallback" aria-hidden="true" />;
 
 export default function App() {
   return (
-    <>
-      <CursorDot />
-      <Nav />
-      <main>
-        <Hero />
-        <Timeline />
-        <Services />
-        <ServicesShowcase />
-        <Evolution />
-        <Suspense fallback={<div className="section-fallback" aria-hidden="true" />}>
-          <Gallery />
-        </Suspense>
-        <LegacyBanner />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route
+          path="about"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <About />
+            </Suspense>
+          }
+        />
+        <Route
+          path="services"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <ServicesPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="services/:slug"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <ServiceDetail />
+            </Suspense>
+          }
+        />
+        <Route
+          path="work"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Work />
+            </Suspense>
+          }
+        />
+        <Route
+          path="contact"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <ContactPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
+      </Route>
+    </Routes>
   );
 }

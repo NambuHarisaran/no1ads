@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import TrueFocus from '../components/TrueFocus.jsx';
 import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
@@ -47,8 +48,8 @@ export default function Hero() {
             />
           </div>
           <div className="hero-ctas">
-            <a href="#work" className="btn-orange">Explore Our Work</a>
-            <a href="#legacy" className="ghost-link">Our Story →</a>
+            <Link to="/work" className="btn-orange">Explore Our Work</Link>
+            <Link to="/about" className="ghost-link">Our Story →</Link>
           </div>
         </div>
         <div className="hero-badge">
