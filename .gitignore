@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Raw, unoptimized source art (8+ GB — NOT needed to run/deploy the site).
+# Only the optimized WebP derivatives in public/gallery and public/services
+# are committed. Keep this folder locally to regenerate assets via
+# `node scripts/optimize-images.mjs` when new creatives are added.
+website creatives/
+
+# Local tooling / editor / notes
+.claude/
+*.txt
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / misc junk
+Thumbs.db
+.DS_Store
+*.local
+.vite/

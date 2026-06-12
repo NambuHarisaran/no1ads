@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "design",
+    "title": "Creative Design",
+    "blurb": "Brand-led print & digital artwork crafted to the last pixel.",
+    "image": "/services/design.webp",
+    "w": 851,
+    "h": 360,
+    "lqip": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBACdASoYAAoAPu1iqU2ppaOiMAgBMB2JQBOgBF5YnyhtPAi//FC5YAD+8rIValxtcN9zvhEHQagYmqWLAekbel3qQJlG0sROXFbA78lyM3K0lgJMVHqyBlKLG17bEQxRg0eAYsRz4nlAIvEdAAAA",
+    "count": 4
+  },
+  {
+    "slug": "led-signage",
+    "title": "LED Signage",
+    "blurb": "High-impact illuminated displays that command attention day and night.",
+    "image": "/services/led-signage.webp",
+    "w": 2667,
+    "h": 1340,
+    "lqip": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAAAwBACdASoYAAwAPu1iqU2ppaOiMAgBMB2JQBYdhDukzqlZSMHgi9wO90AA/vKqH1wlB6pZWjCsq7Ry3Q5Ei+BWFbHRu7jjNpCLVXG8LNR91KyFQ0xhlEoXb0mJ4IR2Y2y/ZTYaOTXZu4w342ozWNCZD2B9JVmd5M0eAwC0rMY4AA==",
+    "count": 6
+  },
+  {
+    "slug": "signage-boards",
+    "title": "Signage Boards",
+    "blurb": "Durable storefront and directional boards built to brand spec.",
+    "image": "/services/signage-boards.webp",
+    "w": 1110,
+    "h": 640,
+    "lqip": "data:image/webp;base64,UklGRtAAAABXRUJQVlA4IMQAAADQBACdASoYAA4APu1iqU2ppaOiMAgBMB2JbACdMoMYGWjgZTaL7w/qB3e1y+bC4AD+7FP3NMApzPlMv1D2essmoYFaSaQUzun08Rm1FGkSm+LA6bDUzd2XAlRgdWXzMnMkPlpV7Gb6rJxa7xlgWz0wZhLyK92b9n0eoO1udaqSU8+z56wU2EL9qhjACBtH6DSfh9XloXXrMTTm4WYra9d46bvJNyMxSIe8ix71rrg30+0sx1/z4zWjHhrJxaxucsHUAAAA",
+    "count": 17
+  },
+  {
+    "slug": "acp-elevation",
+    "title": "ACP Elevation",
+    "blurb": "Premium aluminium composite façades that transform building fronts.",
+    "image": "/services/acp-elevation.webp",
+    "w": 891,
+    "h": 1257,
+    "lqip": "data:image/webp;base64,UklGRtoAAABXRUJQVlA4IM4AAADwBQCdASoRABgAPu1ur1IppiQiqAgBMB2JZQDDSQA5/8uwAzU0XcS3oNyfpSMHbQ7ZcITcaIaRgAD+x37nSUMcTiO6wl32Jj1m1g1qt6AaBT4HO4IY0HjL4eGyJsAT3Sx+T6FaQbbwP82m7cY+GP8eR1nQBuJ5hkDQKq14J85JORg29QoKbgJaaN3vrf9Dp/JH2PweY5jlB369kWKQsqXN8WUsMvlwO5nPnHmdrBM/qAT0Y6/uH3Bz5ewtLh1tgV+jszVfrjYlzmMBNgAAAA==",
+    "count": 11
+  },
+  {
+    "slug": "exhibition-stall",
+    "title": "Exhibition Stalls",
+    "blurb": "Show-stopping stall design and on-site execution end to end.",
+    "image": "/services/exhibition-stall.webp",
+    "w": 1280,
+    "h": 767,
+    "lqip": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4ILgAAABwBACdASoYAA4APu1iqU2ppaQiMAgBMB2JbACdEf/i2DmagUa1QYJYSnZmAADOI8YJEZO+7RXvFqRLwvnyX7uZI2tWYbeDLSGY/cxo+udEn4bvQnwtUThFbEuiGI5QQpGkYXPfoG0e4ahrZTQG0nKs1DbLGezsqI+mW00JLoJ6tj9SJ2QKU4FmM9ygSY+jACmP2aph57+y4eTRAEf+hs+DXivoKpNCMmidz3qQT964Ym0WiJ1x4AAA",
+    "count": 11
+  },
+  {
+    "slug": "roadshow",
+    "title": "Roadshow & Outdoor",
+    "blurb": "Mobile brand activations that take your story to the streets.",
+    "image": "/services/roadshow.webp",
+    "w": 593,
+    "h": 1280,
+    "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAADwAwCdASoLABgAPu1iqU2ppaQiMAgBMB2JZACdABuxkQDp6LKvT3AAAJ+w7zxzgy+wOpnjuCXL2y6mJzv0Sxa9spPxJAsp5zXkU5cq9nufEGF7kCKj4BhdVP74kKGd3z4XayTgqHPH6PdAsfJ4JafCQfrOAAAA",
+    "count": 18
+  },
+  {
+    "slug": "in-shop",
+    "title": "In-Shop Branding",
+    "blurb": "Retail interiors and point-of-sale that turn footfall into sales.",
+    "image": "/services/in-shop.webp",
+    "w": 1999,
+    "h": 948,
+    "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADwAwCdASoYAAsAPu1iqU2ppaQiMAgBMB2JQAB8t0JCY2TmKwW7wceAAP6ExI6jtHZWQYL4/Rhd2Fjly++06HpxZz0p6/wR/ARYCOjvdRjL+DdNSUvqAXy9fLW6KGfd0/IUEiXeAk63wDuMoX/AVXuErnrCOMS+qgkJbOsVX/K/XCbpG5gfyYawMEED3wGJAJYru1El38HjMcap7PVXZh2+pyEAAA==",
+    "count": 15
+  },
+  {
+    "slug": "backlight-board",
+    "title": "Backlit Boards",
+    "blurb": "Glowing backlit panels for unmissable nighttime visibility.",
+    "image": "/services/backlight-board.webp",
+    "w": 949,
+    "h": 1280,
+    "lqip": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAACQBACdASoSABgAPu1qrlCppaQiqAqpMB2JQBgbgjCt1oNVZ8ATSWElZP1ri7AA/uX+ySWZYpCoEKEpZk/lXEblI0HBR5Xa79hSSD6amGAME1aavwqDMHUFpRknYwuAjY3CC0RsKJ/i1+aRjvQoM+dbL1djLtgmRo5Gb1rQDevinDvDkcyEwk7QpVopTm7kQ2ilM04AAAA=",
+    "count": 4
+  },
+  {
+    "slug": "pylon-branding",
+    "title": "Pylon Branding",
+    "blurb": "Tall freestanding totems that anchor a brand to its location.",
+    "image": "/services/pylon-branding.webp",
+    "w": 1219,
+    "h": 1625,
+    "lqip": "data:image/webp;base64,UklGRgIBAABXRUJQVlA4IPYAAACwBQCdASoSABgAPu1sq1EppaOiqAqpMB2JYgC06YxEd1lT4h8L30RXTt1B6qQFXVuFEkNUzGAA/mQJTVrJDU0A3yoVINdML1u72RaWSxI9pIa1xU3boe0LdBiXAK1pVwX9nN9Tr1dpj2XxAB/qEPDKamwIj0c4/y2LdFhS+ADCtSyzSvR8hM6fZJh6sT9srWMm6hy0mVDaRQJHEkBtEvPGBbyA7KkWwMgtwJV/RHEdnu98aBXpCFgMA2Erb/Um5VY8bS1JGyoKrmNC3j4V6L2ar6RbUsWik+FuV+EQ4IgwA8SbDn4uxxiYEkCryaPSXcoOW6zQAAA=",
+    "count": 2
+  },
+  {
+    "slug": "lamp-post-branding",
+    "title": "Lamp Post Branding",
+    "blurb": "Street-level pole media that builds repeated brand exposure.",
+    "image": "/services/lamp-post-branding.webp",
+    "w": 607,
+    "h": 839,
+    "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAwBQCdASoRABgAPu1oqk2ppiQiMAgBMB2JZQDGfBiq+C3psWICBfMlRWHaH/XduNneAAD+9DJggHGYzpFTa9p+lXjOM+scD38AZfvPUyXZw/3rSjx2BNMiwj0CxLOYgjwqiIeRN7w9LuRUikpm0umusK/gcs6dYvtEHnKdr1AGeTCEnR1rhes/fEO+NBHiK+hZPgAA",
+    "count": 2
+  },
+  {
+    "slug": "standee",
+    "title": "Standees",
+    "blurb": "Portable promotional displays for launches, stores and events.",
+    "image": "/services/standee.webp",
+    "w": 565,
+    "h": 992,
+    "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAQBACdASoOABgALrV2u12jqampiYC0S0AE6ZQYwASyq8L+wHtPL3woyAD+3pfxZu7f8hHPP/shSxmOuIj3SDnpdqOzuizJtucXSDXxsL7ldcvwhDgLt0oIuuj/rfwqYszwV2ZIvFAH2iRR8ZOdtDsehU3dWeSE9hAquxym6Ie0CcaPg4AAAA==",
+    "count": 3
+  },
+  {
+    "slug": "signage",
+    "title": "Signage Solutions",
+    "blurb": "Complete signage systems engineered for clarity and longevity.",
+    "image": "/services/signage.webp",
+    "w": 3333,
+    "h": 2500,
+    "lqip": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAAAwBQCdASoYABIAPu1gp06ppSMiMBgMATAdiUAXyTGNioJ8YecNkIyEdscJI6dLt07JAAD+W3Mx5snC+QICOXpCkCefTalI6NrCFs950aI/bMjA1LIN/5k+Lwye69ioCbh4y+e/9MKQ1TfR6MpVHjbwQhrieIzBTCJEZbToYSwDbTppfuuAui8iYe1+F/KzBFq3JwPg9fC1/3g/yAXNB7orN32NbOQSHKVI7PHbqTOIi9Cm5D5JeM1hJYVD3OURdDpgkaIuq0nIAAAA",
+    "count": 4
+  },
+  {
+    "slug": "auto-back-branding",
+    "title": "Auto Back Branding",
+    "blurb": "Vehicle-rear advertising that turns every commute into reach.",
+    "image": "/services/auto-back-branding.webp",
+    "w": 723,
+    "h": 1280,
+    "lqip": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAQBACdASoOABgAPu1iqU2ppaQiMAgBMB2JbAAAUTEU+GzYovcv6ikOQAD+5syYJysXQlqJgEViuhh+0RGvAAxAdGHrB1IdDFhii9Ha0TyY3NuWXemh0yP4INP79rqcEMaEzA3ajHB9zZDLbMjZOYNegidd9velmNYb2TFRjDQno7zqPdhgNfmWr+S4f2fc2vsFIgTC9koGl46vmIwim8niQAA=",
+    "count": 23
+  }
+]
