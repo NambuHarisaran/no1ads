@@ -18,7 +18,10 @@ export default function Hero() {
           <div className="hero-label">
             <ShinyText text="EST. 2000 · MADURAI, INDIA" speed={4} color="#808080" shineColor="#FFFFFF" />
           </div>
-          <div className="hero-headline">
+          <h1 className="sr-only">
+            Number One Ads — 360° Advertising Agency in Madurai, Tamil Nadu
+          </h1>
+          <div className="hero-headline" aria-hidden="true">
             <TrueFocus
               sentence="360° ADVERTISING AGENCY"
               manualMode={false}
