@@ -30,6 +30,11 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #E87722 #0D0D0D;
+  /* Root scroller must also clip horizontal overflow — overflow-x:hidden on
+     <body> alone does not stop the page from scrolling sideways. Without this,
+     the decorative hero-badge glow (inset:-60px) leaks ~36px past narrow
+     viewports, causing the "zoomed-left / black bar on the right" effect. */
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 8px; }
