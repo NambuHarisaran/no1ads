@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,11 +22,15 @@ const SplitText = ({
   onLetterAnimationComplete,
 }) => {
   const ref = useRef(null);
-  const [fontsLoaded, setFontsLoaded] = useState(document.fonts.status === 'loaded');
+  // Guard for prerender/SSR: `document` does not exist on the server.
+  const [fontsLoaded, setFontsLoaded] = useState(
+    typeof document !== 'undefined' && document.fonts?.status === 'loaded'
+  );
 
-  if (!fontsLoaded) {
+  useEffect(() => {
+    if (fontsLoaded || typeof document === 'undefined' || !document.fonts) return;
     document.fonts.ready.then(() => setFontsLoaded(true));
-  }
+  }, [fontsLoaded]);
 
   useGSAP(
     () => {

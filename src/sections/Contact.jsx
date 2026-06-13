@@ -3,6 +3,13 @@ import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
 import Reveal from '../components/Reveal.jsx';
 import { FacebookIcon, InstagramIcon } from './SocialIcons.jsx';
+import { site, displayPhone, whatsappLink } from '../data/siteConfig.js';
+
+const PhoneIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
+);
 
 const PinIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -16,7 +23,7 @@ const MailIcon = () => (
   </svg>
 );
 
-function Field({ label, name, type = 'text', textarea = false }) {
+function Field({ label, name, type = 'text', textarea = false, required = false }) {
   const [focused, setFocused] = useState(false);
   return (
     <div className="form-field">
@@ -32,6 +39,7 @@ function Field({ label, name, type = 'text', textarea = false }) {
           id={name}
           name={name}
           rows={4}
+          required={required}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
@@ -40,6 +48,7 @@ function Field({ label, name, type = 'text', textarea = false }) {
           id={name}
           name={name}
           type={type}
+          required={required}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
@@ -48,7 +57,54 @@ function Field({ label, name, type = 'text', textarea = false }) {
   );
 }
 
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
+
 export default function Contact({ showHeading = true }) {
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [error, setError] = useState('');
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (status === 'sending') return;
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    // Honeypot: real users leave this empty; bots fill it.
+    if (data.get('botcheck')) return;
+
+    if (!WEB3FORMS_KEY) {
+      setStatus('error');
+      setError('Form is not configured yet. Please email contact@no1ads.in directly.');
+      return;
+    }
+
+    data.append('access_key', WEB3FORMS_KEY);
+    data.append('subject', 'New enquiry from no1ads.in');
+    data.append('from_name', 'Number One Ads Website');
+
+    setStatus('sending');
+    setError('');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: data,
+      });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        setStatus('success');
+        form.reset();
+      } else {
+        setStatus('error');
+        setError(result.message || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setStatus('error');
+      setError('Network error. Please check your connection and try again.');
+    }
+  }
+
   return (
     <section className="contact-section" id="contact">
       <div className="container">
@@ -84,6 +140,17 @@ export default function Contact({ showHeading = true }) {
                 <PinIcon />
                 <span>Madurai, Tamil Nadu, India</span>
               </div>
+              {site.phone && (
+                <div className="contact-info-item">
+                  <PhoneIcon />
+                  <span className="contact-phones">
+                    <a href={`tel:${site.phone}`} className="ghost-link">{displayPhone()}</a>
+                    {site.phoneSecondary && (
+                      <a href={`tel:${site.phoneSecondary}`} className="ghost-link">{displayPhone(site.phoneSecondary)}</a>
+                    )}
+                  </span>
+                </div>
+              )}
               <div className="contact-info-item">
                 <MailIcon />
                 <a href="mailto:contact@no1ads.in" className="ghost-link">contact@no1ads.in</a>
@@ -101,11 +168,31 @@ export default function Contact({ showHeading = true }) {
               </div>
             </Reveal>
           </div>
-          <Reveal as="form" className="contact-form" onSubmit={e => e.preventDefault()}>
-            <Field label="Name" name="name" />
-            <Field label="Email" name="email" type="email" />
-            <Field label="Message" name="message" textarea />
-            <button type="submit" className="btn-orange">Send Message →</button>
+          <Reveal as="form" className="contact-form" onSubmit={handleSubmit}>
+            <Field label="Name" name="name" required />
+            <Field label="Email" name="email" type="email" required />
+            <Field label="Message" name="message" textarea required />
+            <input
+              type="checkbox"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+              aria-hidden="true"
+            />
+            <button type="submit" className="btn-orange" disabled={status === 'sending'}>
+              {status === 'sending' ? 'Sending…' : 'Send Message →'}
+            </button>
+            {status === 'success' && (
+              <p className="form-status form-status-success" role="status">
+                Thanks! Your message has been sent — we'll reply soon.
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="form-status form-status-error" role="alert">
+                {error}
+              </p>
+            )}
           </Reveal>
         </div>
       </div>

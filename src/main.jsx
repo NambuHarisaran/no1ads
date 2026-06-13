@@ -1,13 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
+import { ViteReactSSG } from 'vite-react-ssg';
+import { routes } from './App.jsx';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+// vite-react-ssg owns the router (data router). At build time it prerenders
+// every static path to HTML; in the browser it hydrates the same tree.
+export const createRoot = ViteReactSSG({
+  routes,
+  basename: import.meta.env.BASE_URL,
+});

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import ShinyText from '../components/ShinyText.jsx';
 import { FacebookIcon, InstagramIcon } from './SocialIcons.jsx';
+import { site, displayPhone, whatsappLink } from '../data/siteConfig.js';
 
 const NAV = [
   ['Home', '/'],
@@ -62,8 +63,17 @@ export default function Footer() {
         <div className="footer-col">
           <h3 className="footer-col-title">Get in Touch</h3>
           <ul>
+            {site.phone && (
+              <li><a href={`tel:${site.phone}`}>{displayPhone()}</a></li>
+            )}
+            {site.phoneSecondary && (
+              <li><a href={`tel:${site.phoneSecondary}`}>{displayPhone(site.phoneSecondary)}</a></li>
+            )}
+            {whatsappLink() && (
+              <li><a href={whatsappLink()} target="_blank" rel="noreferrer">WhatsApp us</a></li>
+            )}
             <li><a href="mailto:contact@no1ads.in">contact@no1ads.in</a></li>
-            <li><span>Madurai, Tamil Nadu, India</span></li>
+            <li><span>{site.streetAddress ? `${site.streetAddress}, ` : ''}Madurai, Tamil Nadu, India</span></li>
             <li><Link to="/contact" className="footer-cta-link">Start a project →</Link></li>
           </ul>
         </div>

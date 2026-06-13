@@ -1,47 +1,28 @@
-import { useEffect } from 'react';
+import { Head } from 'vite-react-ssg';
 
 const SITE_URL = 'https://no1ads.in';
 const DEFAULT_IMAGE = `${SITE_URL}/assets/logo.png`;
 
 /**
- * Lightweight per-page <head> manager. Updates document.title, the meta
- * description, canonical link, and the key Open Graph / Twitter tags whenever a
- * route mounts. No external dependency — just imperative DOM updates in an
- * effect, which is plenty for a static SPA that is also prerender-friendly.
+ * Per-page <head> manager. Renders title, description, canonical and the key
+ * Open Graph / Twitter tags via vite-react-ssg's <Head>, so they are baked
+ * into the prerendered static HTML (readable by AI crawlers and search bots
+ * that don't execute JavaScript) and kept in sync during client navigation.
  */
-function setMeta(attr, key, content) {
-  if (!content) return;
-  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('content', content);
-}
-
 export default function Seo({ title, description, path = '/', image = DEFAULT_IMAGE }) {
-  useEffect(() => {
-    const url = `${SITE_URL}${path}`;
-    if (title) document.title = title;
-
-    setMeta('name', 'description', description);
-    setMeta('property', 'og:title', title);
-    setMeta('property', 'og:description', description);
-    setMeta('property', 'og:url', url);
-    setMeta('property', 'og:image', image);
-    setMeta('name', 'twitter:title', title);
-    setMeta('name', 'twitter:description', description);
-    setMeta('name', 'twitter:image', image);
-
-    let canonical = document.head.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', url);
-  }, [title, description, path, image]);
-
-  return null;
+  const url = `${SITE_URL}${path}`;
+  return (
+    <Head>
+      {title && <title>{title}</title>}
+      {description && <meta name="description" content={description} />}
+      <link rel="canonical" href={url} />
+      {title && <meta property="og:title" content={title} />}
+      {description && <meta property="og:description" content={description} />}
+      <meta property="og:url" content={url} />
+      <meta property="og:image" content={image} />
+      {title && <meta name="twitter:title" content={title} />}
+      {description && <meta name="twitter:description" content={description} />}
+      <meta name="twitter:image" content={image} />
+    </Head>
+  );
 }

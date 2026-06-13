@@ -1,6 +1,7 @@
 import Seo from '../components/Seo.jsx';
 import PageHero from '../components/PageHero.jsx';
 import Contact from '../sections/Contact.jsx';
+import Faq from '../sections/Faq.jsx';
 
 export default function ContactPage() {
   return (
@@ -17,6 +18,7 @@ export default function ContactPage() {
         crumb="Contact"
       />
       <Contact showHeading={false} />
+      <Faq />
     </>
   );
 }

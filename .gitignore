@@ -14,10 +14,18 @@ website creatives/
 # Local tooling / editor / notes
 .claude/
 *.txt
+# …but llms.txt and robots.txt in public/ are real, deployable source files.
+!public/llms.txt
+!public/robots.txt
 
 # Logs
 *.log
 npm-debug.log*
+
+# Env files (keep .env.example committed)
+.env
+.env.*
+!.env.example
 
 # OS / misc junk
 Thumbs.db
