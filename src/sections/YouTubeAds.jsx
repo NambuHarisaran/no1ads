@@ -1,13 +1,7 @@
 import Reveal from '../components/Reveal.jsx';
 import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
-
-const CHANNEL_URL = 'https://www.youtube.com/@No1ads';
-
-// To feature specific films, add YouTube video IDs here (e.g. 'dQw4w9WgXcQ').
-// Each becomes a real thumbnail that links straight to the video. Until then,
-// the cards link to the channel.
-const VIDEO_IDS = [];
+import { CHANNEL_URL, featuredVideos, watchUrl, thumbUrl } from '../data/videos.js';
 
 const PlayIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -17,12 +11,11 @@ const PlayIcon = () => (
 );
 
 export default function YouTubeAds() {
-  const cards = VIDEO_IDS.length
-    ? VIDEO_IDS.map(id => ({
-        href: `https://www.youtube.com/watch?v=${id}`,
-        thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-      }))
-    : [{ href: CHANNEL_URL }, { href: CHANNEL_URL }, { href: CHANNEL_URL }];
+  const cards = featuredVideos.map(v => ({
+    href: watchUrl(v.id),
+    thumb: thumbUrl(v.id),
+    title: v.title,
+  }));
 
   return (
     <section className="youtube-section" id="ads">
@@ -49,12 +42,8 @@ export default function YouTubeAds() {
 
         <Reveal className="youtube-grid" stagger={120}>
           {cards.map((c, i) => (
-            <a className="youtube-card" key={i} href={c.href} target="_blank" rel="noreferrer" aria-label="Watch on YouTube">
-              {c.thumb ? (
-                <img className="youtube-thumb" src={c.thumb} alt="" loading="lazy" decoding="async" />
-              ) : (
-                <span className="youtube-thumb youtube-thumb--placeholder" />
-              )}
+            <a className="youtube-card" key={i} href={c.href} target="_blank" rel="noreferrer" aria-label={`Watch ${c.title} on YouTube`}>
+              <img className="youtube-thumb" src={c.thumb} alt={c.title} loading="lazy" decoding="async" />
               <span className="youtube-play"><PlayIcon /></span>
             </a>
           ))}

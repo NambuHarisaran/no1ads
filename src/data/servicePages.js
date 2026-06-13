@@ -24,6 +24,18 @@ const servicePages = [
       'Brand-consistent templates',
     ],
     image: '/services/design.webp',
+    // Selected creatives from our own portfolio — shown as a showcase grid.
+    gallery: [
+      '/gallery/necklece-thumb.webp',
+      '/gallery/spark-jwellery-copy-thumb.webp',
+      '/gallery/ring-post-copy-thumb.webp',
+      '/gallery/charm-thumb.webp',
+      '/gallery/minimal-magic-thumb.webp',
+      '/gallery/swirl-thumb.webp',
+      '/gallery/mangalyam-copy-thumb.webp',
+      '/gallery/social-media-post-16-thumb.webp',
+      '/gallery/akshaya-thirithi-thumb.webp',
+    ],
   },
   {
     slug: 'digital-marketing',
@@ -211,6 +223,11 @@ const servicePages = [
       'Editing, grading & post-production',
       'Scriptwriting & direction',
     ],
+    // Renders the full YouTube catalogue + a product-shoot image showcase.
+    showcase: 'film',
+    // Product / catalogue shoot stills. Drop image paths (e.g. '/shoots/xxx.webp')
+    // here as they're added — the section only renders when this has entries.
+    productShoots: [],
   },
 ];
 
