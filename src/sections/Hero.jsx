@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TrueFocus from '../components/TrueFocus.jsx';
 import ShinyText from '../components/ShinyText.jsx';
@@ -11,6 +12,12 @@ const TICKER_ITEMS = [
 
 export default function Hero() {
   const tickerText = TICKER_ITEMS.map(s => `${s} · `).join('');
+  // Start at the server value (desktop) so the first client render matches the
+  // prerendered HTML, then refine after mount — avoids a hydration mismatch.
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
 
   return (
     <section className="hero" id="home">
@@ -26,7 +33,7 @@ export default function Hero() {
             <TrueFocus
               sentence="360° ADVERTISING AGENCY"
               manualMode={false}
-              blurAmount={window.innerWidth <= 768 ? 2 : 4}
+              blurAmount={isMobile ? 2 : 4}
               borderColor="#E87722"
               glowColor="rgba(232,119,34,0.5)"
               animationDuration={1.3}
@@ -37,7 +44,7 @@ export default function Hero() {
             <SplitText
               text="25 years of precision, creativity & legacy"
               splitType="chars"
-              delay={window.innerWidth <= 768 ? 15 : 25}
+              delay={isMobile ? 15 : 25}
               duration={0.6}
               ease="power3.out"
               from={{ opacity: 0, y: 30 }}

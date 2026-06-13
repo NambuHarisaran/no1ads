@@ -8,6 +8,7 @@ import Gallery from '../sections/Gallery.jsx';
 import YouTubeAds from '../sections/YouTubeAds.jsx';
 import Testimonials from '../sections/Testimonials.jsx';
 import LegacyBanner from '../sections/LegacyBanner.jsx';
+import Faq from '../sections/Faq.jsx';
 import CtaBand from '../components/CtaBand.jsx';
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
       <YouTubeAds />
       <Testimonials />
       <LegacyBanner />
+      <Faq />
       <CtaBand variant="orange" />
     </>
   );
