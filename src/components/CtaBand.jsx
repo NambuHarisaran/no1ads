@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { track } from '../lib/analytics.js';
 import ShinyText from './ShinyText.jsx';
 import SplitText from './SplitText.jsx';
 import Reveal from './Reveal.jsx';
@@ -32,7 +33,11 @@ export default function CtaBand({
             <SplitText text={title} splitType="words" delay={40} duration={0.7} ease="power3.out" tag="span" />
           </h2>
           <p className="cta-band-text">{text}</p>
-          <Link to={to} className={variant === 'orange' ? 'btn-dark' : 'btn-orange'}>
+          <Link
+            to={to}
+            className={variant === 'orange' ? 'btn-dark' : 'btn-orange'}
+            onClick={() => track('cta_click', { location: 'cta_band', label: buttonLabel })}
+          >
             {buttonLabel}
           </Link>
         </Reveal>

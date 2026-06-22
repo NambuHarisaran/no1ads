@@ -1,4 +1,5 @@
 import { site, whatsappLink } from '../data/siteConfig.js';
+import { track } from '../lib/analytics.js';
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -30,13 +31,19 @@ export default function FloatingContact() {
           target="_blank"
           rel="noreferrer"
           aria-label="Chat with Number One Ads on WhatsApp"
+          onClick={() => track('whatsapp_click', { location: 'floating' })}
         >
           <WhatsAppIcon />
           <span className="fc-label">WhatsApp</span>
         </a>
       )}
       {tel && (
-        <a className="fc-btn fc-call" href={tel} aria-label="Call Number One Ads">
+        <a
+          className="fc-btn fc-call"
+          href={tel}
+          aria-label="Call Number One Ads"
+          onClick={() => track('call_click', { location: 'floating' })}
+        >
           <PhoneIcon />
           <span className="fc-label">Call</span>
         </a>

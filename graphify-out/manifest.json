@@ -1,0 +1,342 @@
+{
+  "F:\\no1ads\\package.json": {
+    "mtime": 1781353225.7327325,
+    "ast_hash": "d0b702a716e013032c7ab68fb5949875",
+    "semantic_hash": "d0b702a716e013032c7ab68fb5949875"
+  },
+  "F:\\no1ads\\scripts\\convert-logos.mjs": {
+    "mtime": 1781283010.3897955,
+    "ast_hash": "36dd90dde85d820d8a1f7b690e796e53",
+    "semantic_hash": "36dd90dde85d820d8a1f7b690e796e53"
+  },
+  "F:\\no1ads\\scripts\\optimize-images.mjs": {
+    "mtime": 1781196656.6401975,
+    "ast_hash": "322e0f089ab7173df23813eb997a8ee8",
+    "semantic_hash": "322e0f089ab7173df23813eb997a8ee8"
+  },
+  "F:\\no1ads\\src\\App.jsx": {
+    "mtime": 1781353197.7423334,
+    "ast_hash": "1bb6ff20192743432d3820229eb8c69f",
+    "semantic_hash": "1bb6ff20192743432d3820229eb8c69f"
+  },
+  "F:\\no1ads\\src\\components\\Analytics.jsx": {
+    "mtime": 1781375199.3184526,
+    "ast_hash": "7c8755335745ada79c1262f41bdd4de8",
+    "semantic_hash": "7c8755335745ada79c1262f41bdd4de8"
+  },
+  "F:\\no1ads\\src\\components\\BrandLogo.jsx": {
+    "mtime": 1781280940.599245,
+    "ast_hash": "e294ea46eb03475d030238495cefb66f",
+    "semantic_hash": "e294ea46eb03475d030238495cefb66f"
+  },
+  "F:\\no1ads\\src\\components\\CtaBand.jsx": {
+    "mtime": 1781375232.0365026,
+    "ast_hash": "7477d20e928d2189b1d89106ae4f5a51",
+    "semantic_hash": "7477d20e928d2189b1d89106ae4f5a51"
+  },
+  "F:\\no1ads\\src\\components\\CursorDot.jsx": {
+    "mtime": 1781191129.71201,
+    "ast_hash": "3acf84de3b381b99b10932b139680a52",
+    "semantic_hash": "3acf84de3b381b99b10932b139680a52"
+  },
+  "F:\\no1ads\\src\\components\\FloatingContact.jsx": {
+    "mtime": 1781375213.709179,
+    "ast_hash": "ee344ef9e5bc0d047490388943ba1584",
+    "semantic_hash": "ee344ef9e5bc0d047490388943ba1584"
+  },
+  "F:\\no1ads\\src\\components\\Layout.jsx": {
+    "mtime": 1781375206.3610053,
+    "ast_hash": "5b04d5383c34fdd99975a78146448d9b",
+    "semantic_hash": "5b04d5383c34fdd99975a78146448d9b"
+  },
+  "F:\\no1ads\\src\\components\\LazyImage.jsx": {
+    "mtime": 1781196303.3535106,
+    "ast_hash": "ae2be5c1023bfbf54f257b3bf5d2c02a",
+    "semantic_hash": "ae2be5c1023bfbf54f257b3bf5d2c02a"
+  },
+  "F:\\no1ads\\src\\components\\Lightbox.jsx": {
+    "mtime": 1781196315.8605316,
+    "ast_hash": "555d543d633c50c6337d78b88f5f215c",
+    "semantic_hash": "555d543d633c50c6337d78b88f5f215c"
+  },
+  "F:\\no1ads\\src\\components\\PageHero.jsx": {
+    "mtime": 1781279467.0409172,
+    "ast_hash": "f3cc92cb2939145158ae230918006b8b",
+    "semantic_hash": "f3cc92cb2939145158ae230918006b8b"
+  },
+  "F:\\no1ads\\src\\components\\Reveal.jsx": {
+    "mtime": 1781191122.8695765,
+    "ast_hash": "c95987f7c0d405f05c2abd7eaa8b214c",
+    "semantic_hash": "c95987f7c0d405f05c2abd7eaa8b214c"
+  },
+  "F:\\no1ads\\src\\components\\ScrollToTop.jsx": {
+    "mtime": 1781279420.9216983,
+    "ast_hash": "f3d9b0368ff28db2294dad9710195c17",
+    "semantic_hash": "f3d9b0368ff28db2294dad9710195c17"
+  },
+  "F:\\no1ads\\src\\components\\Seo.jsx": {
+    "mtime": 1781353209.269858,
+    "ast_hash": "64add1ce5a05ed9f8def6d0fa4e01b37",
+    "semantic_hash": "64add1ce5a05ed9f8def6d0fa4e01b37"
+  },
+  "F:\\no1ads\\src\\components\\ShinyText.jsx": {
+    "mtime": 1781191096.5947533,
+    "ast_hash": "bfd7f79eee54d60a5658d0c22cb893cb",
+    "semantic_hash": "bfd7f79eee54d60a5658d0c22cb893cb"
+  },
+  "F:\\no1ads\\src\\components\\SplitText.jsx": {
+    "mtime": 1781353062.298072,
+    "ast_hash": "2f278147874b693220105bf427bfe1ce",
+    "semantic_hash": "2f278147874b693220105bf427bfe1ce"
+  },
+  "F:\\no1ads\\src\\components\\TrueFocus.jsx": {
+    "mtime": 1781354009.63767,
+    "ast_hash": "56aa3c13fa7ce050376870ff0db92cfb",
+    "semantic_hash": "56aa3c13fa7ce050376870ff0db92cfb"
+  },
+  "F:\\no1ads\\src\\data\\clients.js": {
+    "mtime": 1781280959.3523223,
+    "ast_hash": "0171e0e98880d0534f2156ef9014a64c",
+    "semantic_hash": "0171e0e98880d0534f2156ef9014a64c"
+  },
+  "F:\\no1ads\\src\\data\\faqs.js": {
+    "mtime": 1781353372.7676637,
+    "ast_hash": "72929be815c4497872c9111cc52bb2db",
+    "semantic_hash": "72929be815c4497872c9111cc52bb2db"
+  },
+  "F:\\no1ads\\src\\data\\gallery.json": {
+    "mtime": 1781196712.388837,
+    "ast_hash": "b46561eedd3bd04e932ce473b2078d56",
+    "semantic_hash": "b46561eedd3bd04e932ce473b2078d56"
+  },
+  "F:\\no1ads\\src\\data\\group.js": {
+    "mtime": 1781282114.048988,
+    "ast_hash": "0894471b3bea74e2149c14d85ae1c17e",
+    "semantic_hash": "0894471b3bea74e2149c14d85ae1c17e"
+  },
+  "F:\\no1ads\\src\\data\\partners.js": {
+    "mtime": 1781280979.1769102,
+    "ast_hash": "1873975e0c73fd5d78433cb75b1d1bbd",
+    "semantic_hash": "1873975e0c73fd5d78433cb75b1d1bbd"
+  },
+  "F:\\no1ads\\src\\data\\servicePages.js": {
+    "mtime": 1781335613.9622107,
+    "ast_hash": "bf1844267d686d8a3be738481b2caab7",
+    "semantic_hash": "bf1844267d686d8a3be738481b2caab7"
+  },
+  "F:\\no1ads\\src\\data\\services.json": {
+    "mtime": 1781196712.3898816,
+    "ast_hash": "4cdac74b14affb90e6e87e46ba2d0e34",
+    "semantic_hash": "4cdac74b14affb90e6e87e46ba2d0e34"
+  },
+  "F:\\no1ads\\src\\data\\siteConfig.js": {
+    "mtime": 1781354211.1137576,
+    "ast_hash": "925523a8c77f2f0ec2ff7cec633a54c4",
+    "semantic_hash": "925523a8c77f2f0ec2ff7cec633a54c4"
+  },
+  "F:\\no1ads\\src\\data\\videos.js": {
+    "mtime": 1781337263.4854193,
+    "ast_hash": "d9570ef902813a9449527b026054ce49",
+    "semantic_hash": "d9570ef902813a9449527b026054ce49"
+  },
+  "F:\\no1ads\\src\\lib\\analytics.js": {
+    "mtime": 1781539993.7946663,
+    "ast_hash": "0a85a76b6d23256137df880bf17394ac",
+    "semantic_hash": "0a85a76b6d23256137df880bf17394ac"
+  },
+  "F:\\no1ads\\src\\main.jsx": {
+    "mtime": 1781353201.8208594,
+    "ast_hash": "2088dae4f638dbb2c10f4bdb14a81ea9",
+    "semantic_hash": "2088dae4f638dbb2c10f4bdb14a81ea9"
+  },
+  "F:\\no1ads\\src\\pages\\About.jsx": {
+    "mtime": 1781281217.088901,
+    "ast_hash": "3f38e83b71128374e20119b9f343d32c",
+    "semantic_hash": "3f38e83b71128374e20119b9f343d32c"
+  },
+  "F:\\no1ads\\src\\pages\\ContactPage.jsx": {
+    "mtime": 1781353640.366517,
+    "ast_hash": "8b6875d721732f21b0458cde08fb0576",
+    "semantic_hash": "8b6875d721732f21b0458cde08fb0576"
+  },
+  "F:\\no1ads\\src\\pages\\Home.jsx": {
+    "mtime": 1781353630.2235355,
+    "ast_hash": "6a2f05faebd2d6db739902a880e6e933",
+    "semantic_hash": "6a2f05faebd2d6db739902a880e6e933"
+  },
+  "F:\\no1ads\\src\\pages\\NotFound.jsx": {
+    "mtime": 1781279685.843574,
+    "ast_hash": "d329fbb9d69e343a729c62f6b3d17ec7",
+    "semantic_hash": "d329fbb9d69e343a729c62f6b3d17ec7"
+  },
+  "F:\\no1ads\\src\\pages\\ServiceDetail.jsx": {
+    "mtime": 1781337526.0580997,
+    "ast_hash": "4e7e641912fdc348d6ceb202b5a84a25",
+    "semantic_hash": "4e7e641912fdc348d6ceb202b5a84a25"
+  },
+  "F:\\no1ads\\src\\pages\\ServicesPage.jsx": {
+    "mtime": 1781279642.3417573,
+    "ast_hash": "a7cdc1b7a0168502830e6010f18e002b",
+    "semantic_hash": "a7cdc1b7a0168502830e6010f18e002b"
+  },
+  "F:\\no1ads\\src\\pages\\Work.jsx": {
+    "mtime": 1781279678.7911415,
+    "ast_hash": "79683fe29a00a7ba70b9fb070b2f1b76",
+    "semantic_hash": "79683fe29a00a7ba70b9fb070b2f1b76"
+  },
+  "F:\\no1ads\\src\\sections\\BniBadge.jsx": {
+    "mtime": 1781283040.0542574,
+    "ast_hash": "46303d5a5fbb40ae15aad879bab4df3d",
+    "semantic_hash": "46303d5a5fbb40ae15aad879bab4df3d"
+  },
+  "F:\\no1ads\\src\\sections\\Clients.jsx": {
+    "mtime": 1781281190.8307016,
+    "ast_hash": "1a9db65afc2f085572b72d4b41fc8884",
+    "semantic_hash": "1a9db65afc2f085572b72d4b41fc8884"
+  },
+  "F:\\no1ads\\src\\sections\\ClientsWall.jsx": {
+    "mtime": 1781281069.5869193,
+    "ast_hash": "2f7ec0f308296facf4dd6fe6dadfcba1",
+    "semantic_hash": "2f7ec0f308296facf4dd6fe6dadfcba1"
+  },
+  "F:\\no1ads\\src\\sections\\Contact.jsx": {
+    "mtime": 1781375224.6595933,
+    "ast_hash": "5474d1c0a69f22fc6116a3d9c81c7183",
+    "semantic_hash": "5474d1c0a69f22fc6116a3d9c81c7183"
+  },
+  "F:\\no1ads\\src\\sections\\Evolution.jsx": {
+    "mtime": 1781193073.2773254,
+    "ast_hash": "7a985f2fbe8f1dff72845a8f6cd342b5",
+    "semantic_hash": "7a985f2fbe8f1dff72845a8f6cd342b5"
+  },
+  "F:\\no1ads\\src\\sections\\Faq.jsx": {
+    "mtime": 1781353617.7519896,
+    "ast_hash": "597be99758cc80aad348a9df37276483",
+    "semantic_hash": "597be99758cc80aad348a9df37276483"
+  },
+  "F:\\no1ads\\src\\sections\\Footer.jsx": {
+    "mtime": 1781354227.8956277,
+    "ast_hash": "e393f558a5fc84188c3771bc2d9c1e3b",
+    "semantic_hash": "e393f558a5fc84188c3771bc2d9c1e3b"
+  },
+  "F:\\no1ads\\src\\sections\\Gallery.jsx": {
+    "mtime": 1781279572.6326277,
+    "ast_hash": "1204ce0dd27a61a9bbfc389c2f1f3f77",
+    "semantic_hash": "1204ce0dd27a61a9bbfc389c2f1f3f77"
+  },
+  "F:\\no1ads\\src\\sections\\Group.jsx": {
+    "mtime": 1781282120.5406072,
+    "ast_hash": "2f010ad4b7eb550bed9501e50012a021",
+    "semantic_hash": "2f010ad4b7eb550bed9501e50012a021"
+  },
+  "F:\\no1ads\\src\\sections\\Hero.jsx": {
+    "mtime": 1781353830.2765732,
+    "ast_hash": "acd1739b39fdae72c03821166dbb8ab5",
+    "semantic_hash": "acd1739b39fdae72c03821166dbb8ab5"
+  },
+  "F:\\no1ads\\src\\sections\\LegacyBanner.jsx": {
+    "mtime": 1781256339.3041718,
+    "ast_hash": "f44c06f56778e1b8ddd517b72bb74959",
+    "semantic_hash": "f44c06f56778e1b8ddd517b72bb74959"
+  },
+  "F:\\no1ads\\src\\sections\\Nav.jsx": {
+    "mtime": 1781279443.9689462,
+    "ast_hash": "aef9a664d6f2deba2da44957d98455d3",
+    "semantic_hash": "aef9a664d6f2deba2da44957d98455d3"
+  },
+  "F:\\no1ads\\src\\sections\\Partners.jsx": {
+    "mtime": 1781281035.7288618,
+    "ast_hash": "c5f952177a652b46aefc529c304a7bd3",
+    "semantic_hash": "c5f952177a652b46aefc529c304a7bd3"
+  },
+  "F:\\no1ads\\src\\sections\\Process.jsx": {
+    "mtime": 1781281823.6525106,
+    "ast_hash": "b1dfdc1a9bea77da73675991dc527e3c",
+    "semantic_hash": "b1dfdc1a9bea77da73675991dc527e3c"
+  },
+  "F:\\no1ads\\src\\sections\\Services.jsx": {
+    "mtime": 1781281874.0496643,
+    "ast_hash": "da6f898dfe8b06b1eda86160d8a96424",
+    "semantic_hash": "da6f898dfe8b06b1eda86160d8a96424"
+  },
+  "F:\\no1ads\\src\\sections\\ServicesDetail.jsx": {
+    "mtime": 1781281178.097964,
+    "ast_hash": "1a98490cff5b97a9963139579d1afa1b",
+    "semantic_hash": "1a98490cff5b97a9963139579d1afa1b"
+  },
+  "F:\\no1ads\\src\\sections\\ServicesShowcase.jsx": {
+    "mtime": 1781196335.044588,
+    "ast_hash": "cb812c6c316ee6fb7d882db5cd392f0d",
+    "semantic_hash": "cb812c6c316ee6fb7d882db5cd392f0d"
+  },
+  "F:\\no1ads\\src\\sections\\SocialIcons.jsx": {
+    "mtime": 1781191322.325079,
+    "ast_hash": "84478dd4fc1c82aac101a50d92cf2a1d",
+    "semantic_hash": "84478dd4fc1c82aac101a50d92cf2a1d"
+  },
+  "F:\\no1ads\\src\\sections\\Testimonials.jsx": {
+    "mtime": 1781281841.5569875,
+    "ast_hash": "a2beecfa967bd29bc884a48c65c098e2",
+    "semantic_hash": "a2beecfa967bd29bc884a48c65c098e2"
+  },
+  "F:\\no1ads\\src\\sections\\Timeline.jsx": {
+    "mtime": 1781354618.855467,
+    "ast_hash": "0f53284fa59d5f93933c5498ff5cf62c",
+    "semantic_hash": "0f53284fa59d5f93933c5498ff5cf62c"
+  },
+  "F:\\no1ads\\src\\sections\\Values.jsx": {
+    "mtime": 1781281809.7522416,
+    "ast_hash": "6c7a9b5877671f8228f9887848142aec",
+    "semantic_hash": "6c7a9b5877671f8228f9887848142aec"
+  },
+  "F:\\no1ads\\src\\sections\\YouTubeAds.jsx": {
+    "mtime": 1781335596.9450572,
+    "ast_hash": "7b24d595fdbec7e116c860d73793218d",
+    "semantic_hash": "7b24d595fdbec7e116c860d73793218d"
+  },
+  "F:\\no1ads\\vercel.json": {
+    "mtime": 1781354100.3957038,
+    "ast_hash": "d33d404f988cb15fa3d31902656eb511",
+    "semantic_hash": "d33d404f988cb15fa3d31902656eb511"
+  },
+  "F:\\no1ads\\vite.config.js": {
+    "mtime": 1781353501.2778313,
+    "ast_hash": "4f04223ce5a1545449755e719ea3015c",
+    "semantic_hash": "4f04223ce5a1545449755e719ea3015c"
+  },
+  "F:\\no1ads\\README.md": {
+    "mtime": 1781354023.3445961,
+    "ast_hash": "92acc7f8a2b7303c87a227144ffe795e",
+    "semantic_hash": "92acc7f8a2b7303c87a227144ffe795e"
+  },
+  "F:\\no1ads\\index.html": {
+    "mtime": 1781353604.0850227,
+    "ast_hash": "f5d107b06d214be413e1bca7aa844ba2",
+    "semantic_hash": "f5d107b06d214be413e1bca7aa844ba2"
+  },
+  "F:\\no1ads\\public\\clients\\README.md": {
+    "mtime": 1781281226.743289,
+    "ast_hash": "ad2d0113ec08c7967a2ac98e9dce1822",
+    "semantic_hash": "ad2d0113ec08c7967a2ac98e9dce1822"
+  },
+  "F:\\no1ads\\public\\group\\README.md": {
+    "mtime": 1781281238.2970445,
+    "ast_hash": "593af01a2e218f3de7a8aa37b5945067",
+    "semantic_hash": "593af01a2e218f3de7a8aa37b5945067"
+  },
+  "F:\\no1ads\\public\\llms.txt": {
+    "mtime": 1781353515.9535797,
+    "ast_hash": "f027b874b44e9c46b40e8dac5a4586fe",
+    "semantic_hash": "f027b874b44e9c46b40e8dac5a4586fe"
+  },
+  "F:\\no1ads\\public\\partners\\README.md": {
+    "mtime": 1781281232.6023662,
+    "ast_hash": "5caa168061ce72dcd74539e5ca375468",
+    "semantic_hash": "5caa168061ce72dcd74539e5ca375468"
+  },
+  "F:\\no1ads\\public\\assets\\a21ad704-2ea9-4628-b389-e49fc37bbb21_Veil_of_the_Elements_The_Missing_Spirit_(Game_Script).pdf": {
+    "mtime": 1781542073.641671,
+    "ast_hash": "ed24a76e2ce24811a2dc88963df061d9",
+    "semantic_hash": "ed24a76e2ce24811a2dc88963df061d9"
+  }
+}

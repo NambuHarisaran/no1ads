@@ -4,6 +4,7 @@ import SplitText from '../components/SplitText.jsx';
 import Reveal from '../components/Reveal.jsx';
 import { FacebookIcon, InstagramIcon } from './SocialIcons.jsx';
 import { site, displayPhone, whatsappLink } from '../data/siteConfig.js';
+import { track } from '../lib/analytics.js';
 
 const PhoneIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -94,6 +95,7 @@ export default function Contact({ showHeading = true }) {
       const result = await res.json();
       if (res.ok && result.success) {
         setStatus('success');
+        track('generate_lead', { method: 'contact_form' });
         form.reset();
       } else {
         setStatus('error');
@@ -144,16 +146,16 @@ export default function Contact({ showHeading = true }) {
                 <div className="contact-info-item">
                   <PhoneIcon />
                   <span className="contact-phones">
-                    <a href={`tel:${site.phone}`} className="ghost-link">{displayPhone()}</a>
+                    <a href={`tel:${site.phone}`} className="ghost-link" onClick={() => track('call_click', { location: 'contact' })}>{displayPhone()}</a>
                     {site.phoneSecondary && (
-                      <a href={`tel:${site.phoneSecondary}`} className="ghost-link">{displayPhone(site.phoneSecondary)}</a>
+                      <a href={`tel:${site.phoneSecondary}`} className="ghost-link" onClick={() => track('call_click', { location: 'contact' })}>{displayPhone(site.phoneSecondary)}</a>
                     )}
                   </span>
                 </div>
               )}
               <div className="contact-info-item">
                 <MailIcon />
-                <a href="mailto:contact@no1ads.in" className="ghost-link">contact@no1ads.in</a>
+                <a href="mailto:contact@no1ads.in" className="ghost-link" onClick={() => track('email_click', { location: 'contact' })}>contact@no1ads.in</a>
               </div>
               <div className="contact-info-item">
                 <div className="social-links">
