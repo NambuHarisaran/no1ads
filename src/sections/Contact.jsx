@@ -2,8 +2,9 @@ import { useState } from 'react';
 import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
 import Reveal from '../components/Reveal.jsx';
-import { FacebookIcon, InstagramIcon } from './SocialIcons.jsx';
+import { FacebookIcon, InstagramIcon, YouTubeIcon } from './SocialIcons.jsx';
 import { site, displayPhone, whatsappLink } from '../data/siteConfig.js';
+import servicePages from '../data/servicePages.js';
 
 const PhoneIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -23,7 +24,13 @@ const MailIcon = () => (
   </svg>
 );
 
-function Field({ label, name, type = 'text', textarea = false, required = false }) {
+const ClockIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+function Field({ label, name, type = 'text', textarea = false, options = null, required = false, placeholder = '' }) {
   const [focused, setFocused] = useState(false);
   return (
     <div className="form-field">
@@ -40,15 +47,30 @@ function Field({ label, name, type = 'text', textarea = false, required = false 
           name={name}
           rows={4}
           required={required}
+          placeholder={placeholder}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
+      ) : options ? (
+        <select
+          id={name}
+          name={name}
+          defaultValue=""
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+        >
+          <option value="" disabled>Select a service (optional)</option>
+          {options.map(opt => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
       ) : (
         <input
           id={name}
           name={name}
           type={type}
           required={required}
+          placeholder={placeholder}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
         />
@@ -58,6 +80,10 @@ function Field({ label, name, type = 'text', textarea = false, required = false 
 }
 
 const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
+const SERVICE_OPTIONS = [
+  ...servicePages.map(s => s.label),
+  'Full 360° Campaign / Other',
+];
 
 export default function Contact({ showHeading = true }) {
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
@@ -75,7 +101,7 @@ export default function Contact({ showHeading = true }) {
 
     if (!WEB3FORMS_KEY) {
       setStatus('error');
-      setError('Form is not configured yet. Please email contact@no1ads.in directly.');
+      setError('Form is not configured yet. Please email contact@no1ads.in or message us on WhatsApp directly.');
       return;
     }
 
@@ -104,6 +130,12 @@ export default function Contact({ showHeading = true }) {
       setError('Network error. Please check your connection and try again.');
     }
   }
+
+  const fullAddress = [
+    site.streetAddress,
+    `${site.locality}${site.postalCode ? ` — ${site.postalCode}` : ''}`,
+    `${site.region}, India`,
+  ].filter(Boolean).join(', ');
 
   return (
     <section className="contact-section" id="contact">
@@ -138,7 +170,7 @@ export default function Contact({ showHeading = true }) {
             <Reveal className="contact-info" stagger={120}>
               <div className="contact-info-item">
                 <PinIcon />
-                <span>Madurai, Tamil Nadu, India</span>
+                <span>{fullAddress}</span>
               </div>
               {site.phone && (
                 <div className="contact-info-item">
@@ -148,30 +180,50 @@ export default function Contact({ showHeading = true }) {
                     {site.phoneSecondary && (
                       <a href={`tel:${site.phoneSecondary}`} className="ghost-link">{displayPhone(site.phoneSecondary)}</a>
                     )}
+                    {whatsappLink() && (
+                      <a href={whatsappLink()} target="_blank" rel="noreferrer" className="ghost-link">
+                        Chat on WhatsApp →
+                      </a>
+                    )}
                   </span>
                 </div>
               )}
               <div className="contact-info-item">
                 <MailIcon />
-                <a href="mailto:contact@no1ads.in" className="ghost-link">contact@no1ads.in</a>
+                <a href={`mailto:${site.email}`} className="ghost-link">{site.email}</a>
+              </div>
+              <div className="contact-info-item">
+                <ClockIcon />
+                <span>Mon – Sat: 9:30 AM – 7:00 PM</span>
               </div>
               <div className="contact-info-item">
                 <div className="social-links">
-                  <a href="https://www.facebook.com/no1teleadvertisors" target="_blank" rel="noreferrer" aria-label="Facebook">
-                    <FacebookIcon />
-                  </a>
-                  <a href="https://www.instagram.com/no1teleadvertisers" target="_blank" rel="noreferrer" aria-label="Instagram">
-                    <InstagramIcon />
-                  </a>
+                  {site.social.facebook && (
+                    <a href={site.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">
+                      <FacebookIcon />
+                    </a>
+                  )}
+                  {site.social.instagram && (
+                    <a href={site.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
+                      <InstagramIcon />
+                    </a>
+                  )}
+                  {site.social.youtube && (
+                    <a href={site.social.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
+                      <YouTubeIcon />
+                    </a>
+                  )}
                 </div>
-                <span>@no1teleadvertisers</span>
+                <span>@no1teleadvertisers · @No1ads</span>
               </div>
             </Reveal>
           </div>
           <Reveal as="form" className="contact-form" onSubmit={handleSubmit}>
             <Field label="Name" name="name" required />
+            <Field label="Phone / WhatsApp" name="phone" type="tel" required />
             <Field label="Email" name="email" type="email" required />
-            <Field label="Message" name="message" textarea required />
+            <Field label="Service Required" name="service" options={SERVICE_OPTIONS} />
+            <Field label="Project Brief / Message" name="message" textarea required />
             <input
               type="checkbox"
               name="botcheck"
@@ -181,11 +233,11 @@ export default function Contact({ showHeading = true }) {
               aria-hidden="true"
             />
             <button type="submit" className="btn-orange" disabled={status === 'sending'}>
-              {status === 'sending' ? 'Sending…' : 'Send Message →'}
+              {status === 'sending' ? 'Sending…' : 'Send Enquiry →'}
             </button>
             {status === 'success' && (
               <p className="form-status form-status-success" role="status">
-                Thanks! Your message has been sent — we'll reply soon.
+                Thanks! Your enquiry has been sent — our team will call or message you shortly.
               </p>
             )}
             {status === 'error' && (

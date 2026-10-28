@@ -11,9 +11,9 @@ export const site = {
 
   // Primary phone (international format) — used for click-to-call, WhatsApp
   // and structured data. Leave '' to hide click-to-call and omit from schema.
-  phone: '+919843288863',
+  phone: '+919843288864',
   // Optional secondary phone, shown alongside the primary in contact/footer.
-  phoneSecondary: '+919843288864',
+  phoneSecondary: '+919843288863',
   // WhatsApp number (often same as phone). Leave '' to hide the WhatsApp CTA.
   whatsapp: '+919843288863',
   // Street address line(s). Leave '' to fall back to city-level only.

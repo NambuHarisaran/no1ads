@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ShinyText from '../components/ShinyText.jsx';
-import { FacebookIcon, InstagramIcon } from './SocialIcons.jsx';
+import { FacebookIcon, InstagramIcon, YouTubeIcon } from './SocialIcons.jsx';
 import { site, displayPhone, whatsappLink } from '../data/siteConfig.js';
 
 const NAV = [
@@ -26,19 +26,28 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <Link to="/" className="footer-logo" aria-label="Number One Ads — home">
-            <img src="/assets/logo.png" alt="number one ads" />
+            <img src="/assets/logo.png" alt="Number One Ads logo" />
           </Link>
           <p className="footer-tagline">
             Madurai's 360° advertising agency. Twenty-five years of design, signage,
             branding and on-ground execution across Tamil Nadu.
           </p>
           <div className="social-links">
-            <a href="https://www.facebook.com/no1teleadvertisors" target="_blank" rel="noreferrer" aria-label="Facebook">
-              <FacebookIcon />
-            </a>
-            <a href="https://www.instagram.com/no1teleadvertisers" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <InstagramIcon />
-            </a>
+            {site.social.facebook && (
+              <a href={site.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">
+                <FacebookIcon />
+              </a>
+            )}
+            {site.social.instagram && (
+              <a href={site.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
+                <InstagramIcon />
+              </a>
+            )}
+            {site.social.youtube && (
+              <a href={site.social.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
+                <YouTubeIcon />
+              </a>
+            )}
           </div>
         </div>
 
@@ -72,8 +81,13 @@ export default function Footer() {
             {whatsappLink() && (
               <li><a href={whatsappLink()} target="_blank" rel="noreferrer">WhatsApp us</a></li>
             )}
-            <li><a href="mailto:contact@no1ads.in">contact@no1ads.in</a></li>
-            <li><span>{site.streetAddress ? `${site.streetAddress}, ` : ''}Madurai, Tamil Nadu, India</span></li>
+            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li>
+              <span>
+                {site.streetAddress ? `${site.streetAddress}, ` : ''}
+                {site.locality}{site.postalCode ? ` — ${site.postalCode}` : ''}, {site.region}, India
+              </span>
+            </li>
             <li><Link to="/contact" className="footer-cta-link">Start a project →</Link></li>
           </ul>
         </div>

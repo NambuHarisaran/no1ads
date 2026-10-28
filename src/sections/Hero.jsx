@@ -5,9 +5,9 @@ import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
 
 const TICKER_ITEMS = [
-  'CREATIVE DESIGN & DEVELOPMENT', 'DIGITAL MARKETING', 'EXHIBITION DESIGN & CONDUCTION',
+  'CREATIVE DESIGN & DEVELOPMENT', 'DIGITAL MARKETING', 'EXHIBITION STALLS & EXECUTION',
   'EVENT PLANNING', 'ROADSHOW & OUTDOOR MEDIA SOLUTIONS', 'RETAIL BRANDING',
-  'SIGNAGE SOLUTIONS', 'PRINTING',
+  'LED & ACP SIGNAGE SOLUTIONS', 'PRINTING & FILM PRODUCTION',
 ];
 
 // `years` is flagged so the phone layout can drop it — the 25 badge says it.
@@ -57,9 +57,9 @@ export default function Hero() {
 
         <div className="hero-sub">
           <SplitText
-            text="25 years of precision, creativity & legacy"
+            text="25 years of design, LED & ACP signage, brand films & on-ground campaigns"
             splitType="chars"
-            delay={isMobile ? 15 : 25}
+            delay={isMobile ? 15 : 20}
             duration={0.6}
             ease="power3.out"
             from={{ opacity: 0, y: 30 }}
@@ -71,8 +71,8 @@ export default function Hero() {
         </div>
 
         <div className="hero-ctas">
-          <Link to="/work" className="btn-orange hero-cta-primary">Explore Our Work</Link>
-          <Link to="/about" className="hero-cta-secondary">Our Story →</Link>
+          <Link to="/contact" className="btn-orange hero-cta-primary">Start a Project →</Link>
+          <Link to="/work" className="hero-cta-secondary">Explore Our Work →</Link>
         </div>
 
         <div className="hero-visual">
@@ -84,7 +84,7 @@ export default function Hero() {
           <img
             className="hero-badge-img"
             src="/assets/25.png"
-            alt="25 Years of Legacy"
+            alt="25 Years of Legacy — Number One Ads"
             width="1565"
             height="1561"
             fetchpriority="high"

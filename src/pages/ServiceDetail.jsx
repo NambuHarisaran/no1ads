@@ -5,6 +5,7 @@ import Reveal from '../components/Reveal.jsx';
 import LazyImage from '../components/LazyImage.jsx';
 import CtaBand from '../components/CtaBand.jsx';
 import Partners from '../sections/Partners.jsx';
+import BniBadge from '../sections/BniBadge.jsx';
 import servicePages, { getServiceBySlug } from '../data/servicePages.js';
 import videos, { CHANNEL_URL, watchUrl, thumbUrl } from '../data/videos.js';
 
@@ -28,6 +29,7 @@ export default function ServiceDetail() {
   if (!service) return <Navigate to="/services" replace />;
 
   const others = servicePages.filter(s => s.slug !== slug).slice(0, 6);
+  const ogImage = service.image ? `https://no1ads.in${service.image}` : undefined;
 
   return (
     <>
@@ -35,6 +37,7 @@ export default function ServiceDetail() {
         title={`${service.title} — Number One Ads | Madurai`}
         description={`${service.tagline}. ${service.intro[0]}`}
         path={`/services/${service.slug}`}
+        image={ogImage}
       />
       <PageHero
         key={`hero-${service.slug}`}
@@ -147,6 +150,7 @@ export default function ServiceDetail() {
       {service.feature === 'digital' && (
         <>
           <Partners />
+          <BniBadge />
         </>
       )}
 

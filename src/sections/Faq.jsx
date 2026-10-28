@@ -1,16 +1,31 @@
+import { Head } from 'vite-react-ssg';
 import ShinyText from '../components/ShinyText.jsx';
 import Reveal from '../components/Reveal.jsx';
 import faqs from '../data/faqs.js';
+import site from '../data/siteConfig.js';
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${site.url}/#faq`,
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
 
 /**
  * Visible FAQ accordion. The same questions/answers feed the FAQPage
- * structured data injected at build time, so what users read matches what
- * search and AI engines index. Native <details> keeps it accessible and works
- * even before hydration.
+ * structured data injected via <Head> only on pages that visibly render <Faq />,
+ * matching Google's structured data guidelines.
  */
 export default function Faq({ heading = 'Frequently Asked Questions' }) {
   return (
     <section className="faq-section" id="faq" aria-labelledby="faq-heading">
+      <Head>
+        <script type="application/ld+json">{faqSchema}</script>
+      </Head>
       <div className="container">
         <Reveal>
           <div className="section-label">

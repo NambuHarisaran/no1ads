@@ -4,23 +4,23 @@ import Reveal from '../components/Reveal.jsx';
 
 const FEATURED = {
   quote:
-    'Number One Ads handled our showroom elevation, signage and launch roadshow as one team. Twenty years on, they are still the first call for anything brand-related.',
+    'Number One Ads handled our showroom ACP elevation, LED signage and launch roadshow as one unified team. Twenty years on, they remain our first call for every brand launch across Madurai.',
   name: 'Senthil Kumar',
-  role: 'Managing Director, Automobile Showroom',
+  role: 'Managing Director · Flagship Jewellery & Silk Showroom, Madurai',
 };
 
 const SUPPORTING = [
   {
     quote:
-      'From concept artwork to the final installed board, the finish was flawless. They understand how a brand should feel on the street, not just on paper.',
+      'From festive campaign artwork to the final installed storefront boards across our branches, the finish was flawless. They understand how a brand should command attention on the street, not just on paper.',
     name: 'Priya Rajan',
-    role: 'Marketing Head, Retail Chain',
+    role: 'Marketing Head · Multi-Outlet Retail Group, Tamil Nadu',
   },
   {
     quote:
-      'Our exhibition stall was the most photographed at the expo. A tight brief and tighter deadline turned into something genuinely premium.',
+      'Our exhibition stall and TVC launch were the most talked-about in our category. A tight brief and tighter festival deadline turned into something genuinely premium.',
     name: 'Arun Vetri',
-    role: 'Founder, FMCG Brand',
+    role: 'Founder · Regional Consumer & Food Brand, South India',
   },
 ];
 

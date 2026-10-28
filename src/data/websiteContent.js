@@ -24,7 +24,7 @@ export const brandAssets = {
 export const navigation = {
   logo: {
     src: brandAssets.logo,
-    alt: 'number one ads',
+    alt: 'Number One Ads logo',
     href: '/',
   },
   links: [
@@ -43,7 +43,7 @@ export const navigation = {
 export const footerContent = {
   logo: {
     src: brandAssets.logo,
-    alt: 'number one ads',
+    alt: 'Number One Ads logo',
     href: '/',
   },
   tagline:
@@ -75,22 +75,22 @@ export const homeContent = {
     eyebrow: 'EST. 2000 · MADURAI, INDIA',
     srTitle: 'Number One Ads — 360° Advertising Agency in Madurai, Tamil Nadu',
     headline: '360° ADVERTISING AGENCY',
-    subheadline: '25 years of precision, creativity & legacy',
-    primaryCta: { label: 'Explore Our Work', href: '/work' },
-    secondaryCta: { label: 'Our Story →', href: '/about' },
+    subheadline: '25 years of design, LED & ACP signage, brand films & on-ground campaigns',
+    primaryCta: { label: 'Start a Project →', href: '/contact' },
+    secondaryCta: { label: 'Explore Our Work →', href: '/work' },
     badgeImage: {
       src: brandAssets.legacyBadge25,
-      alt: '25 Years of Legacy',
+      alt: '25 Years of Legacy — Number One Ads',
     },
     tickerItems: [
       'CREATIVE DESIGN & DEVELOPMENT',
       'DIGITAL MARKETING',
-      'EXHIBITION DESIGN & CONDUCTION',
+      'EXHIBITION STALLS & EXECUTION',
       'EVENT PLANNING',
       'ROADSHOW & OUTDOOR MEDIA SOLUTIONS',
       'RETAIL BRANDING',
-      'SIGNAGE SOLUTIONS',
-      'PRINTING',
+      'LED & ACP SIGNAGE SOLUTIONS',
+      'PRINTING & FILM PRODUCTION',
     ],
   },
   coreServicesSection: {
@@ -214,22 +214,22 @@ export const homeContent = {
     headline: "Trusted by Tamil Nadu's boldest brands",
     featured: {
       quote:
-        'Number One Ads handled our showroom elevation, signage and launch roadshow as one team. Twenty years on, they are still the first call for anything brand-related.',
+        'Number One Ads handled our showroom ACP elevation, LED signage and launch roadshow as one unified team. Twenty years on, they remain our first call for every brand launch across Madurai.',
       name: 'Senthil Kumar',
-      role: 'Managing Director, Automobile Showroom',
+      role: 'Managing Director · Flagship Jewellery & Silk Showroom, Madurai',
     },
     supporting: [
       {
         quote:
-          'From concept artwork to the final installed board, the finish was flawless. They understand how a brand should feel on the street, not just on paper.',
+          'From festive campaign artwork to the final installed storefront boards across our branches, the finish was flawless. They understand how a brand should command attention on the street, not just on paper.',
         name: 'Priya Rajan',
-        role: 'Marketing Head, Retail Chain',
+        role: 'Marketing Head · Multi-Outlet Retail Group, Tamil Nadu',
       },
       {
         quote:
-          'Our exhibition stall was the most photographed at the expo. A tight brief and tighter deadline turned into something genuinely premium.',
+          'Our exhibition stall and TVC launch were the most talked-about in our category. A tight brief and tighter festival deadline turned into something genuinely premium.',
         name: 'Arun Vetri',
-        role: 'Founder, FMCG Brand',
+        role: 'Founder · Regional Consumer & Food Brand, South India',
       },
     ],
   },
@@ -290,7 +290,7 @@ export const aboutContent = {
       { year: '2008', description: 'Film production wing launched. First TVC shoots.' },
       { year: '2013', description: 'Exhibition & event design division established.' },
       { year: '2018', description: 'Digital marketing & social media services added.' },
-      { year: '2024', description: '25 Years. 360° capabilities. One agency.' },
+      { year: '2025', description: '25 Years. 360° capabilities. One agency.' },
     ],
     counters: [
       { target: 25, suffix: '+', label: 'Years' },
@@ -477,16 +477,18 @@ export const contactPageContent = {
       'Tell us about your brand, your site and your timeline. We reply fast and, for local projects, can visit to measure and quote in person.',
     formFields: [
       { label: 'Name', name: 'name', type: 'text', required: true },
+      { label: 'Phone / WhatsApp', name: 'phone', type: 'tel', required: true },
       { label: 'Email', name: 'email', type: 'email', required: true },
-      { label: 'Message', name: 'message', type: 'textarea', rows: 4, required: true },
+      { label: 'Service Required', name: 'service', type: 'select', required: false },
+      { label: 'Project Brief / Message', name: 'message', type: 'textarea', rows: 4, required: true },
     ],
     submitButton: {
-      idle: 'Send Message →',
+      idle: 'Send Enquiry →',
       sending: 'Sending…',
     },
     messages: {
-      success: "Thanks! Your message has been sent — we'll reply soon.",
-      missingKey: 'Form is not configured yet. Please email contact@no1ads.in directly.',
+      success: "Thanks! Your enquiry has been sent — our team will call or message you shortly.",
+      missingKey: 'Form is not configured yet. Please email contact@no1ads.in or message us on WhatsApp directly.',
       networkError: 'Network error. Please check your connection and try again.',
     },
   },

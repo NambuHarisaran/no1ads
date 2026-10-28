@@ -8,21 +8,21 @@
 export const CHANNEL_URL = 'https://www.youtube.com/@No1ads';
 
 const videos = [
-  { id: 'JDQDdAx1LA4', title: 'Theni Anantham Silks - ARANMANAI OPENING 60sec FINAL' },
-  { id: 'uy_to39Cz9s', title: 'SRI RADHA SILKS 60 SEC DIWALI' },
+  { id: 'JDQDdAx1LA4', title: 'Theni Anantham Silks — Aranmanai Grand Opening TVC (60s)' },
+  { id: 'uy_to39Cz9s', title: 'Sri Radha Silks — Diwali Commercial (60s)' },
   { id: '6OK6O4_j6RY', title: 'Sastha Sesame Oil — 20 Sec TVC' },
-  { id: 'c5XBC1hpAmY', title: 'Sathish Thanganagai Maaligai — Reopening Ad' },
-  { id: 'EGu1BRT6CkI', title: 'Tulsi Diamonds Opening — Madurai (English)' },
-  { id: '_dQsFS3AyO4', title: 'Anantham Silks RMD — Christmas' },
-  { id: 'Gm2qKPqHPDI', title: 'Theni Anantham Subhalaya — 60 Sec' },
-  { id: 'COIL0igYBDQ', title: 'Oviya TMJL Ad' },
-  { id: 'llhJKxIEJQI', title: 'Diwali Reel — AI Ad' },
-  { id: 'J3fQOjynmxs', title: 'Ganapathy Mart — Christmas AI Ad' },
-  { id: 'n0aEOi3-teM', title: 'Ganapathy Mart — Aadi Sale Ad Shoot' },
-  { id: 'wl7GpyG3RnI', title: 'Behind The Scenes — Nutrifreaks' },
-  { id: 'pi2L3tn3W6A', title: 'Sastha — CG Video' },
-  { id: 'FP46q1Z0ufk', title: 'Manila Oil — 15 Sec' },
-  { id: 'u2eZOlfgTOU', title: 'AI Ad Video Promotion' },
+  { id: 'c5XBC1hpAmY', title: 'Sathish Thanganagai Maaligai — Grand Reopening TVC' },
+  { id: 'EGu1BRT6CkI', title: 'Tulsi Diamonds Showroom Opening — Madurai' },
+  { id: '_dQsFS3AyO4', title: 'Anantham Silks (Ramanathapuram) — Christmas Campaign' },
+  { id: 'Gm2qKPqHPDI', title: 'Theni Anantham Subhalaya — 60 Sec Brand Film' },
+  { id: 'COIL0igYBDQ', title: 'Thangamayil Jewellery (TMJL) — Oviya Brand Commercial' },
+  { id: 'llhJKxIEJQI', title: 'Festive Diwali Reel — AI Commercial' },
+  { id: 'J3fQOjynmxs', title: 'Ganapathy Mart — Christmas AI Commercial' },
+  { id: 'n0aEOi3-teM', title: 'Ganapathy Mart — Aadi Sale Campaign Shoot' },
+  { id: 'wl7GpyG3RnI', title: 'Nutrifreaks — Behind the Scenes Production' },
+  { id: 'pi2L3tn3W6A', title: 'Sastha Sesame Oil — 3D CGI Commercial' },
+  { id: 'FP46q1Z0ufk', title: 'Manila Oil — 15 Sec Commercial' },
+  { id: 'u2eZOlfgTOU', title: 'AI Advertising Showreel — Number One Ads' },
 ];
 
 // Ids featured on the home page "Ads We've Shot & Released" strip — our

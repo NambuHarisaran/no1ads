@@ -1,5 +1,6 @@
 import Seo from '../components/Seo.jsx';
 import Hero from '../sections/Hero.jsx';
+import Clients from '../sections/Clients.jsx';
 import Services from '../sections/Services.jsx';
 import ServicesShowcase from '../sections/ServicesShowcase.jsx';
 import Group from '../sections/Group.jsx';
@@ -20,6 +21,7 @@ export default function Home() {
         path="/"
       />
       <Hero />
+      <Clients />
       <Services />
       <ServicesShowcase />
       <Group />

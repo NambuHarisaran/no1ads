@@ -31,7 +31,7 @@ export default function ClientsWall() {
         <Reveal className="clients-wall-grid" stagger={40}>
           {clients.map(c => (
             <div className="client-tile" key={c.slug} title={c.name}>
-              <BrandLogo src={`/clients/${c.slug}.webp`} name={c.name} className="client-tile-logo" />
+              <BrandLogo src={c.logo} name={c.name} className="client-tile-logo" />
             </div>
           ))}
         </Reveal>

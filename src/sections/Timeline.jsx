@@ -9,7 +9,7 @@ const MILESTONES = [
   ['2008', 'Film production wing launched. First TVC shoots.'],
   ['2013', 'Exhibition & event design division established.'],
   ['2018', 'Digital marketing & social media services added.'],
-  ['2024', '25 Years. 360° capabilities. One agency.'],
+  ['2025', '25 Years. 360° capabilities. One agency.'],
 ];
 
 const STATS = [

@@ -53,7 +53,8 @@ html.has-custom-cursor,
 html.has-custom-cursor a,
 html.has-custom-cursor button,
 html.has-custom-cursor input,
-html.has-custom-cursor textarea {
+html.has-custom-cursor textarea,
+html.has-custom-cursor select {
   cursor: none;
 }
 
@@ -638,6 +639,7 @@ section { position: relative; }
   gap: 24px;
 }
 .showcase-card {
+  display: block;
   background: #161616;
   border: 1px solid #262626;
   border-radius: 10px;
@@ -941,6 +943,7 @@ section { position: relative; }
   color: var(--gray);
 }
 .form-field input,
+.form-field select,
 .form-field textarea {
   background: transparent;
   border: none;
@@ -953,7 +956,12 @@ section { position: relative; }
   resize: vertical;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+.form-field select option {
+  background: #141414;
+  color: var(--white);
+}
 .form-field input:focus,
+.form-field select:focus,
 .form-field textarea:focus {
   border-color: var(--orange);
   box-shadow: 0 6px 18px -8px rgba(232, 119, 34, 0.5);

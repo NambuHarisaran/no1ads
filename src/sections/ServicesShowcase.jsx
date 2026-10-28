@@ -1,8 +1,26 @@
+import { Link } from 'react-router-dom';
 import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
 import Reveal from '../components/Reveal.jsx';
 import LazyImage from '../components/LazyImage.jsx';
 import services from '../data/services.json';
+
+// Map a services.json entry onto the closest /services/:slug detail page.
+const PAGE_FOR = {
+  design: 'creative-design',
+  'led-signage': 'led-signage',
+  'signage-boards': 'signage-boards',
+  'acp-elevation': 'acp-elevation',
+  'exhibition-stall': 'exhibition-stalls',
+  roadshow: 'roadshow-outdoor',
+  'in-shop': 'in-shop-branding',
+  'backlight-board': 'signage-boards',
+  'pylon-branding': 'signage-boards',
+  'lamp-post-branding': 'roadshow-outdoor',
+  standee: 'in-shop-branding',
+  signage: 'led-signage',
+  'auto-back-branding': 'roadshow-outdoor',
+};
 
 export default function ServicesShowcase() {
   return (
@@ -29,7 +47,11 @@ export default function ServicesShowcase() {
 
         <Reveal className="showcase-grid" stagger={100}>
           {services.map(svc => (
-            <article className="showcase-card" key={svc.slug}>
+            <Link
+              className="showcase-card"
+              key={svc.slug}
+              to={`/services/${PAGE_FOR[svc.slug] || ''}`}
+            >
               <div className="showcase-media">
                 <LazyImage
                   src={svc.image}
@@ -44,7 +66,7 @@ export default function ServicesShowcase() {
                 <h3 className="showcase-title">{svc.title}</h3>
                 <p className="showcase-blurb">{svc.blurb}</p>
               </div>
-            </article>
+            </Link>
           ))}
         </Reveal>
       </div>

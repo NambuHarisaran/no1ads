@@ -2,14 +2,14 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import Sitemap from 'vite-plugin-sitemap';
 import site from './src/data/siteConfig.js';
-import faqs from './src/data/faqs.js';
 import servicePages from './src/data/servicePages.js';
 
 const SITE_URL = site.url;
 
 // ── Structured data (JSON-LD) ───────────────────────────────────────────────
-// Built from the single source of truth (siteConfig + faqs) and injected into
-// every prerendered page. Phone / street address are only included when set.
+// Built from the single source of truth (siteConfig) and injected into
+// every prerendered page. FAQPage schema is scoped to pages that visibly render
+// <Faq /> (see src/sections/Faq.jsx).
 function buildJsonLd() {
   const address = {
     '@type': 'PostalAddress',
@@ -32,7 +32,7 @@ function buildJsonLd() {
     image: `${SITE_URL}/assets/logo.png`,
     description:
       "Madurai's most trusted 360° advertising agency since 2000, offering creative design, digital marketing, branding, LED signage, ACP elevation, signage boards, exhibition stalls, roadshows, outdoor and in-shop branding across Tamil Nadu.",
-    slogan: '25 years of precision, creativity & legacy',
+    slogan: '25 years of design, LED & ACP signage, brand films & on-ground campaigns',
     foundingDate: site.foundingYear,
     email: site.email,
     areaServed: site.areaServed,
@@ -89,17 +89,7 @@ function buildJsonLd() {
     inLanguage: 'en-IN',
   };
 
-  const faqPage = {
-    '@type': 'FAQPage',
-    '@id': `${SITE_URL}/#faq`,
-    mainEntity: faqs.map(f => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
-
-  return { '@context': 'https://schema.org', '@graph': [business, website, faqPage] };
+  return { '@context': 'https://schema.org', '@graph': [business, website] };
 }
 
 // Replaces the <!--__JSONLD__--> marker in index.html with the generated graph.
