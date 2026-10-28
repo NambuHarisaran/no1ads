@@ -10,7 +10,7 @@
 .focus-word {
   position: relative;
   /* capped so ADVERTISING never overflows the 60% hero column on wide screens */
-  font-size: clamp(2.4rem, 7vw, 100px);
+  font-size: clamp(1.75rem, 8.2vw, 100px);
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   color: #fff;

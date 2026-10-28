@@ -46,7 +46,7 @@ const TrueFocus = ({
   }, [currentIndex]);
 
   useEffect(() => {
-    updateFocusRect();
+    updateFocusRect(); if (typeof document !== 'undefined' && document.fonts?.ready) { document.fonts.ready.then(updateFocusRect); }
     window.addEventListener('resize', updateFocusRect);
     return () => window.removeEventListener('resize', updateFocusRect);
   }, [currentIndex, words.length, updateFocusRect]);

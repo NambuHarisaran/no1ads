@@ -1,14 +1,67 @@
 # Number One Ads
 
-Multi-page marketing website for **Number One Ads** — a 25-year 360° advertising agency in Madurai, Tamil Nadu. Built with React + Vite + React Router, GSAP, and a custom build-time image pipeline.
+Multi-page marketing website for **Number One Ads** (`No.1 Tele Advertisers`) — a 25-year 360° advertising, branding, and signage agency in Madurai, Tamil Nadu. Built with React + Vite + React Router (`vite-react-ssg` static prerendering) and a build-time WebP image pipeline.
 
-## Pages
+---
 
-- `/` — Home (hero, sectors, services overview, showcase, evolution, featured work, testimonials, CTA)
-- `/about` — Our story, legacy timeline, values, evolution, testimonials
-- `/services` — Capabilities, detailed signage/production grid, process
-- `/work` — Filterable portfolio gallery + lightbox
-- `/contact` — Contact details and enquiry form
+## 🎨 Redesign & Agent Handoff Guide (Start Here)
+
+If you are an AI agent or developer tasked with **redesigning this website**, all website copy, business data, and optimized images are already stored and decoupled from the visual design. **You do not need to invent or scrape content.**
+
+### 1. Read the Complete Website Content & Image Specification
+- **[`WEBSITE_CONTENT.md`](./WEBSITE_CONTENT.md)** — Complete, design-free website description containing **every page, section, heading, paragraph, CTA, FAQ, client list, YouTube video, and linked image asset** in the repository.
+- **[`src/data/websiteContent.js`](./src/data/websiteContent.js)** — Centralized JavaScript content module exporting all page copy, section structures, and image paths for direct import into redesigned components.
+- **[`public/llms.txt`](./public/llms.txt)** — High-level business summary and route map.
+
+### 2. Stored Content Data Files (`src/data/`)
+All structured data is stored in [`src/data/`](./src/data/) and re-exported by [`src/data/websiteContent.js`](./src/data/websiteContent.js):
+- [`src/data/siteConfig.js`](./src/data/siteConfig.js) — Single source of truth for Business NAP (Name, Address, Phone, WhatsApp, Email, Geo coordinates, Opening hours, Social URLs).
+- [`src/data/servicePages.js`](./src/data/servicePages.js) — All 11 individual `/services/:slug` page definitions (titles, taglines, intro paragraphs, deliverable checklists, showcase images).
+- [`src/data/services.json`](./src/data/services.json) — 13 on-ground/signage production capabilities with blurbs, project counts, image dimensions, LQIP blur placeholders, and `/services/*.webp` image paths.
+- [`src/data/gallery.json`](./src/data/gallery.json) — 69 portfolio items with titles, dimensions, LQIP placeholders, thumbnail paths (`/gallery/*-thumb.webp`), and full-res paths (`/gallery/*-full.webp`).
+- [`src/data/clients.js`](./src/data/clients.js) — 30 client brands categorized by sector (`silks`, `jewellery`, `other`).
+- [`src/data/faqs.js`](./src/data/faqs.js) — 6 frequently asked questions and answers (powers both the FAQ UI and `FAQPage` JSON-LD).
+- [`src/data/group.js`](./src/data/group.js) — The 3 sister companies in the Number One Ads Group (`Number One Ads`, `Triple A Signage`, `Infobus Advertising`).
+- [`src/data/partners.js`](./src/data/partners.js) — Digital advertising platform partners (`Google`, `Meta`, `Spotify`, `JioHotstar`).
+- [`src/data/videos.js`](./src/data/videos.js) — 15 YouTube TVCs & ad films (`@No1ads`) with helper functions for watch links and thumbnails.
+
+### 3. Stored Image Assets (`public/`)
+All web-ready images live under [`public/`](./public/) and are referenced using root-relative URLs (e.g. `/assets/logo.png`):
+- **[`public/assets/`](./public/assets/)** — Core brand assets:
+  - [`public/assets/logo.png`](./public/assets/logo.png) (`/assets/logo.png`) — Primary Number One Ads logo
+  - [`public/assets/25.png`](./public/assets/25.png) (`/assets/25.png`) — 25 Years of Legacy badge ([`25.base.png`](./public/assets/25.base.png) alt)
+  - [`public/assets/bni.webp`](./public/assets/bni.webp) (`/assets/bni.webp`) — BNI member badge logo
+  - [`public/Clients2-500x284.jpg`](./public/Clients2-500x284.jpg) (`/Clients2-500x284.jpg`) — Composite client logos reference
+- **[`public/services/`](./public/services/)** — 13 service capability photos (`design.webp`, `led-signage.webp`, `signage-boards.webp`, `acp-elevation.webp`, `exhibition-stall.webp`, `roadshow.webp`, `in-shop.webp`, `backlight-board.webp`, `pylon-branding.webp`, `lamp-post-branding.webp`, `standee.webp`, `signage.webp`, `auto-back-branding.webp`).
+- **[`public/gallery/`](./public/gallery/)** — 69 portfolio creatives × 2 variants (`*-thumb.webp` and `*-full.webp` = 138 WebP files). Full manifest in [`WEBSITE_CONTENT.md`](./WEBSITE_CONTENT.md#section-52-filterable-portfolio-gallery-69-portfolio-pieces) and [`src/data/gallery.json`](./src/data/gallery.json).
+- **[`public/group/`](./public/group/)** — Sister company logos: [`triple-a-signage.webp`](./public/group/triple-a-signage.webp) and [`infobus-advertising.webp`](./public/group/infobus-advertising.webp) (see [`public/group/README.md`](./public/group/README.md)).
+- **[`public/partners/`](./public/partners/)** — Partner platform logos: [`google.webp`](./public/partners/google.webp), [`meta.webp`](./public/partners/meta.webp), [`spotify.webp`](./public/partners/spotify.webp), [`jiohotstar.webp`](./public/partners/jiohotstar.webp) (see [`public/partners/README.md`](./public/partners/README.md)).
+- **[`public/clients/`](./public/clients/)** — Optional per-client `<slug>.webp` logos with automatic text-wordmark fallback in [`src/components/BrandLogo.jsx`](./src/components/BrandLogo.jsx) (see [`public/clients/README.md`](./public/clients/README.md)).
+
+### 4. Where to Start Redesigning the Scaffolded Layout
+1. **Stylesheet Reset / New Design System:** Start in [`src/index.css`](./src/index.css) (and optional text-effect styles [`src/components/ShinyText.css`](./src/components/ShinyText.css), [`src/components/TrueFocus.css`](./src/components/TrueFocus.css)).
+2. **Global Layout Shell:** Update [`src/components/Layout.jsx`](./src/components/Layout.jsx), [`src/sections/Nav.jsx`](./src/sections/Nav.jsx), [`src/sections/Footer.jsx`](./src/sections/Footer.jsx), and [`src/components/FloatingContact.jsx`](./src/components/FloatingContact.jsx).
+3. **Page Scaffolds (`src/pages/`):**
+   - [`src/pages/Home.jsx`](./src/pages/Home.jsx) — `/`
+   - [`src/pages/About.jsx`](./src/pages/About.jsx) — `/about`
+   - [`src/pages/ServicesPage.jsx`](./src/pages/ServicesPage.jsx) — `/services`
+   - [`src/pages/ServiceDetail.jsx`](./src/pages/ServiceDetail.jsx) — `/services/:slug` (11 static service routes)
+   - [`src/pages/Work.jsx`](./src/pages/Work.jsx) — `/work`
+   - [`src/pages/ContactPage.jsx`](./src/pages/ContactPage.jsx) — `/contact`
+   - [`src/pages/NotFound.jsx`](./src/pages/NotFound.jsx) — `*` (404)
+4. **Section Components (`src/sections/`):** Redesign the markup and layout in [`Hero.jsx`](./src/sections/Hero.jsx), [`Services.jsx`](./src/sections/Services.jsx), [`ServicesShowcase.jsx`](./src/sections/ServicesShowcase.jsx), [`ServicesDetail.jsx`](./src/sections/ServicesDetail.jsx), [`Group.jsx`](./src/sections/Group.jsx), [`Evolution.jsx`](./src/sections/Evolution.jsx), [`Gallery.jsx`](./src/sections/Gallery.jsx), [`YouTubeAds.jsx`](./src/sections/YouTubeAds.jsx), [`Testimonials.jsx`](./src/sections/Testimonials.jsx), [`LegacyBanner.jsx`](./src/sections/LegacyBanner.jsx), [`Faq.jsx`](./src/sections/Faq.jsx), [`Timeline.jsx`](./src/sections/Timeline.jsx), [`Values.jsx`](./src/sections/Values.jsx), [`BniBadge.jsx`](./src/sections/BniBadge.jsx), [`Clients.jsx`](./src/sections/Clients.jsx), [`ClientsWall.jsx`](./src/sections/ClientsWall.jsx), [`Partners.jsx`](./src/sections/Partners.jsx), [`Process.jsx`](./src/sections/Process.jsx), and [`Contact.jsx`](./src/sections/Contact.jsx).
+5. **Preserve Core Plumbing:** Keep the route definitions in [`src/App.jsx`](./src/App.jsx), `<Seo />` head tags in [`src/components/Seo.jsx`](./src/components/Seo.jsx), JSON-LD generation in [`vite.config.js`](./vite.config.js), and Web3Forms submission logic in [`src/sections/Contact.jsx`](./src/sections/Contact.jsx).
+
+---
+
+## Pages Overview
+
+- `/` — Home (hero, core services, field showcase, group companies, evolution, featured work, YouTube TVCs, testimonials, legacy banner, FAQ, CTA)
+- `/about` — Our story, quick stats, 25-year timeline, core values, group companies, BNI badge, evolution, client wall, testimonials, CTA
+- `/services` — 6 creative disciplines, 13 signage/on-ground capabilities grid, 4-step process, CTA
+- `/services/:slug` — 11 dedicated service pages with deliverables, imagery, and specialized showcases (portfolio grid, digital partners, or YouTube film catalogue)
+- `/work` — Filterable 69-piece portfolio gallery + lightbox
+- `/contact` — Contact details, Web3Forms enquiry form, and FAQ
 
 Every route is **prerendered to static HTML at build time** by
 [`vite-react-ssg`](https://github.com/Daydreamer-riri/vite-react-ssg) (routes

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 // IntersectionObserver fade-up wrapper. stagger > 0 applies incremental
 // transition-delay to direct children instead of the wrapper itself.
-const Reveal = ({ children, className = '', stagger = 0, as: Tag = 'div', threshold = 0.15, ...rest }) => {
+const Reveal = ({ children, className = '', stagger = 0, as: Tag = 'div', threshold = 0.02, ...rest }) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Reveal = ({ children, className = '', stagger = 0, as: Tag = 'div', thresh
           if (entry.isIntersecting) {
             if (stagger > 0) {
               Array.from(el.children).forEach((child, i) => {
-                child.style.transitionDelay = `${i * stagger}ms`;
+                child.style.transitionDelay = `${Math.min(i * stagger, 600)}ms`;
               });
             }
             el.classList.add('revealed');
@@ -27,7 +27,7 @@ const Reveal = ({ children, className = '', stagger = 0, as: Tag = 'div', thresh
           }
         });
       },
-      { threshold }
+      { threshold: Math.min(threshold, 0.02), rootMargin: '0px 0px -32px 0px' }
     );
     observer.observe(el);
     return () => observer.disconnect();

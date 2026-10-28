@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 
 const LINKS = [
   ['Home', '/'],
@@ -12,11 +12,28 @@ const LINKS = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
+    const onResize = () => {
+      if (window.innerWidth > 768) setOpen(false);
+    };
+    const onKeyDown = e => {
+      if (e.key === 'Escape') setOpen(false);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('keydown', onKeyDown);
+    };
   }, []);
 
   useEffect(() => {
@@ -26,9 +43,9 @@ export default function Nav() {
 
   return (
     <>
-      <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
+      <nav className={`nav ${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
         <div className="nav-inner">
-          <Link to="/" className="nav-logo" aria-label="Number One Ads — home">
+          <Link to="/" className="nav-logo" aria-label="Number One Ads — home" onClick={() => setOpen(false)}>
             <img src="/assets/logo.png" alt="number one ads" />
           </Link>
           <ul className="nav-links">
@@ -51,7 +68,7 @@ export default function Nav() {
           </button>
         </div>
       </nav>
-      <div className={`mobile-overlay ${open ? 'open' : ''}`}>
+      <div className={`mobile-overlay ${open ? 'open' : ''}`} aria-hidden={!open}>
         {LINKS.map(([label, href]) => (
           <NavLink
             key={label}
@@ -63,7 +80,9 @@ export default function Nav() {
             {label}
           </NavLink>
         ))}
-        <Link to="/contact" onClick={() => setOpen(false)} style={{ color: 'var(--orange)' }}>Get in Touch</Link>
+        <Link to="/contact" onClick={() => setOpen(false)} className="mobile-overlay-cta">
+          Get in Touch
+        </Link>
       </div>
     </>
   );

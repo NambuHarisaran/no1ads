@@ -1,11 +1,13 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 /**
  * Fullscreen image preview. Loads the high-res `full` image only when opened,
  * showing the LQIP blur until it decodes. Keyboard: ← → to navigate, Esc to close.
+ * Touch: swipe left/right on mobile to navigate.
  */
 export default function Lightbox({ items, index, onClose, onNavigate }) {
   const [loaded, setLoaded] = useState(false);
+  const touchStartX = useRef(null);
   const item = index != null ? items[index] : null;
 
   const go = useCallback(
@@ -35,8 +37,32 @@ export default function Lightbox({ items, index, onClose, onNavigate }) {
 
   if (item == null) return null;
 
+  const handleTouchStart = e => {
+    touchStartX.current = e.touches?.[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = e => {
+    if (touchStartX.current == null) return;
+    const endX = e.changedTouches?.[0]?.clientX;
+    if (endX != null) {
+      const diff = touchStartX.current - endX;
+      if (Math.abs(diff) > 45) {
+        go(diff > 0 ? 1 : -1);
+      }
+    }
+    touchStartX.current = null;
+  };
+
   return (
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label={item.title} onClick={onClose}>
+    <div
+      className="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label={item.title}
+      onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <button className="lightbox-close" aria-label="Close" onClick={onClose}>×</button>
       <button
         className="lightbox-nav lightbox-prev"
@@ -57,7 +83,7 @@ export default function Lightbox({ items, index, onClose, onNavigate }) {
           {!loaded && <span className="lightbox-spinner" aria-hidden="true" />}
         </div>
         <figcaption className="lightbox-caption">
-          {item.title}
+          <span className="lightbox-title">{item.title}</span>
           <span className="lightbox-count">{index + 1} / {items.length}</span>
         </figcaption>
       </figure>

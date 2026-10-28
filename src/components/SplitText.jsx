@@ -16,7 +16,7 @@ const SplitText = ({
   from = { opacity: 0, y: 40 },
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
-  rootMargin = '-100px',
+  rootMargin = '-40px',
   textAlign = 'left',
   tag = 'p',
   onLetterAnimationComplete,
@@ -117,7 +117,7 @@ const SplitText = ({
   const style = {
     textAlign,
     overflow: 'hidden',
-    display: 'inline-block',
+    display: 'inline-block', maxWidth: '100%', paddingBottom: '0.08em', marginBottom: '-0.08em',
     whiteSpace: 'normal',
     wordWrap: 'break-word',
     opacity: 0,
