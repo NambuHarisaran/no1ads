@@ -14,9 +14,26 @@ export function ActLabel({ num, title, tone = 'default' }) {
 }
 
 export function Arrow({ dir = 'right' }) {
-  const d = dir === 'down' ? 'M12 5v14M6 13l6 6 6-6' : 'M5 12h14M13 6l6 6-6 6';
+  const d =
+    dir === 'down'
+      ? 'M12 5v14M6 13l6 6 6-6'
+      : dir === 'left'
+        ? 'M19 12H5M11 6l-6 6 6 6'
+        : 'M5 12h14M13 6l6 6-6 6';
   return (
-    <svg className="st-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      className="st-arrow"
+      data-dir={dir}
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d={d} />
     </svg>
   );

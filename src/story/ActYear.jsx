@@ -2,12 +2,14 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap, useGSAP } from '../motion/gsap.js';
 import { MQ } from '../motion/tokens.js';
+import { bindHorizontalSwipe, stepHorizontalTrigger } from '../motion/horizontalSwipe.js';
 import { ActLabel, Arrow, useStoryReveals } from './primitives.jsx';
 import { FESTIVALS } from './storyData.js';
 
 /**
  * ACT III — A YEAR IN TAMIL NADU. Every creative here is a real campaign.
- * Every screen size: the section pins and vertical scrolling drives the
+ * Every screen size: the section pins and BOTH vertical scrolling ("scroll down")
+ * AND horizontal swiping ("swipe left/right" + Prev/Next buttons) drive the
  * calendar track sideways (linear `ease: none`, required for
  * containerAnimation) — you see the whole year before the next act. Each
  * card's artwork drifts inside its frame and the month bar fills Jan → Dec.
@@ -15,6 +17,8 @@ import { FESTIVALS } from './storyData.js';
  */
 export default function ActYear() {
   const root = useRef(null);
+  const stRef = useRef(null);
+  const viewportRef = useRef(null);
   useStoryReveals(root);
 
   useGSAP(
@@ -24,6 +28,7 @@ export default function ActYear() {
 
       mm.add(MQ.motion, () => {
         const track = q('[data-track]')[0];
+        const pinEl = q('.st-year__pin')[0];
         const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
 
         const tl = gsap.timeline({
@@ -38,7 +43,14 @@ export default function ActYear() {
             invalidateOnRefresh: true,
           },
         });
-        tl.to(track, { x: () => -distance(), duration: 1 }, 0).fromTo(q('[data-year-fill]'), { scaleX: 0 }, { scaleX: 1, duration: 1 }, 0);
+        stRef.current = tl.scrollTrigger;
+
+        tl.to(track, { x: () => -distance(), duration: 1 }, 0).fromTo(
+          q('[data-year-fill]'),
+          { scaleX: 0 },
+          { scaleX: 1, duration: 1 },
+          0
+        );
 
         q('.st-year__card').forEach(card => {
           gsap.fromTo(
@@ -61,12 +73,24 @@ export default function ActYear() {
             }
           );
         });
+
+        // Bind horizontal touch swipe + trackpad wheel + mouse drag to the pinned ScrollTrigger
+        const unbindSwipe = bindHorizontalSwipe(pinEl, () => stRef.current, { speed: 1.35 });
+
+        return () => {
+          unbindSwipe();
+          stRef.current = null;
+        };
       });
 
       return () => mm.revert();
     },
     { scope: root }
   );
+
+  const handleStep = dir => {
+    stepHorizontalTrigger(stRef.current, dir, FESTIVALS.length, viewportRef.current);
+  };
 
   return (
     <section className="st-act st-year" id="act-year" ref={root} aria-labelledby="year-title">
@@ -83,7 +107,12 @@ export default function ActYear() {
           </div>
         </header>
 
-        <div className="st-year__viewport" tabIndex={0} aria-label="Festival campaign calendar — scroll sideways">
+        <div
+          className="st-year__viewport"
+          ref={viewportRef}
+          tabIndex={0}
+          aria-label="Festival campaign calendar — swipe sideways or scroll down"
+        >
           <ul className="st-year__track" data-track>
             {FESTIVALS.map(f => (
               <li className="st-year__card" key={f.slug}>
@@ -92,7 +121,7 @@ export default function ActYear() {
                   <span className="st-year__season">{f.season}</span>
                 </p>
                 <figure className="st-year__media" style={{ backgroundImage: f.lqip ? `url(${f.lqip})` : undefined }}>
-                  <img src={f.img} alt={f.alt} loading="lazy" decoding="async" width="720" height="900" />
+                  <img src={f.img} alt={f.alt} loading="lazy" decoding="async" width="720" height="900" draggable="false" />
                 </figure>
                 <p className="st-year__fest">
                   <span className="st-year__fest-title">{f.title}</span>
@@ -109,10 +138,34 @@ export default function ActYear() {
           </ul>
         </div>
 
-        <div className="st-year__bar st-container" aria-hidden="true">
-          <span>Jan</span>
-          <span className="st-year__bar-track"><span className="st-year__bar-fill" data-year-fill /></span>
-          <span>Dec</span>
+        <div className="st-year__bar st-container">
+          <span aria-hidden="true">Jan</span>
+          <span className="st-year__bar-track" aria-hidden="true">
+            <span className="st-year__bar-fill" data-year-fill />
+          </span>
+          <span aria-hidden="true">Dec</span>
+
+          <div className="st-year__controls">
+            <span className="st-year__swipe-hint" aria-hidden="true">
+              Swipe <span className="st-year__swipe-arrows">↔</span> or scroll <span className="st-year__swipe-arrows">↓</span>
+            </span>
+            <button
+              type="button"
+              className="st-year__step-btn"
+              onClick={() => handleStep(-1)}
+              aria-label="Previous festival campaign"
+            >
+              <Arrow dir="left" />
+            </button>
+            <button
+              type="button"
+              className="st-year__step-btn"
+              onClick={() => handleStep(1)}
+              aria-label="Next festival campaign"
+            >
+              <Arrow />
+            </button>
+          </div>
         </div>
       </div>
     </section>

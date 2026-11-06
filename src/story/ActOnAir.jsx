@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP } from '../motion/gsap.js';
 import { MQ } from '../motion/tokens.js';
+import { bindHorizontalSwipe } from '../motion/horizontalSwipe.js';
 import { ActLabel, Arrow, YtThumb, useStoryReveals } from './primitives.jsx';
 import { CHANNEL_URL, FILMS, watchUrl } from './storyData.js';
 
@@ -58,13 +59,14 @@ export default function ActOnAir() {
 
       mm.add(MQ.mobile, () => {
         const reel = q('[data-reel]')[0];
+        const stage = q('.st-onair__stage')[0];
         const frame = reel.parentElement;
         const distance = () => {
           const pad = parseFloat(getComputedStyle(frame).paddingLeft) || 0;
           return Math.max(0, reel.scrollWidth - (frame.clientWidth - pad * 2));
         };
 
-        gsap
+        const tl = gsap
           .timeline({
             defaults: { ease: 'none' },
             scrollTrigger: {
@@ -86,6 +88,9 @@ export default function ActOnAir() {
           .fromTo(q('[data-reel-fill]'), { scaleX: 0 }, { scaleX: 1, duration: 1.6 }, 0.6)
           .to(reel, { x: () => -distance(), duration: 1.6 }, 0.6)
           .to({}, { duration: 0.2 });
+
+        const unbindSwipe = bindHorizontalSwipe(stage, () => tl.scrollTrigger, { speed: 1.35 });
+        return () => unbindSwipe();
       });
 
       return () => mm.revert();

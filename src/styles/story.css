@@ -318,6 +318,66 @@ html.has-motion .st-prologue [data-hero-in] { opacity: 0; }
   color: var(--st-text-2);
 }
 
+/* Interactive Hero "Scroll down to switch on" cue */
+.st-prologue__cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  margin: clamp(10px, 1.8svh, 20px) auto 0;
+  padding: 6px 16px 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(246, 194, 122, 0.24);
+  background: rgba(16, 13, 10, 0.72);
+  color: var(--st-gold);
+  font-family: var(--st-font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.st-prologue__cue:hover {
+  border-color: var(--st-orange);
+  background: rgba(232, 119, 34, 0.12);
+  color: var(--st-text);
+}
+.st-prologue__cue:focus-visible {
+  outline: 2px solid var(--st-gold);
+  outline-offset: 3px;
+}
+.st-prologue__cue-mouse {
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 23px;
+  border: 1.5px solid var(--st-gold);
+  border-radius: 999px;
+  flex: none;
+}
+.st-prologue__cue-wheel {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 2.5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--st-orange);
+  transform: translateX(-50%);
+  animation: st-wheel-drop 1.7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.st-prologue__cue-chevron {
+  display: inline-flex;
+  color: var(--st-orange);
+  animation: st-chevron-bob 1.7s ease-in-out infinite;
+}
+.st-prologue__cue-chevron .st-arrow { width: 15px; height: 15px; }
+
+@media (max-height: 780px), (max-width: 359px) {
+  .st-prologue__cue { display: none; }
+}
+
 /* ---------- hanging Edison bulbs (hero) ---------- */
 .st-bulbs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .st-bulb {
@@ -1425,6 +1485,129 @@ html.has-motion .st-bulb [data-bulb-on] { opacity: 0; visibility: hidden; }
   .st-story .st-container { padding-left: 76px; }
 }
 
+/* ---------- Floating bottom scroll guide & story progress pill ---------- */
+.st-scrollguide {
+  position: fixed;
+  right: clamp(14px, 2.5vw, 28px);
+  bottom: clamp(12px, 2.2svh, 24px);
+  z-index: 48;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.st-scrollguide.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.st-scrollguide__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  max-width: calc(100vw - 28px);
+  padding: 6px 14px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(246, 194, 122, 0.24);
+  background: rgba(14, 12, 10, 0.88);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.75);
+  color: var(--st-text);
+  font-family: var(--st-font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+.st-scrollguide__btn:hover {
+  border-color: var(--st-orange);
+  background: rgba(22, 18, 14, 0.95);
+}
+.st-scrollguide__btn:focus-visible {
+  outline: 2px solid var(--st-gold);
+  outline-offset: 2px;
+}
+.st-scrollguide__chapter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.st-scrollguide__num {
+  font-family: var(--st-font-serif);
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--st-orange);
+}
+.st-scrollguide__title {
+  color: var(--st-text-2);
+}
+.st-scrollguide__sep {
+  width: 1px;
+  height: 12px;
+  background: var(--st-line-2);
+}
+.st-scrollguide__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--st-gold);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.st-scrollguide__action .st-arrow {
+  width: 14px;
+  height: 14px;
+  color: var(--st-orange);
+  animation: st-chevron-bob 1.7s ease-in-out infinite;
+}
+.st-scrollguide__bar {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.st-scrollguide__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--st-orange), var(--st-gold));
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+@media (max-width: 639px) {
+  .st-scrollguide {
+    right: 12px;
+    bottom: 10px;
+  }
+  .st-scrollguide__chapter,
+  .st-scrollguide__sep {
+    display: none;
+  }
+  .st-scrollguide__btn {
+    padding: 6px 14px 8px;
+    font-size: 10.5px;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .st-scrollguide { display: none; }
+}
+
 /* ---------- cursor (gsap.quickTo driven — no CSS transitions on transform/opacity) ---------- */
 
 .cursor-ring { transition: none; will-change: transform; }
@@ -1633,6 +1816,12 @@ html.has-motion .st-year__pin {
   height: 100svh;
   padding: calc(var(--st-nav-h) + 8px) 0 clamp(14px, 3svh, 28px);
   overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+html.has-motion .st-year__pin.is-dragging {
+  cursor: grabbing;
 }
 html.has-motion .st-year__head { margin-bottom: 0; }
 html.has-motion .st-year__title { font-size: clamp(1.5rem, min(4.2vw, 6.4svh), 4rem); }
@@ -1646,13 +1835,75 @@ html.has-motion .st-year__card { width: calc(clamp(220px, 42svh, 500px) * 0.8); 
 html.has-motion .st-year__bar {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   font-family: var(--st-font-display);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--st-text-3);
+}
+.st-year__controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 6px;
+  flex: none;
+}
+.st-year__swipe-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--st-line-2);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--st-text-2);
+  white-space: nowrap;
+}
+.st-year__swipe-arrows {
+  color: var(--st-orange);
+  font-weight: 700;
+}
+.st-year__step-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--st-line-2);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--st-text);
+  cursor: pointer;
+  flex: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+.st-year__step-btn:hover {
+  border-color: var(--st-orange);
+  background: rgba(232, 119, 34, 0.12);
+  color: var(--st-orange);
+}
+.st-year__step-btn:active {
+  transform: scale(0.94);
+}
+.st-year__step-btn:focus-visible {
+  outline: 2px solid var(--st-gold);
+  outline-offset: 2px;
+}
+.st-year__step-btn .st-arrow {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 479px) {
+  html.has-motion .st-year__bar { gap: 8px; font-size: 10px; letter-spacing: 0.12em; }
+  .st-year__swipe-hint { padding: 3px 8px; font-size: 9px; letter-spacing: 0.08em; }
+}
+@media (max-width: 349px) {
+  .st-year__swipe-hint { display: none; }
 }
 
 @media (max-width: 1023px) {
@@ -1846,12 +2097,24 @@ html.has-motion .st-year__bar {
   0%, 100% { opacity: 0.25; }
   50% { opacity: 1; }
 }
+@keyframes st-wheel-drop {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  65% { transform: translate(-50%, 7px); opacity: 0.15; }
+  100% { transform: translate(-50%, 0); opacity: 0; }
+}
+@keyframes st-chevron-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
 
 /* ---------- reduced motion: static, fully lit, readable ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   .st-eyebrow__dot,
   .st-prologue__cue-line,
+  .st-prologue__cue-wheel,
+  .st-prologue__cue-chevron,
+  .st-scrollguide__action .st-arrow,
   .st-sign--reserved::after { animation: none; }
   .st-sign--reserved::after { opacity: 0.6; }
   .st-magnetic { will-change: auto; }

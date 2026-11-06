@@ -41,7 +41,7 @@ export default function Prologue() {
       const mm = gsap.matchMedia();
 
       mm.add(MQ.motion, () => {
-        // Load choreography: backdrop → emblem → headline → copy → CTAs.
+        // Load choreography: backdrop → emblem → headline → copy → scroll cue → CTAs.
         gsap
           .timeline({ defaults: { ease: EASE.text } })
           .addLabel('bg')
@@ -51,6 +51,7 @@ export default function Prologue() {
           .fromTo(q('.st-line__inner'), { y: 0, yPercent: 110 }, { y: 0, yPercent: 0, duration: 1.1, stagger: 0.11 }, 'headline')
           .fromTo(q('.st-prologue__switch'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, 'headline+=0.45')
           .fromTo(q('[data-hero-in="copy"]'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9 }, 'headline+=0.6')
+          .fromTo(q('[data-hero-in="cue"]'), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.85 }, 'headline+=0.68')
           .fromTo(q('[data-hero-in="cta"]'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.1 }, 'headline+=0.75');
 
         // Hanging Edison bulbs sway gently, each on its own rhythm.
@@ -106,6 +107,15 @@ export default function Prologue() {
     { scope: root }
   );
 
+  const handleScrollCue = () => {
+    const vh = window.innerHeight || 800;
+    if (window.scrollY < vh * 0.45) {
+      scrollToTarget(Math.round(vh * 0.65), { duration: 1.1 });
+    } else {
+      scrollToTarget('#act-noise');
+    }
+  };
+
   return (
     <section className="st-prologue" id="prologue" ref={root} aria-labelledby="prologue-title">
       <div className="st-prologue__bg" aria-hidden="true">
@@ -144,6 +154,22 @@ export default function Prologue() {
           <p className="st-prologue__sub" data-hero-in="copy">
             Twenty-five years of making Madurai&rsquo;s brands impossible to walk past.
           </p>
+
+          <button
+            type="button"
+            className="st-prologue__cue"
+            data-hero-in="cue"
+            onClick={handleScrollCue}
+            aria-label="Scroll down to switch on the lights and explore our story"
+          >
+            <span className="st-prologue__cue-mouse" aria-hidden="true">
+              <span className="st-prologue__cue-wheel" />
+            </span>
+            <span className="st-prologue__cue-text">Scroll down to switch on</span>
+            <span className="st-prologue__cue-chevron" aria-hidden="true">
+              <Arrow dir="down" />
+            </span>
+          </button>
         </div>
 
         <div className="st-prologue__stage">
