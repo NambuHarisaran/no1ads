@@ -8,21 +8,28 @@ import { Arrow } from './primitives.jsx';
 import HeroBulbs from './HeroBulbs.jsx';
 
 const SWITCH = ['We', 'switch', 'on', 'the', 'lights.'];
-const RING_TEXT = 'Number One Ads \u2726 25 years of legacy \u2726 Madurai \u2726 Since 2000 \u2726 ';
-// Circle the text rides on (viewBox 0 0 200 200, r = 80) and its length,
-// so the phrase spaces itself evenly around the full ring.
-const RING_PATH = 'M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0';
-const RING_LEN = Math.round(2 * Math.PI * 80);
+
+// 25 perimeter marquee bulbs — one for each year of the 25-year legacy —
+// arranged clockwise from 12 o'clock around the emblem (viewBox 0 0 200 200, r = 88).
+const MARQUEE_BULBS = Array.from({ length: 25 }, (_, i) => {
+  const angle = (i / 25) * Math.PI * 2 - Math.PI / 2;
+  const r = 88;
+  return {
+    i,
+    cx: +(100 + Math.cos(angle) * r).toFixed(2),
+    cy: +(100 + Math.sin(angle) * r).toFixed(2),
+  };
+});
 
 /**
  * PROLOGUE — "Every brand starts in the dark."
  * Centred headline on top; the 25-years emblem sits centre-bottom inside a
- * ring with the agency's name set on a curve around it. "Our story" (left)
- * and "Start a project" (right) flank the emblem on desktop and sit side by
- * side under it on phones.
+ * 25-bulb architectural marquee halo (one bulb per year since 2000).
+ * "Our story" (left) and "Start a project" (right) flank the emblem on desktop
+ * and sit side by side under it on phones.
  * Every screen size: load timeline, then a pinned scrubbed "switch-on" (switch
- * line lights, orbit draws, curved type turns gold, the hanging bulbs flicker
- * on, 25 lights up) before the
+ * line lights, power ring draws, all 25 marquee bulbs ignite sequentially,
+ * hanging Edison bulbs flicker on, 25 emblem & stage beams light up) before the
  * stage dims and hands off to Act I. Reduced motion: static, fully lit.
  */
 export default function Prologue() {
@@ -46,15 +53,12 @@ export default function Prologue() {
           .fromTo(q('[data-hero-in="copy"]'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9 }, 'headline+=0.6')
           .fromTo(q('[data-hero-in="cta"]'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.1 }, 'headline+=0.75');
 
-        // The curved type drifts slowly forever (cheap: one SVG group rotation).
-        gsap.to(q('[data-ring-spin]'), { rotation: 360, svgOrigin: '100 100', duration: 48, ease: 'none', repeat: -1 });
-
-        // Hanging bulbs sway gently, each on its own rhythm.
+        // Hanging Edison bulbs sway gently, each on its own rhythm.
         q('[data-bulb]').forEach((bulb, i) => {
           gsap.fromTo(
             bulb,
-            { rotation: i % 2 ? 2.4 : -2.4 },
-            { rotation: i % 2 ? -2.4 : 2.4, duration: 2.6 + i * 0.45, ease: 'sine.inOut', repeat: -1, yoyo: true }
+            { rotation: i % 2 ? 2.2 : -2.2 },
+            { rotation: i % 2 ? -2.2 : 2.2, duration: 2.8 + i * 0.45, ease: 'sine.inOut', repeat: -1, yoyo: true }
           );
         });
 
@@ -72,18 +76,24 @@ export default function Prologue() {
           })
           .addLabel('switch')
           .fromTo(q('.st-word__on'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, stagger: 0.16, ease: 'power2.out' }, 'switch')
-          .fromTo(q('[data-ring]'), { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', duration: 1.4, ease: 'power1.inOut' }, 'switch')
-          .fromTo(q('.st-ring__text'), { fill: '#3A3A3A' }, { fill: '#F6C27A', duration: 0.9, ease: 'power2.inOut' }, 'switch+=0.3')
+          .fromTo(q('[data-ring]'), { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', duration: 1.35, ease: 'power1.inOut' }, 'switch')
+          .fromTo(
+            q('[data-ring-bulb]'),
+            { autoAlpha: 0, scale: 0.4, svgOrigin: '100 100' },
+            { autoAlpha: 1, scale: 1, duration: 0.28, stagger: 0.042, ease: 'back.out(2)' },
+            'switch+=0.05'
+          )
           .fromTo(q('.st-prologue__badge--on'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.9, ease: 'power2.inOut' }, 'switch+=0.35')
-          .fromTo(q('.st-prologue__glow'), { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 1.1, ease: 'power2.out' }, 'switch+=0.35');
+          .fromTo(q('.st-prologue__glow'), { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 1.1, ease: 'power2.out' }, 'switch+=0.35')
+          .fromTo(q('[data-stage-lit]'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.1, ease: 'power2.out' }, 'switch+=0.2');
 
-        // Outer bulbs first, then inner: each flickers (on, dip, on) as you scroll.
+        // Outer hanging bulbs first, then inner: each flickers (on, dip, on) as you scroll.
         const order = [0, 3, 1, 2];
         const bulbs = q('[data-bulb]');
         order.forEach((idx, k) => {
           const lit = bulbs[idx]?.querySelectorAll('[data-bulb-on]');
           if (!lit?.length) return;
-          tl.to(lit, { keyframes: { autoAlpha: [0.9, 0.15, 0.7, 0.3, 1] }, duration: 0.7, ease: 'none' }, `switch+=${0.05 + k * 0.18}`);
+          tl.to(lit, { keyframes: { autoAlpha: [0.9, 0.15, 0.75, 0.3, 1] }, duration: 0.7, ease: 'none' }, `switch+=${0.05 + k * 0.18}`);
         });
 
         tl.to({}, { duration: 0.35 }) // hold the lit frame
@@ -99,7 +109,9 @@ export default function Prologue() {
   return (
     <section className="st-prologue" id="prologue" ref={root} aria-labelledby="prologue-title">
       <div className="st-prologue__bg" aria-hidden="true">
-        <span className="st-prologue__grid" />
+        <span className="st-prologue__ambient" />
+        <span className="st-prologue__beams" data-stage-lit />
+        <span className="st-prologue__floor" data-stage-lit />
         <span className="st-prologue__vignette" />
       </div>
 
@@ -145,17 +157,44 @@ export default function Prologue() {
             <span className="st-prologue__glow" aria-hidden="true" />
             <svg className="st-prologue__ring" viewBox="0 0 200 200" aria-hidden="true">
               <defs>
-                <path id="st-ring-path" d={RING_PATH} />
+                <radialGradient id="st-marquee-glow" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0%" stopColor="#FFE4AD" stopOpacity="0.95" />
+                  <stop offset="40%" stopColor="#F59E36" stopOpacity="0.55" />
+                  <stop offset="100%" stopColor="#E87722" stopOpacity="0" />
+                </radialGradient>
+                <linearGradient id="st-ring-brass" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="rgba(255, 224, 178, 0.35)" />
+                  <stop offset="50%" stopColor="rgba(232, 119, 34, 0.12)" />
+                  <stop offset="100%" stopColor="rgba(246, 194, 122, 0.3)" />
+                </linearGradient>
               </defs>
-              <circle cx="100" cy="100" r="96" className="st-prologue__ring-track" />
-              <circle cx="100" cy="100" r="96" className="st-prologue__ring-lit" data-ring transform="rotate(-90 100 100)" />
-              <circle cx="100" cy="100" r="72" className="st-prologue__ring-inner" />
-              <g data-ring-spin>
-                <text className="st-ring__text">
-                  <textPath href="#st-ring-path" textLength={RING_LEN} lengthAdjust="spacing">
-                    {RING_TEXT}
-                  </textPath>
-                </text>
+
+              {/* Architectural luminaire housing rails */}
+              <circle cx="100" cy="100" r="95" className="st-prologue__ring-outer" />
+              <circle cx="100" cy="100" r="88" className="st-prologue__ring-track" />
+              <circle cx="100" cy="100" r="88" className="st-prologue__ring-lit" data-ring transform="rotate(-90 100 100)" />
+              <circle cx="100" cy="100" r="80" className="st-prologue__ring-inner" />
+
+              {/* 25 unlit bulb sockets + smoked glass globes */}
+              <g className="st-ring__sockets">
+                {MARQUEE_BULBS.map(({ i, cx, cy }) => (
+                  <g key={`off-${i}`}>
+                    <circle cx={cx} cy={cy} r="3.1" fill="#171411" stroke="rgba(246, 194, 122, 0.24)" strokeWidth="0.6" />
+                    <circle cx={cx} cy={cy} r="1.9" fill="#2a241e" />
+                    <circle cx={cx - 0.5} cy={cy - 0.5} r="0.55" fill="rgba(255, 255, 255, 0.22)" />
+                  </g>
+                ))}
+              </g>
+
+              {/* 25 lit warm-tungsten marquee bulbs (ignite sequentially on scroll) */}
+              <g className="st-ring__bulbs">
+                {MARQUEE_BULBS.map(({ i, cx, cy }) => (
+                  <g key={`on-${i}`} className="st-ring__bulb-on" data-ring-bulb>
+                    <circle cx={cx} cy={cy} r="7.5" fill="url(#st-marquee-glow)" />
+                    <circle cx={cx} cy={cy} r="2.7" fill="#FFC870" stroke="rgba(255, 244, 218, 0.85)" strokeWidth="0.5" />
+                    <circle cx={cx} cy={cy} r="1.35" fill="#FFFDF7" />
+                  </g>
+                ))}
               </g>
             </svg>
             <img

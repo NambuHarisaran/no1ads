@@ -196,6 +196,8 @@ html.has-motion .st-prologue__switch,
 html.has-motion .st-word__on,
 html.has-motion .st-prologue__badge--on,
 html.has-motion .st-prologue__glow,
+html.has-motion .st-prologue [data-stage-lit],
+html.has-motion .st-ring__bulb-on,
 html.has-motion .st-era__on,
 html.has-motion .st-era__meta > *,
 html.has-motion .st-sign--reserved { opacity: 0; }
@@ -203,12 +205,11 @@ html.has-motion .st-sign--reserved { opacity: 0; }
 html.has-motion .st-line__inner { transform: translateY(110%); }
 html.has-motion .st-sign:not(.st-sign--reserved) { opacity: 0.14; }
 html.has-motion .st-prologue__ring-lit { stroke-dasharray: 0 1000; }
-html.has-motion .st-ring__text { fill: var(--st-unlit-2); }
 html.has-motion .st-prologue [data-hero-in] { opacity: 0; }
 
 /* ==========================================================================
-   PROLOGUE — centred headline, 25 emblem centre-bottom inside a ring with
-   curved type, "Our story" (left) / "Start a project" (right).
+   PROLOGUE — centred headline, 25 emblem centre-bottom inside a 25-bulb
+   marquee halo, "Our story" (left) / "Start a project" (right).
    ========================================================================== */
 
 .st-prologue {
@@ -216,27 +217,49 @@ html.has-motion .st-prologue [data-hero-in] { opacity: 0; }
   min-height: 100vh;
   min-height: 100svh;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse 55% 55% at 50% 86%, rgba(232, 119, 34, 0.1), transparent 70%),
-    var(--st-ink-950);
+  background: var(--st-ink-950);
 }
 
 .st-prologue__bg { position: absolute; inset: 0; pointer-events: none; }
-.st-prologue__grid {
+
+/* Studio dark-stage atmosphere (replaces dated grid) */
+.st-prologue__ambient {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(var(--st-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--st-line) 1px, transparent 1px);
-  background-size: 72px 72px;
-  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 62%, #000 10%, transparent 75%);
-  mask-image: radial-gradient(ellipse 60% 70% at 50% 62%, #000 10%, transparent 75%);
-  opacity: 0.55;
+  background:
+    radial-gradient(ellipse 75% 50% at 50% 0%, rgba(255, 214, 153, 0.045) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 55% at 50% 78%, rgba(232, 119, 34, 0.08) 0%, transparent 72%),
+    linear-gradient(180deg, #050505 0%, #0b0908 58%, #070605 100%);
 }
+
+/* Overhead volumetric warm spotlight cones that bloom when the stage switches on */
+.st-prologue__beams {
+  position: absolute;
+  inset: 0;
+  background:
+    conic-gradient(from 164deg at 8% -6%, transparent 0deg, rgba(255, 194, 112, 0.09) 16deg, transparent 34deg),
+    conic-gradient(from 162deg at 92% -6%, transparent 0deg, rgba(255, 194, 112, 0.09) 16deg, transparent 34deg),
+    radial-gradient(ellipse 62% 52% at 50% 34%, rgba(246, 194, 122, 0.08) 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+/* Warm architectural stage floor pool beneath the 25 emblem */
+.st-prologue__floor {
+  position: absolute;
+  left: 50%;
+  bottom: -8%;
+  width: min(1100px, 92vw);
+  height: 44svh;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(ellipse 55% 42% at 50% 68%, rgba(232, 119, 34, 0.24) 0%, rgba(232, 119, 34, 0.07) 48%, transparent 76%);
+  filter: blur(18px);
+}
+
 .st-prologue__vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.72) 100%);
+  background: radial-gradient(ellipse 82% 78% at 50% 48%, transparent 46%, rgba(0, 0, 0, 0.78) 100%);
 }
 
 .st-prologue__inner {
@@ -295,7 +318,7 @@ html.has-motion .st-prologue [data-hero-in] { opacity: 0; }
   color: var(--st-text-2);
 }
 
-/* ---------- hanging bulbs (hero) ---------- */
+/* ---------- hanging Edison bulbs (hero) ---------- */
 .st-bulbs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .st-bulb {
   position: absolute;
@@ -308,43 +331,98 @@ html.has-motion .st-prologue [data-hero-in] { opacity: 0; }
   will-change: transform;
 }
 .st-bulb__cord {
+  position: relative;
   display: block;
-  width: 1.5px;
+  width: 2.5px;
   height: var(--len);
-  background: linear-gradient(180deg, #1a1a1a, #3a3a3a 60%, #4a4036);
+  background:
+    repeating-linear-gradient(
+      180deg,
+      #1a1714 0px,
+      #332b22 3px,
+      #141210 6px
+    );
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.65);
+}
+.st-bulb__cord::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 14px;
+  height: 5px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, #171411, #574834 50%, #171411);
+  transform: translateX(-50%);
 }
 .st-bulb__body { position: relative; display: block; width: 100%; margin-top: -1px; }
-.st-bulb__svg { position: relative; z-index: 1; display: block; width: 100%; height: auto; overflow: visible; }
-.st-bulb__filament { filter: drop-shadow(0 0 2px #FFD58A) drop-shadow(0 0 5px rgba(255, 170, 70, 0.9)); }
+.st-bulb__svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.65));
+}
+.st-bulb__filament {
+  filter: drop-shadow(0 0 3px #FFF6DC) drop-shadow(0 0 8px rgba(255, 176, 72, 0.95));
+}
+.st-bulb__filament-glow {
+  filter: blur(1.2px);
+}
 .st-bulb__halo {
   position: absolute;
   left: 50%;
-  top: 64%;
-  width: 520%;
+  top: 66%;
+  width: 540%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 196, 110, 0.42) 0%, rgba(232, 119, 34, 0.16) 32%, transparent 66%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 210, 130, 0.46) 0%,
+    rgba(232, 119, 34, 0.2) 34%,
+    rgba(232, 119, 34, 0.05) 56%,
+    transparent 72%
+  );
   transform: translate(-50%, -50%);
   mix-blend-mode: screen;
 }
+.st-bulb__core-bloom {
+  position: absolute;
+  left: 50%;
+  top: 66%;
+  width: 185%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 244, 214, 0.62) 0%,
+    rgba(255, 184, 77, 0.28) 45%,
+    transparent 74%
+  );
+  transform: translate(-50%, -50%);
+  filter: blur(8px);
+  mix-blend-mode: screen;
+}
 
-.st-bulb--1 { left: 4%;  --w: clamp(46px, 4vw, 62px); --len: 34svh; }
-.st-bulb--2 { left: 12%; --w: clamp(38px, 3.2vw, 50px); --len: 19svh; }
-.st-bulb--3 { right: 12%; --w: clamp(38px, 3.2vw, 50px); --len: 26svh; }
-.st-bulb--4 { right: 4%;  --w: clamp(46px, 4vw, 62px); --len: 41svh; }
+.st-bulb--1 { left: 3.5%;  --w: clamp(68px, 5.8vw, 94px); --len: 26svh; }
+.st-bulb--2 { left: 13.5%; --w: clamp(54px, 4.5vw, 74px); --len: 14svh; }
+.st-bulb--3 { right: 13.5%; --w: clamp(54px, 4.5vw, 74px); --len: 19svh; }
+.st-bulb--4 { right: 3.5%;  --w: clamp(68px, 5.8vw, 94px); --len: 32svh; }
 
 html.has-motion .st-bulb [data-bulb-on] { opacity: 0; visibility: hidden; }
 
 @media (max-width: 699px) {
   .st-bulb--2,
   .st-bulb--3 { display: none; }
-  .st-bulb--1 { left: 6px; --w: 30px; --len: 170px; }
-  .st-bulb--4 { right: 6px; --w: 30px; --len: 220px; }
-  .st-bulb__halo { width: 600%; }
+  .st-bulb--1 { left: 2.5%; --w: clamp(44px, 12vw, 58px); --len: 15svh; }
+  .st-bulb--4 { right: 2.5%; --w: clamp(44px, 12vw, 58px); --len: 21svh; }
+  .st-bulb__halo { width: 560%; }
 }
 @media (max-height: 500px) and (orientation: landscape) {
-  .st-bulb--1 { --len: 26svh; --w: 30px; }
-  .st-bulb--4 { --len: 34svh; --w: 30px; }
+  .st-bulb--1 { --len: 20svh; --w: 44px; }
+  .st-bulb--4 { --len: 26svh; --w: 44px; }
   .st-bulb--2,
   .st-bulb--3 { display: none; }
 }
@@ -374,39 +452,45 @@ html.has-motion .st-bulb [data-bulb-on] { opacity: 0; visibility: hidden; }
   height: 100%;
   overflow: visible;
 }
-.st-prologue__ring circle { fill: none; }
-.st-prologue__ring-track { stroke: var(--st-line-2); stroke-width: 0.5; stroke-dasharray: 1 3; }
-.st-prologue__ring-lit {
-  stroke: var(--st-orange);
-  stroke-width: 0.9;
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 3px var(--st-orange));
+.st-prologue__ring > circle { fill: none; }
+.st-prologue__ring-outer {
+  stroke: url(#st-ring-brass);
+  stroke-width: 0.75;
 }
-.st-prologue__ring-inner { stroke: rgba(246, 194, 122, 0.16); stroke-width: 0.5; }
-.st-ring__text {
-  fill: var(--st-gold);
-  font-family: var(--st-font-display);
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.st-prologue__ring-track {
+  stroke: rgba(246, 194, 122, 0.16);
+  stroke-width: 0.7;
+  stroke-dasharray: 1.5 3.5;
+}
+.st-prologue__ring-lit {
+  stroke: var(--st-gold);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px var(--st-orange));
+}
+.st-prologue__ring-inner {
+  stroke: url(#st-ring-brass);
+  stroke-width: 0.75;
+}
+.st-ring__bulb-on {
+  filter: drop-shadow(0 0 4px rgba(255, 184, 77, 0.85));
 }
 .st-prologue__glow {
   position: absolute;
-  inset: 16%;
+  inset: 12%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 119, 34, 0.5) 0%, rgba(232, 119, 34, 0.12) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(232, 119, 34, 0.52) 0%, rgba(246, 194, 122, 0.16) 44%, transparent 72%);
   filter: blur(24px);
 }
 .st-prologue__badge {
   position: absolute;
-  inset: 25%;
-  width: 50%;
-  height: 50%;
+  inset: 20%;
+  width: 60%;
+  height: 60%;
   object-fit: contain;
 }
-.st-prologue__badge--off { filter: grayscale(1) brightness(0.4) contrast(1.1); }
-.st-prologue__badge--on { filter: drop-shadow(0 16px 44px rgba(232, 119, 34, 0.4)); }
+.st-prologue__badge--off { filter: grayscale(1) brightness(0.42) contrast(1.1); }
+.st-prologue__badge--on { filter: drop-shadow(0 16px 44px rgba(232, 119, 34, 0.45)); }
 
 /* reduced motion: no pin, so let the hero size itself */
 @media (prefers-reduced-motion: reduce) {
