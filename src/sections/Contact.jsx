@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ShinyText from '../components/ShinyText.jsx';
 import SplitText from '../components/SplitText.jsx';
 import Reveal from '../components/Reveal.jsx';
+import QuickContact from '../components/QuickContact.jsx';
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from './SocialIcons.jsx';
 import { site, displayPhone, whatsappLink } from '../data/siteConfig.js';
 import servicePages from '../data/servicePages.js';
@@ -167,6 +168,10 @@ export default function Contact({ showHeading = true }) {
                 </p>
               </Reveal>
             )}
+            <Reveal className="contact-quick">
+              <p className="contact-quick-label">Fastest reply</p>
+              <QuickContact showNumber />
+            </Reveal>
             <Reveal className="contact-info" stagger={120}>
               <div className="contact-info-item">
                 <PinIcon />

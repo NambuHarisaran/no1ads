@@ -3,11 +3,12 @@ import Nav from '../sections/Nav.jsx';
 import Footer from '../sections/Footer.jsx';
 import CursorDot from './CursorDot.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
-import FloatingContact from './FloatingContact.jsx';
+import SmoothScroll from '../motion/SmoothScroll.jsx';
 
 export default function Layout() {
   return (
     <>
+      <SmoothScroll />
       <CursorDot />
       <ScrollToTop />
       <Nav />
@@ -15,7 +16,6 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
-      <FloatingContact />
     </>
   );
 }

@@ -35,7 +35,24 @@
     <link rel="apple-touch-icon" href="/assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <!--
+      Montserrat (brand display) + Inter (body) + Instrument Serif (editorial
+      italic accents).
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,900&family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+    <!--
+      Motion gate: hidden "before" states (reveals, split text, story scenes)
+      only apply under html.has-motion. No JS or prefers-reduced-motion means
+      the class is never added and every word stays visible.
+    -->
+    <script>
+      try {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('has-motion');
+        }
+      } catch (e) {}
+    </script>
 
     <!--
       Structured data (LocalBusiness + WebSite + FAQPage) is injected here at

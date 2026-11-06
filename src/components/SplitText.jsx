@@ -120,7 +120,8 @@ const SplitText = ({
     display: 'inline-block', maxWidth: '100%', paddingBottom: '0.08em', marginBottom: '-0.08em',
     whiteSpace: 'normal',
     wordWrap: 'break-word',
-    opacity: 0,
+    // Hidden start state lives in CSS (`html.has-motion .split-parent`) so the
+    // text stays readable without JS / with reduced motion.
   };
   const classes = `split-parent ${className}`;
   const Tag = tag;

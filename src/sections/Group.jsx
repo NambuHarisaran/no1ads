@@ -8,25 +8,28 @@ export default function Group() {
   return (
     <section className="group-section" id="group">
       <div className="container">
-        <Reveal className="group-head">
-          <div className="section-label">
-            <ShinyText text="ONE GROUP, THREE SPECIALISTS" speed={5} color="#E87722" shineColor="#FFFFFF" />
-          </div>
-          <h2 className="group-headline">
-            <SplitText
-              text="The Number One Ads Group"
-              splitType="chars"
-              delay={18}
-              duration={0.8}
-              ease="power4.out"
-              tag="span"
-            />
-          </h2>
-          <p className="group-intro">
-            Three companies under one roof — so a single brief can move from idea to artwork
-            to fabricated signage to bus media without ever leaving the family.
-          </p>
-        </Reveal>
+        <div className="group-head">
+          <Reveal>
+            <div className="section-label">
+              <ShinyText text="ONE GROUP, THREE SPECIALISTS" speed={5} color="#E87722" shineColor="#FFFFFF" />
+            </div>
+          </Reveal>
+          <SplitText
+            tag="h2"
+            className="group-headline"
+            text="The Number One Ads Group"
+            splitType="chars"
+            delay={18}
+            duration={0.8}
+            ease="power4.out"
+          />
+          <Reveal>
+            <p className="group-intro">
+              Three companies under one roof — so a single brief can move from idea to artwork
+              to fabricated signage to bus media without ever leaving the family.
+            </p>
+          </Reveal>
+        </div>
 
         <div className="group-rows">
           {group.map((co, i) => {

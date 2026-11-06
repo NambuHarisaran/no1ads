@@ -1,17 +1,23 @@
 import Seo from '../components/Seo.jsx';
-import Hero from '../sections/Hero.jsx';
-import Clients from '../sections/Clients.jsx';
-import Services from '../sections/Services.jsx';
-import ServicesShowcase from '../sections/ServicesShowcase.jsx';
-import Group from '../sections/Group.jsx';
-import Evolution from '../sections/Evolution.jsx';
-import Gallery from '../sections/Gallery.jsx';
-import YouTubeAds from '../sections/YouTubeAds.jsx';
-import Testimonials from '../sections/Testimonials.jsx';
-import LegacyBanner from '../sections/LegacyBanner.jsx';
 import Faq from '../sections/Faq.jsx';
-import CtaBand from '../components/CtaBand.jsx';
+import Prologue from '../story/Prologue.jsx';
+import ActNoise from '../story/ActNoise.jsx';
+import ActOneBrief from '../story/ActOneBrief.jsx';
+import ActYear from '../story/ActYear.jsx';
+import ActOnAir from '../story/ActOnAir.jsx';
+import ActRemembered from '../story/ActRemembered.jsx';
+import ActEras from '../story/ActEras.jsx';
+import Epilogue from '../story/Epilogue.jsx';
+import StoryNav from '../story/StoryNav.jsx';
 
+/**
+ * Home is a scroll story — "Every brand starts in the dark" — where the
+ * visitor's brand is the hero and Number One Ads is the guide:
+ * Prologue → I The noise → II One brief → III A year in Tamil Nadu →
+ * IV On air → V Remembered → VI Five eras → Epilogue (CTA), then the FAQ
+ * (kept for visitors and for the FAQPage structured data).
+ * See DESIGN.md for the motion system and tokens.
+ */
 export default function Home() {
   return (
     <>
@@ -20,18 +26,18 @@ export default function Home() {
         description="Madurai's most trusted 360° advertising agency since 2000. Creative design, digital marketing, LED signage, ACP elevation, exhibition stalls, roadshows & branding across Tamil Nadu."
         path="/"
       />
-      <Hero />
-      <Clients />
-      <Services />
-      <ServicesShowcase />
-      <Group />
-      <Evolution />
-      <Gallery preview />
-      <YouTubeAds />
-      <Testimonials />
-      <LegacyBanner />
+      <div className="st-story">
+        <Prologue />
+        <ActNoise />
+        <ActOneBrief />
+        <ActYear />
+        <ActOnAir />
+        <ActRemembered />
+        <ActEras />
+        <Epilogue />
+        <StoryNav />
+      </div>
       <Faq />
-      <CtaBand variant="orange" />
     </>
   );
 }

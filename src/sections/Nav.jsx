@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import { lockScroll } from '../motion/SmoothScroll.jsx';
 
 const LINKS = [
   ['Home', '/'],
@@ -38,7 +39,11 @@ export default function Nav() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    lockScroll(open);
+    return () => {
+      document.body.style.overflow = '';
+      lockScroll(false);
+    };
   }, [open]);
 
   return (

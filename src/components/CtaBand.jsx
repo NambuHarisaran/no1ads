@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import ShinyText from './ShinyText.jsx';
 import SplitText from './SplitText.jsx';
 import Reveal from './Reveal.jsx';
+import QuickContact from './QuickContact.jsx';
 
 /**
  * Reusable closing call-to-action band. `variant="orange"` renders the bold
  * brand-orange block; the default dark variant suits pages that already end on
- * a light section.
+ * a light section. WhatsApp + call sit beside the primary button.
  */
 export default function CtaBand({
   eyebrow = 'LET\'S BUILD SOMETHING ICONIC',
@@ -32,9 +33,12 @@ export default function CtaBand({
             <SplitText text={title} splitType="words" delay={40} duration={0.7} ease="power3.out" tag="span" />
           </h2>
           <p className="cta-band-text">{text}</p>
-          <Link to={to} className={variant === 'orange' ? 'btn-dark' : 'btn-orange'}>
-            {buttonLabel}
-          </Link>
+          <div className="cta-band-actions">
+            <Link to={to} className={variant === 'orange' ? 'btn-dark' : 'btn-orange'}>
+              {buttonLabel}
+            </Link>
+            <QuickContact className={`qc--${variant}`} />
+          </div>
         </Reveal>
       </div>
     </section>

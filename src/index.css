@@ -1,6 +1,7 @@
 :root {
   --orange: #E87722;
   --gray: #808080;
+  --muted: #808080;
   --dark-gray: #3A3A3A;
   --black: #0D0D0D;
   --off-white: #F5F2EE;
@@ -27,7 +28,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* No `scroll-behavior: smooth`: Lenis owns smooth scrolling and the two
+     fight each other. Reduced-motion users get instant native scroll. */
   scrollbar-width: thin;
   scrollbar-color: #E87722 #0D0D0D;
   /* Root scroller must also clip horizontal overflow — overflow-x:hidden on
@@ -113,23 +115,27 @@ section { position: relative; }
 }
 .ghost-link:hover { color: var(--orange); border-color: var(--orange); }
 
-/* ---------- reveal animations ---------- */
+/* ---------- reveal animations ----------
+   Hidden start states are gated behind html.has-motion (set by an inline
+   head script) so content is never invisible without JS. */
 
-.reveal {
+html.has-motion .split-parent { opacity: 0; }
+
+html.has-motion .reveal {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.reveal.revealed { opacity: 1; transform: translateY(0); }
+html.has-motion .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-.stagger-children > * {
+html.has-motion .stagger-children > * {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.stagger-children.revealed > * { opacity: 1; transform: translateY(0); }
+html.has-motion .stagger-children.revealed > * { opacity: 1; transform: translateY(0); }
 
 /* ---------- cursor ---------- */
 
@@ -159,8 +165,8 @@ section { position: relative; }
   height: 40px;
   opacity: 1;
 }
-@media (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
+@media (pointer: coarse), (hover: none), (max-width: 1023px) {
+  .cursor-dot, .cursor-ring { display: none !important; }
 }
 
 /* ---------- nav ---------- */
@@ -229,6 +235,10 @@ section { position: relative; }
   cursor: pointer;
   padding: 6px;
   z-index: 1002;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 .nav-burger span {
   display: block;
@@ -567,11 +577,19 @@ section { position: relative; }
 
 /* ---------- social links (contact) ---------- */
 
-.social-links { display: flex; gap: 16px; margin-top: 16px; }
+.social-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
 .social-links a {
-  color: var(--gray);
-  transition: color 0.3s ease, transform 0.3s ease;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  color: var(--muted);
+  transition: color 0.3s, transform 0.3s;
 }
 .social-links a:hover { color: var(--orange); transform: translateY(-2px); }
 .social-links svg { width: 22px; height: 22px; }
@@ -910,7 +928,7 @@ section { position: relative; }
 }
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 80px;
   align-items: start;
 }
@@ -1033,41 +1051,80 @@ section { position: relative; }
   line-height: 1.7;
 }
 
-/* ---------- floating contact (WhatsApp / call) ---------- */
+/* ---------- quick contact (inline WhatsApp / call pair) ----------
+   Lives in the contact section, CTA bands and the home epilogue — never
+   fixed over content. */
 
-.floating-contact {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 60;
+.qc {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
 }
-.fc-btn {
+.qc__btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  height: 54px;
-  padding: 0 20px 0 16px;
+  min-height: 52px;
+  padding: 0 24px 0 20px;
+  border: 1px solid transparent;
   border-radius: 999px;
-  color: #fff;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
   font-size: 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
-.fc-btn svg { width: 26px; height: 26px; flex-shrink: 0; }
-.fc-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55); }
-.fc-whatsapp { background: #25D366; }
-.fc-call { background: var(--orange); color: var(--black); }
+.qc__btn svg { width: 20px; height: 20px; flex: none; }
+.qc__btn:hover { transform: translateY(-2px); }
+.qc__btn:active { transform: scale(0.97); }
+.qc__btn:focus-visible { outline: 2px solid #F6C27A; outline-offset: 3px; }
+
+.qc__btn--wa {
+  background: #25D366;
+  color: #062b14;
+  box-shadow: 0 10px 28px -12px rgba(37, 211, 102, 0.7);
+}
+.qc__btn--wa:hover { background: #2fe374; box-shadow: 0 16px 36px -12px rgba(37, 211, 102, 0.8); }
+
+.qc__btn--call {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--white);
+}
+.qc__btn--call:hover { border-color: var(--orange); color: var(--orange); background: rgba(232, 119, 34, 0.08); }
+
+/* on the orange CTA band the outline button switches to ink */
+.qc--orange .qc__btn--call { border-color: rgba(13, 13, 13, 0.55); color: var(--black); background: transparent; }
+.qc--orange .qc__btn--call:hover { background: var(--black); color: var(--orange); border-color: var(--black); }
+
+.cta-band-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.cta-band-actions .qc { justify-content: center; }
+
+.contact-quick { margin: 0 0 32px; }
+.contact-quick-label {
+  margin: 0 0 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
 
 @media (max-width: 560px) {
-  .floating-contact { right: 14px; bottom: 14px; gap: 10px; }
-  .fc-btn { height: 50px; padding: 0 16px; }
-  .fc-label { display: none; }
-  .fc-btn { padding: 0; width: 50px; justify-content: center; }
+  .qc { width: 100%; gap: 10px; }
+  .qc__btn { flex: 1 1 0; min-width: 0; padding: 0 14px; font-size: 13px; }
+  .cta-band-actions { flex-direction: column; align-items: stretch; }
+  .cta-band-actions > a { text-align: center; }
 }
 
 /* ---------- footer ---------- */
@@ -1138,7 +1195,7 @@ section { position: relative; }
   .showcase-grid { grid-template-columns: 1fr 1fr; }
   .masonry { column-count: 2; column-gap: 14px; }
   .masonry-item { margin-bottom: 14px; }
-  .contact-grid { grid-template-columns: 1fr; gap: 56px; }
+  .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 56px; }
   .footer-row { flex-direction: column; text-align: center; }
   .lightbox { padding: 24px 16px; }
   .lightbox-nav { width: 42px; height: 42px; font-size: 28px; }
@@ -1220,8 +1277,8 @@ section { position: relative; }
   position: absolute;
   top: -10%;
   left: 50%;
-  width: 900px;
-  max-width: 120%;
+  width: min(900px, 100%);
+  max-width: 100%;
   height: 520px;
   transform: translateX(-50%);
   background: radial-gradient(ellipse at center, rgba(232, 119, 34, 0.16) 0%, transparent 68%);
@@ -1305,7 +1362,7 @@ section { position: relative; }
 .story-section { background: var(--black); padding: 100px 0; }
 .story-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: 64px;
   align-items: start;
 }
@@ -1323,7 +1380,7 @@ section { position: relative; }
 }
 .story-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 18px;
 }
 .story-stat {
@@ -1546,8 +1603,23 @@ section { position: relative; }
   color: var(--white);
   margin-bottom: 18px;
 }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.footer-col a, .footer-col span {
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.footer-col a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  min-width: 40px;
+  padding: 4px 0;
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.footer-col span {
   font-size: 14px;
   color: var(--gray);
   transition: color 0.3s ease;
@@ -1605,7 +1677,7 @@ section { position: relative; }
 
 @media (max-width: 768px) {
   .page-hero { padding: 140px 0 60px; }
-  .story-grid { grid-template-columns: 1fr; gap: 40px; }
+  .story-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .cta-band { padding: 80px 0; }
 }
 
@@ -2277,10 +2349,34 @@ section { position: relative; }
    ==================================================================== */
 
 .evolution-left,
-.story-copy,
-.service-page-copy,
-.contact-info-item {
+.service-page-copy {
   min-width: 0;
+}
+.contact-grid > *,
+.story-grid > *,
+.story-copy,
+.story-stats,
+.story-stat,
+.contact-form,
+.form-field,
+.form-field input,
+.form-field select,
+.form-field textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+.contact-form,
+.form-field,
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+.contact-info-item {
+  flex-wrap: wrap;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .breadcrumb {
   flex-wrap: wrap;
@@ -2670,22 +2766,18 @@ section { position: relative; }
     font-size: 20px;
   }
 
-  /* Horizontal swipeable filter pills on Work page */
+  /* Wrap filter pills cleanly into rows on mobile with zero horizontal bleed */
   .work-filter {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    flex-wrap: wrap;
+    overflow-x: visible;
     gap: 8px;
     margin-bottom: 28px;
-    padding-bottom: 4px;
-  }
-  .work-filter::-webkit-scrollbar {
-    display: none;
+    padding-bottom: 0;
   }
   .work-filter-btn {
-    flex-shrink: 0;
-    padding: 9px 18px;
+    flex-shrink: 1;
+    padding: 9px 16px;
+    min-height: 38px;
     font-size: 12px;
   }
 }
@@ -2744,7 +2836,7 @@ section { position: relative; }
     font-size: 16px;
   }
   .footer {
-    padding: 36px 0 28px;
+    padding: 36px 0 88px;
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -2892,6 +2984,25 @@ section { position: relative; }
   .cta-band-text {
     font-size: 15.5px;
     margin-bottom: 28px;
+  }
+  .timeline-section .headline,
+  .services-section .headline,
+  .evolution-left .headline,
+  .showcase-section .headline,
+  .gallery-section .headline,
+  .headline,
+  .cta-band-title,
+  .values-headline,
+  .process-headline,
+  .t-headline,
+  .services-detail-headline,
+  .testimonials-headline,
+  .group-headline,
+  .clients-wall-headline,
+  .youtube-headline,
+  .faq-heading {
+    font-size: clamp(21px, 7vw, 28px);
+    line-height: 1.16;
   }
 }
 
@@ -3388,4 +3499,32 @@ section { position: relative; }
   .hero-sub { margin-bottom: 24px; }
   .hero-stats { margin-top: 30px; padding-top: 20px; }
   .hero-visual { width: min(100%, 74svh); }
+}
+
+
+
+/* ---------- ultra-narrow screens (<= 359px) ---------- */
+@media (max-width: 359px) {
+  .footer-grid,
+  .story-stats {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .story-stat {
+    padding: 16px 14px;
+  }
+}
+
+/* ---------- short landscape viewports (<= 500px height) ---------- */
+@media (max-height: 500px) {
+  .nav-inner,
+  .nav.scrolled .nav-inner {
+    padding: 8px 20px;
+  }
+  .nav-logo img {
+    height: 32px;
+  }
+  .page-hero {
+    min-height: auto;
+    padding: 84px 0 36px;
+  }
 }

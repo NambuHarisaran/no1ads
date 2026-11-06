@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
+import { lockScroll } from '../motion/SmoothScroll.jsx';
 
 /**
  * Fullscreen image preview. Loads the high-res `full` image only when opened,
@@ -29,9 +30,11 @@ export default function Lightbox({ items, index, onClose, onNavigate }) {
     };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
+    lockScroll(true);
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
+      lockScroll(false);
     };
   }, [index, go, onClose]);
 
@@ -56,6 +59,7 @@ export default function Lightbox({ items, index, onClose, onNavigate }) {
   return (
     <div
       className="lightbox"
+      data-lenis-prevent
       role="dialog"
       aria-modal="true"
       aria-label={item.title}

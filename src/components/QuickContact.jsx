@@ -1,4 +1,4 @@
-import { site, whatsappLink } from '../data/siteConfig.js';
+import { site, displayPhone, whatsappLink } from '../data/siteConfig.js';
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -13,32 +13,36 @@ const PhoneIcon = () => (
 );
 
 /**
- * Fixed lead-capture buttons (WhatsApp + click-to-call). Renders nothing until
- * a phone/WhatsApp number is set in siteConfig, so it's safe to ship now.
+ * Inline WhatsApp + click-to-call pair. Replaces the old fixed floating
+ * buttons: it lives where people decide to get in touch (the contact
+ * section, every CTA band and the home epilogue) instead of covering
+ * content on small screens. Renders nothing if neither number is set.
+ *
+ * `showNumber` prints the phone number on the call button (contact section).
  */
-export default function FloatingContact() {
-  const wa = whatsappLink();
+export default function QuickContact({ className = '', showNumber = false, message }) {
+  const wa = whatsappLink(message);
   const tel = site.phone ? `tel:${site.phone}` : '';
   if (!wa && !tel) return null;
 
   return (
-    <div className="floating-contact" aria-label="Quick contact">
+    <div className={`qc ${className}`.trim()}>
       {wa && (
         <a
-          className="fc-btn fc-whatsapp"
+          className="qc__btn qc__btn--wa"
           href={wa}
           target="_blank"
           rel="noreferrer"
-          aria-label="Chat with Number One Ads on WhatsApp"
+          aria-label="Chat with Number One Ads on WhatsApp (opens in a new tab)"
         >
           <WhatsAppIcon />
-          <span className="fc-label">WhatsApp</span>
+          <span>WhatsApp us</span>
         </a>
       )}
       {tel && (
-        <a className="fc-btn fc-call" href={tel} aria-label="Call Number One Ads">
+        <a className="qc__btn qc__btn--call" href={tel} aria-label={`Call Number One Ads on ${displayPhone()}`}>
           <PhoneIcon />
-          <span className="fc-label">Call</span>
+          <span>{showNumber ? displayPhone() : 'Call now'}</span>
         </a>
       )}
     </div>
