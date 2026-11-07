@@ -5,6 +5,7 @@ import { MQ } from '../motion/tokens.js';
 import Magnetic from '../motion/Magnetic.jsx';
 import { site } from '../data/siteConfig.js';
 import QuickContact from '../components/QuickContact.jsx';
+import BrandLogo from '../components/BrandLogo.jsx';
 import { ActLabel, Arrow, useStoryReveals } from './primitives.jsx';
 import { SIGNS } from './storyData.js';
 
@@ -91,16 +92,24 @@ export default function Epilogue() {
         </div>
 
         <div className="st-epilogue__wall" aria-hidden="true">
-          {signs.map((name, i) =>
-            name ? (
-              <span className="st-sign" key={name} style={{ '--i': i }}>{name}</span>
-            ) : (
-              <span className="st-sign st-sign--reserved" key="reserved">
-                <span className="st-sign__you">Your brand</span>
-                <span className="st-sign__note">Reserved</span>
+          {signs.map((sign, i) => {
+            if (!sign) {
+              return (
+                <span className="st-sign st-sign--reserved" key="reserved">
+                  <span className="st-sign__you">Your brand</span>
+                  <span className="st-sign__note">Reserved</span>
+                </span>
+              );
+            }
+            const name = typeof sign === 'string' ? sign : sign.name;
+            const logo = typeof sign === 'object' ? sign.logo : undefined;
+            const key = typeof sign === 'string' ? sign : sign.slug || sign.name;
+            return (
+              <span className={`st-sign ${logo ? 'st-sign--logo' : ''}`} key={key} style={{ '--i': i }} title={name}>
+                <BrandLogo src={logo} name={name} className="st-sign__brand" />
               </span>
-            )
-          )}
+            );
+          })}
         </div>
       </div>
     </section>

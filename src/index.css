@@ -1338,6 +1338,9 @@ html.has-motion .stagger-children.revealed > * { opacity: 1; transform: translat
   animation: clientsScroll 38s linear infinite;
 }
 .client-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -1348,6 +1351,16 @@ html.has-motion .stagger-children.revealed > * { opacity: 1; transform: translat
   border: 1px solid #262626;
   border-radius: 999px;
   background: #141414;
+}
+.client-chip--logo {
+  background: #fafafa;
+  border-color: #e5e5e5;
+  padding: 8px 18px;
+  border-radius: 10px;
+}
+.client-chip-brand.brand-logo--img {
+  max-height: 36px;
+  max-width: 110px;
 }
 @keyframes clientsScroll {
   from { transform: translateX(0); }

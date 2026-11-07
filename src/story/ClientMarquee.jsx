@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { gsap, ScrollTrigger, useGSAP } from '../motion/gsap.js';
 import { MQ } from '../motion/tokens.js';
+import BrandLogo from '../components/BrandLogo.jsx';
 
 /**
  * Infinite client-name marquee. One linear GSAP tween per row (xPercent over
@@ -55,11 +56,22 @@ export default function ClientMarquee({ names, direction = 'left', duration = 60
 
   const list = hidden => (
     <ul className="st-marquee__list" aria-hidden={hidden || undefined}>
-      {names.map(name => (
-        <li key={name}>
-          <span className="st-wordmark">{name}</span>
-        </li>
-      ))}
+      {names.map(item => {
+        const name = typeof item === 'string' ? item : item.name;
+        const logo = typeof item === 'object' ? item.logo : undefined;
+        const key = typeof item === 'string' ? item : item.slug || item.name;
+        return (
+          <li key={key}>
+            {logo ? (
+              <span className="st-marquee__logo-pill" title={name}>
+                <BrandLogo src={logo} name={name} className="st-marquee__logo" />
+              </span>
+            ) : (
+              <span className="st-wordmark">{name}</span>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 

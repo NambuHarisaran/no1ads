@@ -127,10 +127,12 @@ export const FESTIVALS = [
 /** Act IV — films. First is the feature. */
 export const FILMS = [videos[0], videos[1], videos[2]];
 
-/** Act V — clients split into two marquee rows. */
+/** Act V — clients with logos split evenly into two marquee rows. */
+const logoClients = clients.filter(c => Boolean(c.logo));
+const half = Math.ceil(logoClients.length / 2);
 export const CLIENT_ROWS = [
-  clients.filter(c => c.sector === 'silks' || c.sector === 'other').map(c => c.name),
-  clients.filter(c => c.sector === 'jewellery').map(c => c.name),
+  logoClients.slice(0, half),
+  logoClients.slice(half),
 ];
 
 export const QUOTES = {
@@ -172,8 +174,17 @@ export const STATS = [
 ];
 
 /** Epilogue — the wall of lit signs. */
+const cBySlug = slug => clients.find(c => c.slug === slug);
 export const SIGNS = [
-  'The Chennai Silks', 'Thangamayil', 'Ramraj Cotton', 'Tulsi Diamonds',
-  'Sri Radha Silks', 'Preethi', 'KRT', 'Theni Anantham Silks',
-  'SMJ Jewellers', 'Germanus Hotels', 'Sastha Sesame Oil',
-];
+  cBySlug('thangamayil'),
+  cBySlug('ramraj-cotton'),
+  cBySlug('tulsi-diamonds'),
+  cBySlug('anandam-silks'),
+  cBySlug('preethi'),
+  cBySlug('krt-thanga-maligai'),
+  cBySlug('smj'),
+  cBySlug('saastha'),
+  cBySlug('prestige'),
+  cBySlug('apollo-hospitals'),
+  cBySlug('kalimark'),
+].filter(Boolean);
