@@ -502,7 +502,7 @@ html.has-motion .st-bulb [data-bulb-on] { opacity: 0; visibility: hidden; }
 .st-prologue__sign {
   grid-area: sign;
   position: relative;
-  width: clamp(150px, min(30vw, 46svh), 470px);
+  width: clamp(140px, min(28vw, 39svh), 430px);
   aspect-ratio: 1;
 }
 .st-prologue__ring {
